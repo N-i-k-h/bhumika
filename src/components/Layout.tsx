@@ -23,29 +23,15 @@ export const Layout: React.FC = () => {
     navigate('/admin');
   }, [navigate]);
 
-  const handleLogout = useCallback(() => {
-    setIsAdmin(false);
-    localStorage.removeItem('isAdmin');
-    navigate('/');
-  }, [navigate]);
-
-  const handleOpenAdminPanel = useCallback(() => {
-    navigate('/admin');
-  }, [navigate]);
-
   return (
     <div className="min-h-screen flex flex-col bg-surface text-on-surface">
       <Header 
-        onMenuToggle={handleMenuToggle} 
-        isAdmin={isAdmin}
+        onMenuToggle={handleMenuToggle}
         onLoginSuccess={handleLoginSuccess}
       />
       <Sidebar 
         isOpen={isSidebarOpen} 
-        onClose={handleSidebarClose} 
-        isAdmin={isAdmin}
-        onLogout={handleLogout}
-        onOpenAdminPanel={handleOpenAdminPanel}
+        onClose={handleSidebarClose}
       />
       <main className="flex-grow flex flex-col">
         <Outlet />

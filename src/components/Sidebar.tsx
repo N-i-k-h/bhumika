@@ -5,12 +5,9 @@ import { X } from 'lucide-react';
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
-  isAdmin: boolean;
-  onLogout: () => void;
-  onOpenAdminPanel: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isAdmin, onLogout, onOpenAdminPanel }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
 
   useEffect(() => {

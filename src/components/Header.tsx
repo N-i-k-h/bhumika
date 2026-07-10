@@ -4,11 +4,10 @@ import { Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   onMenuToggle: () => void;
-  isAdmin: boolean;
   onLoginSuccess: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onMenuToggle, isAdmin, onLoginSuccess }) => {
+export const Header: React.FC<HeaderProps> = ({ onMenuToggle, onLoginSuccess }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
