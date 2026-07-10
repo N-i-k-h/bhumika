@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Eye, Send, Clock, Cpu, Settings, Layers, Flame, Award, ShieldAlert } from 'lucide-react';
-import heritageImg from '../assets/DSC02671.JPG';
+import heritageImg from '../assets/DSC02681.JPG';
 import qaImg1 from '../assets/DSC01932.JPG';
 import qaImg2 from '../assets/DSC01918.JPG';
 
