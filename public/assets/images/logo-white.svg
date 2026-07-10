@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 390" width="100%" height="100%">
+  <defs>
+    <!-- Molten orange gradient matching logo orange -->
+    <linearGradient id="moltenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E27233" />
+      <stop offset="100%" stop-color="#C15C26" />
+    </linearGradient>
+    <linearGradient id="metalOutline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E5E7EB" />
+      <stop offset="50%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#CCCCCC" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(10, 10)">
+    <!-- Brand Title: B H [Ladle] M I K A -->
+    <!-- Text "BH" in white -->
+    <text x="30" y="210" font-family="'Hanken Grotesk', 'Outfit', 'Inter', sans-serif" font-weight="900" font-size="160" fill="#FFFFFF" letter-spacing="-2">BH</text>
+    
+    <!-- Ladle "U" -->
+    <g transform="translate(262, 50)" id="ladle">
+      <!-- Crucible outer cup -->
+      <path d="M 12 18 L 88 18 L 76 96 C 72 120, 28 120, 24 96 Z" fill="url(#metalOutline)" stroke="#FFFFFF" stroke-width="4" />
+      <!-- Top opening outer ring -->
+      <ellipse cx="50" cy="18" rx="38" ry="12" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="3" />
+      <!-- Inner molten orange liquid surface -->
+      <ellipse cx="50" cy="18" rx="28" ry="8" fill="url(#moltenGrad)" />
+      <!-- Lip spill overlay -->
+      <path d="M 42 18 C 42 24, 58 24, 58 18" fill="none" stroke="url(#moltenGrad)" stroke-width="6" />
+      <!-- Pour stream running down into the orange bar -->
+      <path d="M 47 18 L 47 185 C 47 188, 53 188, 53 185 L 53 18 Z" fill="url(#moltenGrad)" />
+    </g>
+
+    <!-- Text "MIKA" in white -->
+    <text x="390" y="210" font-family="'Hanken Grotesk', 'Outfit', 'Inter', sans-serif" font-weight="900" font-size="160" fill="#FFFFFF" letter-spacing="-2">MIKA</text>
+
+    <!-- Rounded Orange Bar for ALLOY CASTINGS -->
+    <rect x="25" y="228" width="670" height="96" rx="16" fill="#C15C26" />
+    <text x="360" y="294" font-family="'Inter', 'Outfit', sans-serif" font-weight="800" font-size="58" fill="#FFFFFF" letter-spacing="8" text-anchor="middle">ALLOY CASTINGS</text>
+
+    <!-- Subtitle: An ISO 9001 : 2015 Certified company in white/light-gray -->
+    <text x="360" y="370" font-family="'Inter', 'Outfit', sans-serif" font-weight="600" font-size="28" fill="#E5E7EB" letter-spacing="1" text-anchor="middle">An ISO 9001 : 2015 Certified company</text>
+  </g>
+</svg>

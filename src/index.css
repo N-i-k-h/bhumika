@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2D2D2D;
+  --color-on-primary: #ffffff;
+  --color-secondary: #C15C26;
+  --color-on-secondary: #ffffff;
+  --color-molten-glow: #C15C26;
+  --color-steel-plate: #F5F5F5;
+  --color-alloy-dark: #1A1A1A;
+  --color-background: #fbf9f8;
+  --color-surface: #fbf9f8;
+  --color-on-surface: #1b1c1c;
+  --color-surface-variant: #e4e2e1;
+  --color-on-surface-variant: #43474c;
+  --color-tertiary: #3a2100;
+  --color-tertiary-container: #583500;
+  --color-on-tertiary-container: #e99401;
+  --color-tertiary-fixed: #ffddb9;
+  --color-tertiary-fixed-dim: #ffb961;
+  --color-on-tertiary-fixed: #2b1700;
+  --color-on-tertiary-fixed-variant: #663e00;
+  --color-secondary-fixed: #FFEAD8;
+  --color-secondary-fixed-dim: #FDBA74;
+  --color-on-secondary-fixed: #451A03;
+  --color-on-secondary-fixed-variant: #7C2D12;
+  --color-primary-fixed: #E5E7EB;
+  --color-primary-fixed-dim: #E5E7EB;
+  --color-on-primary-fixed: #1F2937;
+  --color-on-primary-fixed-variant: #4B5563;
+  --color-surface-bright: #fbf9f8;
+  --color-surface-dim: #dcd9d9;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f6f3f2;
+  --color-surface-container: #f0eded;
+  --color-surface-container-high: #eae8e7;
+  --color-surface-container-highest: #e4e2e1;
+  --color-inverse-surface: #303030;
+  --color-inverse-on-surface: #f3f0f0;
+  --color-inverse-primary: #FFB88C;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  
+  --font-headline-xl: "Hanken Grotesk", sans-serif;
+  --font-headline-lg: "Hanken Grotesk", sans-serif;
+  --font-headline-md: "Hanken Grotesk", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-label-caps: "JetBrains Mono", monospace;
+  
+  --spacing-gutter: 24px;
+  --spacing-margin-desktop: 64px;
+  --spacing-section-gap: 120px;
+  --spacing-base: 8px;
+  --spacing-margin-mobile: 16px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body-md);
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Custom Scrollbar - Molten Steel Theme */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #2D2D2D; /* Brand Charcoal */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #C15C26; /* Brand Rust Orange */
+    border-radius: 4px;
+    border: 2px solid #2D2D2D;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #E0692D; /* Molten Hover Orange */
+  }
+
+  /* Molten Border with Shimmer */
+  .molten-border {
+    position: relative;
+  }
+
+  .molten-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #C15C26, #E0692D, #C15C26);
+    background-size: 200% auto;
+    animation: moltenShimmer 3s linear infinite;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .group:hover .molten-border::after {
+    width: 120px;
+  }
+
+  @keyframes moltenShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Pulsing molten glow effect */
+  .glow-pulse {
+    animation: glowPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 15px rgba(193, 92, 38, 0.6);
+    }
+    50% {
+      opacity: .8;
+      box-shadow: 0 0 25px rgba(193, 92, 38, 0.9);
+    }
+  }
+
+  /* Glassmorphism for floating cards */
+  .glass-panel {
+    background: rgba(45, 45, 45, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Premium Card Hover Transitions */
+  .premium-card {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .premium-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Custom tabs / filter button animations */
+  .filter-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .filter-btn.active {
+    background-color: #C15C26;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(193, 92, 38, 0.3);
+  }
+
+  /* Page Loader (for transition state effect) */
+  .page-transition {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Input styles for RFQ */
+  .rfq-input:focus {
+    border-color: #C15C26;
+    box-shadow: 0 0 0 3px rgba(193, 92, 38, 0.25);
+    outline: none;
+  }
+
+  /* Hero Carousel Animations */
+  .slide-up-animation {
+    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes slideUpFade {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Thin horizontal scrollbars for sub-processes on responsive viewports */
+  .scrollbar-container::-webkit-scrollbar {
+    height: 6px;
+  }
+  .scrollbar-container::-webkit-scrollbar-track {
+    background: rgba(45, 45, 45, 0.05);
+    border-radius: 3px;
+  }
+  .scrollbar-container::-webkit-scrollbar-thumb {
+    background: #C15C26;
+    border-radius: 3px;
+    border: none;
+  }
+}
