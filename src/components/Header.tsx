@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ShieldAlert } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   onMenuToggle: () => void;
@@ -115,12 +115,6 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, isAdmin, onLoginSu
           </nav>
 
           <div className="flex items-center gap-4">
-            {isAdmin && (
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded bg-secondary/10 border border-secondary/20 text-secondary text-xs font-bold font-label-caps">
-                <ShieldAlert className="w-3.5 h-3.5" />
-                ADMIN ACTIVE
-              </span>
-            )}
             <Link
               to="/contact"
               className="hidden lg:inline-flex bg-secondary hover:bg-opacity-90 text-white px-5 py-2 rounded font-bold text-sm transition-all shadow-md"

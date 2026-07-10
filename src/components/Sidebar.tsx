@@ -88,28 +88,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isAdmin, onLo
                 {item.label}
               </Link>
             ))}
-            {isAdmin && (
-              <>
-                <button
-                  onClick={() => {
-                    onOpenAdminPanel();
-                    onClose();
-                  }}
-                  className="font-headline-md text-headline-md text-secondary hover:text-molten-glow transition-colors text-left flex items-center gap-2 cursor-pointer font-bold border-t border-white/10 pt-4"
-                >
-                  Admin Control Panel
-                </button>
-                <button
-                  onClick={() => {
-                    onLogout();
-                    onClose();
-                  }}
-                  className="font-headline-md text-headline-md text-red-400 hover:text-red-300 transition-colors text-left flex items-center gap-2 cursor-pointer"
-                >
-                  Logout
-                </button>
-              </>
-            )}
           </nav>
 
           <div className="space-y-8 border-t border-white/10 pt-8">
