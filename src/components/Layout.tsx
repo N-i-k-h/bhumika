@@ -7,7 +7,6 @@ import { Footer } from './Footer';
 export const Layout: React.FC = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem('isAdmin') === 'true');
 
   const handleMenuToggle = useCallback(() => {
     setIsSidebarOpen(true);
@@ -18,7 +17,6 @@ export const Layout: React.FC = () => {
   }, []);
 
   const handleLoginSuccess = useCallback(() => {
-    setIsAdmin(true);
     localStorage.setItem('isAdmin', 'true');
     navigate('/admin');
   }, [navigate]);
