@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Eye, Send, Clock, Cpu, Settings, Layers, Flame, Award, ShieldAlert } from 'lucide-react';
+import { Eye, Send, Clock, Settings, Flame, Layers } from 'lucide-react';
 import heritageImg from '../assets/DSC02681.JPG';
-import qaImg1 from '../assets/DSC01932.JPG';
-import qaImg2 from '../assets/DSC01918.JPG';
 
 export const About: React.FC = () => {
   const location = useLocation();
@@ -53,7 +51,13 @@ export const About: React.FC = () => {
               Bhumika Alloy Castings Pvt Ltd (BAC) was established in 1997 by <strong>Mr. H.S. Diwakar</strong>, who is also one of the founders of Perfect Alloy Components. With a vision to deliver premium metallurgical products that match strict international standards, the firm set out to fill the gap in high-precision castings for the growing heavy industrial markets.
             </p>
             <p className="font-body-md text-on-surface-variant mb-6 leading-relaxed">
-              From a modest foundry workshop with a single furnace, we expanded our technology and footprints. Today, the Sagar Road facility in Shimoga is equipped with advanced roll-over furnaces, high-capacity induction molding arrays, and state-of-the-art laboratory testing systems.
+              Built on a strong foundation of metallurgical expertise and manufacturing excellence, the company was established to deliver castings that meet the evolving needs of global industries.
+            </p>
+            <p className="font-body-md text-on-surface-variant mb-6 leading-relaxed">
+              What began as a modest foundry with a single furnace has grown into a modern manufacturing facility in Shimoga, Karnataka.
+            </p>
+            <p className="font-body-md text-on-surface-variant mb-6 leading-relaxed">
+              The facility is equipped with unique furnaces like rollover furnaces and also high induction furnaces capable of up to 500 kgs, and a supporting laboratory for international standards and for customer preferences worldwide.
             </p>
             <blockquote className="border-l-4 border-molten-glow pl-4 py-2 my-6 bg-steel-plate/60 rounded-r-md">
               <p className="italic text-primary text-sm font-medium">
@@ -151,10 +155,7 @@ export const About: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-primary/5 text-on-surface-variant">
-                    <tr>
-                      <td className="py-2">Roll Over Furnace</td>
-                      <td className="text-right py-2">25 kg / 100 kg</td>
-                    </tr>
+
                     <tr>
                       <td className="py-2">Induction Furnace 1</td>
                       <td className="text-right py-2">150 kg</td>
@@ -182,7 +183,7 @@ export const About: React.FC = () => {
                 Most castings require final machining tolerances. Our machine shop handles complex components directly, avoiding third-party overhead.
               </p>
               <ul className="space-y-3 text-xs text-on-surface-variant pl-4 list-disc">
-                <li>CNC Vertical Machining Centers (VMC)</li>
+                <li>CNC &amp; VMC (Vertical Machining Center) machining</li>
                 <li>High-performance CNC lathes for rotational turning</li>
                 <li>Conventional lathes, milling, and shaping rigs</li>
                 <li>Profile Projector for dimensional validation</li>
@@ -196,84 +197,8 @@ export const About: React.FC = () => {
               </div>
               <h3 className="font-headline-md text-lg text-primary font-bold mb-4">Design &amp; Engineering</h3>
               <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
-                We employ modern CAD/CAM layouts and simulation tools to model solidification behavior, minimizing shrinkage cavities before cutting molds.
+                Our New Product Development (NPD) team has expertise in SolidWorks and CAD softwares, combined with in-house design to optimize every component before production. We validate 3D models and refine casting parameters early to reduce delays in development time, improve manufacturability, and ensure consistent quality.
               </p>
-              <ul className="space-y-3 text-xs text-on-surface-variant pl-4 list-disc">
-                <li>Solid modeling for structural stress evaluation</li>
-                <li>Solidification simulation to analyze thermal gradients</li>
-                <li>In-house tooling design for rapid development</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quality Assurance & Testing */}
-      <section className="py-20 bg-white" id="quality">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <span className="font-label-caps text-label-caps text-secondary mb-4 block uppercase tracking-wider text-xs">
-              QUALITY ASSURANCE
-            </span>
-            <h2 className="font-headline-lg text-3xl font-extrabold text-primary mb-6 molten-border pb-4">
-              Metallurgical Controls &amp; Testing Labs
-            </h2>
-            <p className="font-body-md text-on-surface-variant mb-6 leading-relaxed text-sm">
-              To guarantee compliance with Aerospace (AS9100 targets) and Oil &amp; Gas requirements, we maintain an on-site testing facility. Our laboratory checks both the physical properties and the exact chemical breakdown of the alloys before tapping the furnace.
-            </p>
-            <div className="grid grid-cols-2 gap-6 mt-8">
-              <div className="flex gap-3">
-                <Cpu className="w-6 h-6 text-molten-glow flex-shrink-0" />
-                <div>
-                  <h4 className="font-headline-md text-xs font-bold text-primary">Chemical Spectrometer</h4>
-                  <p className="text-[11px] text-on-surface-variant mt-1">
-                    100% element analysis of carbon, alloy, and stainless metals.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <Award className="w-6 h-6 text-molten-glow flex-shrink-0" />
-                <div>
-                  <h4 className="font-headline-md text-xs font-bold text-primary">Physical Validation</h4>
-                  <p className="text-[11px] text-on-surface-variant mt-1">
-                    Tensile test, hardness validation, and impact resistance evaluation.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <ShieldAlert className="w-6 h-6 text-molten-glow flex-shrink-0" />
-                <div>
-                  <h4 className="font-headline-md text-xs font-bold text-primary">NDT Inspections</h4>
-                  <p className="text-[11px] text-on-surface-variant mt-1">
-                    Liquid penetrant checking, ultrasonic checks, magnetic particle tests.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <Layers className="w-6 h-6 text-molten-glow flex-shrink-0" />
-                <div>
-                  <h4 className="font-headline-md text-xs font-bold text-primary">Traceability</h4>
-                  <p className="text-[11px] text-on-surface-variant mt-1">
-                    Full batch documentation and material sheet certification.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="aspect-square bg-steel-plate overflow-hidden rounded shadow-sm">
-              <img
-                className="w-full h-full object-cover"
-                alt="Metallurgical testing laboratory equipment"
-                src={qaImg1}
-              />
-            </div>
-            <div className="aspect-square bg-steel-plate overflow-hidden rounded shadow-sm">
-              <img
-                className="w-full h-full object-cover"
-                alt="Spectrometer chemical verification"
-                src={qaImg2}
-              />
             </div>
           </div>
         </div>

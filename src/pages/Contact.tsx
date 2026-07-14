@@ -243,7 +243,6 @@ export const Contact: React.FC = () => {
                     >
                       <option value="investment">Investment Casting</option>
                       <option value="centrifugal">Centrifugal Casting</option>
-                      <option value="sand">Sand Casting</option>
                       <option value="consult">Consult Engineering</option>
                     </select>
                   </div>

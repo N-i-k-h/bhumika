@@ -128,7 +128,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 <li>
                   <Link
                     className="font-body-md text-surface-variant hover:text-white transition-colors"
-                    to="/about#quality"
+                    to="/certificates"
                   >
                     ISO 9001:2015 Certs
                   </Link>
@@ -136,7 +136,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 <li>
                   <Link
                     className="font-body-md text-surface-variant hover:text-white transition-colors"
-                    to="/about#quality"
+                    to="/certificates"
                   >
                     AS9100 Standards
                   </Link>

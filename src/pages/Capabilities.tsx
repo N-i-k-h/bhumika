@@ -2,20 +2,24 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Shield, Wrench, Settings } from 'lucide-react';
 import waxInjectionImg from '../assets/DSC02157.JPG';
-import preAssemblyImg from '../assets/DSC01932.JPG';
+import preAssemblyImg from '../assets/image copy 10.png';
 import shellBuildingImg from '../assets/DSC02302.JPG';
-import dewaxingImg from '../assets/DSC01818 (1).JPG';
-import shellFiringImg from '../assets/DSC01754.JPG';
+import dewaxingImg from '../assets/image copy 13.png';
+import shellFiringKilnImg from '../assets/DSC01818 (1).JPG';
+import shellFiringImg from '../assets/image copy 9.png';
 import knockoutImg from '../assets/Screenshot 2026-07-09 142152.png';
-import heatTreatmentImg from '../assets/Screenshot 2026-07-09 142412.png';
+import fettlingImg from '../assets/DSC02041.JPG';
+import heatTreatmentImg from '../assets/image copy 14.png';
 import shotBlastingImg from '../assets/Screenshot 2026-07-09 143429.png';
 import grindingImg from '../assets/DSC01997.JPG';
 import testingImg from '../assets/DSC01942.JPG';
 import centrifugalImg from '../assets/Screenshot 2026-07-09 122649.png';
 import machiningImg from '../assets/DSC02512.JPG';
+import vmcMachiningImg from '../assets/image copy 8.png';
 import moldPrepImg from '../assets/Screenshot 2026-07-09 173251.png';
 import pouringImg from '../assets/DSC01737.JPG';
 import machiningCentrifugalImg from '../assets/image.png';
+import finishMachiningImg from '../assets/finish_machining.png';
 
 interface GalleryItem {
   title: string;
@@ -50,10 +54,16 @@ const investmentSteps: GalleryItem[] = [
     image: dewaxingImg
   },
   {
-    title: "Shell Firing & Pouring",
-    subtitle: "High-Temp Pouring",
-    desc: "The empty ceramic shells are fired in high-temperature ovens (around 1000°C) to strengthen the ceramic and prevent thermal shock, then filled with molten alloy poured from induction furnaces.",
-    image: shellFiringImg
+    title: "Shell Firing",
+    subtitle: "Mold Sintering",
+    desc: "The empty ceramic shells are fired in high-temperature ovens (around 1000°C) to strengthen the ceramic structure and remove any residual moisture or wax, preparing them for receiving molten metal.",
+    image: shellFiringKilnImg
+  },
+  {
+    title: "Pouring",
+    subtitle: "High-Temp Alloy Transfer",
+    desc: "Molten metal is tapped from induction furnaces into a ladle and carefully poured into the preheated ceramic shells to form the cast parts.",
+    image: pouringImg
   },
   {
     title: "Knockout",
@@ -62,9 +72,15 @@ const investmentSteps: GalleryItem[] = [
     image: knockoutImg
   },
   {
-    title: "Fettling & Heat Treatment",
-    subtitle: "Cutoff & Thermal Refinement",
-    desc: "Individual components are cut off from the runner system. Castings undergo specialized heat treatment cycles (normalizing, tempering, or solution annealing) to refine metallurgical properties.",
+    title: "Fettling",
+    subtitle: "Gate Removal & Cutoff",
+    desc: "Individual castings are mechanically cut off from the main central runner tree system using abrasive saws or cut-off wheels.",
+    image: fettlingImg
+  },
+  {
+    title: "Heat Treatment",
+    subtitle: "Thermal Refinement",
+    desc: "Castings undergo specialized heat treatment cycles (such as normalizing, tempering, or solution annealing) to refine their grain structure and achieve the required mechanical properties.",
     image: heatTreatmentImg
   },
   {
@@ -110,7 +126,7 @@ const centrifugalSteps: GalleryItem[] = [
     title: "Finish Machining",
     subtitle: "Boring & Dressing",
     desc: "The inner slag-rich layer is bored out, and the outer diameter is turned to the precise microns required on finish drawings.",
-    image: machiningCentrifugalImg
+    image: finishMachiningImg
   }
 ];
 
@@ -352,7 +368,7 @@ export const Capabilities: React.FC = () => {
         </div>
       </section>
 
-      {/* CNC Precision Machining */}
+      {/* CNC & VMC Precision Machining */}
       <section className="py-20 bg-white" id="machining">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -361,10 +377,10 @@ export const Capabilities: React.FC = () => {
                 MACHINING
               </span>
               <h2 className="font-headline-lg text-3xl font-extrabold text-primary molten-border pb-4">
-                CNC Finish Machining
+                CNC &amp; VMC Finish Machining
               </h2>
               <p className="font-body-md text-on-surface-variant leading-relaxed">
-                Providing raw castings often leaves complex bore lines unfinished. Bhumika's in-house <strong>CNC Machine Shop</strong> bridges this gap, milling, boring, and turning parts to absolute finish drawings.
+                Providing raw castings often leaves complex features unfinished. Bhumika's in-house machine shop bridges this gap by offering both <strong>CNC Turning</strong> and <strong>VMC (Vertical Machining Center) Milling</strong>, finishing parts to absolute tolerances.
               </p>
               <div className="grid grid-cols-2 gap-4 text-xs font-label-caps">
                 <div className="bg-steel-plate p-4 rounded">
@@ -377,7 +393,7 @@ export const Capabilities: React.FC = () => {
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">DRILLING/MILLING</span>
-                  High speed vertical mill centers
+                  High-speed vertical VMC centers
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">ADVANTAGE</span>
@@ -385,12 +401,27 @@ export const Capabilities: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="aspect-video bg-steel-plate rounded-lg overflow-hidden shadow-md">
-              <img
-                className="w-full h-full object-cover"
-                alt="CNC machinery center carving steel"
-                src={machiningImg}
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="aspect-[4/3] bg-steel-plate rounded-lg overflow-hidden shadow-md relative group">
+                <img
+                  className="w-full h-full object-cover"
+                  alt="CNC turning lathe carving steel"
+                  src={machiningImg}
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] font-label-caps py-1.5 px-3">
+                  CNC Turning
+                </div>
+              </div>
+              <div className="aspect-[4/3] bg-steel-plate rounded-lg overflow-hidden shadow-md relative group">
+                <img
+                  className="w-full h-full object-cover"
+                  alt="VMC vertical milling center in action"
+                  src={vmcMachiningImg}
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] font-label-caps py-1.5 px-3">
+                  VMC Vertical Milling
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -410,7 +441,6 @@ export const Capabilities: React.FC = () => {
                   <th className="p-4 border-b border-primary/10">WEIGHT RANGE</th>
                   <th className="p-4 border-b border-primary/10">TOLERANCE CAPABILITY</th>
                   <th className="p-4 border-b border-primary/10">SURFACE FINISH (Ra)</th>
-                  <th className="p-4 border-b border-primary/10">WALL THICKNESS MIN</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-primary/5 font-body-md text-xs text-on-surface-variant">
@@ -419,21 +449,12 @@ export const Capabilities: React.FC = () => {
                   <td className="p-4">5 g – 10 kg</td>
                   <td className="p-4">±0.15 mm per 25 mm</td>
                   <td className="p-4">3.2 – 6.3 µm</td>
-                  <td className="p-4">1.5 mm</td>
                 </tr>
                 <tr>
                   <td className="p-4 font-bold text-primary">Centrifugal Casting</td>
                   <td className="p-4">1.0 kg – 120 kg</td>
                   <td className="p-4">Machined bore (±0.01 mm)</td>
                   <td className="p-4">Machined finishes</td>
-                  <td className="p-4">5.0 mm (Raw)</td>
-                </tr>
-                <tr>
-                  <td className="p-4 font-bold text-primary">Sand Casting</td>
-                  <td className="p-4">1.0 kg – 250 kg</td>
-                  <td className="p-4">±0.8 mm – ±1.6 mm</td>
-                  <td className="p-4">12.5 – 25 µm</td>
-                  <td className="p-4">4.5 mm</td>
                 </tr>
               </tbody>
             </table>
@@ -456,36 +477,22 @@ export const Capabilities: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Stainless Steels */}
             <div className="p-6 border border-primary/10 rounded-lg hover:border-secondary transition-all">
               <h4 className="font-headline-md text-base font-bold text-primary mb-3 flex items-center justify-between">
                 Stainless Steel Alloys <Shield className="w-5 h-5 text-secondary" />
               </h4>
               <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
-                Corrosion-resistant steel castings ideal for chemical flow valves, instrumentation housings, and fluid engineering.
+                Corrosion-resistant and precipitation hardening steel castings ideal for chemical flow valves, aerospace fittings, instrumentation housings, and fluid engineering.
               </p>
               <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
                 <span className="bg-steel-plate px-2 py-1 rounded">CF8 (304)</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">CF8M (316)</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">CF3M (316L)</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">Duplex (CD4MCu)</span>
-              </div>
-            </div>
-
-            {/* Ni-Resist Cast Iron */}
-            <div className="p-6 border border-primary/10 rounded-lg hover:border-secondary transition-all">
-              <h4 className="font-headline-md text-base font-bold text-primary mb-3 flex items-center justify-between">
-                Ni-Resist &amp; Special Castings <Wrench className="w-5 h-5 text-secondary" />
-              </h4>
-              <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
-                Nickel-alloyed cast irons delivering thermal stability, high wear-resistance, and resistance to alkaline corroding agents.
-              </p>
-              <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
-                <span className="bg-steel-plate px-2 py-1 rounded">Type D-2</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">Type D-5</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">Ni-Resist Nuts</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">High Nickel Alloys</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CB7Cu-1 (17-4 PH)</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CB7Cu-2 (15-5 PH)</span>
               </div>
             </div>
 

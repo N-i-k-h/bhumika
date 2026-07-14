@@ -5,13 +5,14 @@ import { X, ArrowRight } from 'lucide-react';
 interface Product {
   id: number;
   title: string;
-  category: 'centrifugal' | 'investment' | 'sand';
+  category?: string;
   image: string;
   material: string;
   weight: string;
   dimensions: string;
   description: string;
   applications: string;
+  industry: 'automobile' | 'food' | 'textile' | 'reverse_osmosis' | 'others';
 }
 
 export const Products: React.FC = () => {
@@ -39,7 +40,7 @@ export const Products: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (['all', 'centrifugal', 'investment', 'sand'].includes(filterParam)) {
+    if (['all', 'automobile', 'food', 'textile', 'reverse_osmosis', 'others'].includes(filterParam)) {
       setActiveFilter(filterParam);
     } else {
       setActiveFilter('all');
@@ -58,7 +59,18 @@ export const Products: React.FC = () => {
 
   const filteredProducts = activeFilter === 'all' 
     ? products 
-    : products.filter(p => p.category === activeFilter);
+    : products.filter(p => p.industry === activeFilter);
+
+  const getIndustryLabel = (industry: string) => {
+    switch (industry) {
+      case 'automobile': return 'Automobile';
+      case 'food': return 'Food Industry';
+      case 'textile': return 'Textile';
+      case 'reverse_osmosis': return 'Reverse Osmosis';
+      case 'others': return 'Others';
+      default: return industry;
+    }
+  };
 
   return (
     <div className="page-transition">
@@ -75,7 +87,7 @@ export const Products: React.FC = () => {
             Precision Component Catalog
           </h1>
           <p className="font-body-lg text-sm md:text-base text-surface-variant max-w-xl mt-4 leading-relaxed font-light">
-            Filter through our high-integrity castings, review technical dimensions, and download metallurgy reference logs.
+            Filter through our high-integrity castings categorized by industrial applications, review technical specifications, and download engineering reference sheets.
           </p>
         </div>
       </section>
@@ -87,17 +99,24 @@ export const Products: React.FC = () => {
           {/* Filters Banner */}
           <div className="flex flex-wrap gap-3 items-center justify-between border-b border-primary/10 pb-6 mb-12">
             <div className="flex flex-wrap gap-2" id="filter-buttons">
-              {['all', 'centrifugal', 'investment', 'sand'].map((category) => (
+              {[
+                { value: 'all', label: 'All Components' },
+                { value: 'automobile', label: 'Automobile' },
+                { value: 'food', label: 'Food Industry' },
+                { value: 'textile', label: 'Textile' },
+                { value: 'reverse_osmosis', label: 'Reverse Osmosis' },
+                { value: 'others', label: 'Others' }
+              ].map((item) => (
                 <button
-                  key={category}
-                  onClick={() => handleFilterChange(category)}
+                  key={item.value}
+                  onClick={() => handleFilterChange(item.value)}
                   className={`filter-btn text-xs font-label-caps border px-5 py-2.5 rounded font-bold uppercase cursor-pointer ${
-                    activeFilter === category
+                    activeFilter === item.value
                       ? 'active bg-secondary text-white border-secondary shadow-md'
                       : 'border-primary/20 hover:bg-steel-plate text-primary'
                   }`}
                 >
-                  {category === 'all' ? 'All Components' : `${category} castings`}
+                  {item.label}
                 </button>
               ))}
             </div>
@@ -113,15 +132,15 @@ export const Products: React.FC = () => {
                 key={p.id}
                 className="bg-white p-5 rounded-lg border border-primary/5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col premium-card group"
               >
-                <div className="h-48 overflow-hidden mb-4 bg-steel-plate rounded">
+                <div className="h-48 overflow-hidden mb-4 bg-steel-plate rounded flex items-center justify-center p-2">
                   <img
                     src={p.image}
                     alt={p.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <span className="font-label-caps text-[9px] text-secondary font-bold uppercase tracking-wider mb-1 block">
-                  {p.category} casting
+                  {getIndustryLabel(p.industry)}
                 </span>
                 <h4 className="font-headline-md text-base text-primary font-bold mb-2 group-hover:text-secondary transition-colors line-clamp-1">
                   {p.title}
@@ -166,8 +185,8 @@ export const Products: React.FC = () => {
             <div className="p-8 space-y-6 flex-grow">
               <div className="grid grid-cols-2 gap-4 text-xs font-label-caps border-b border-primary/10 pb-6">
                 <div>
-                  <span className="text-secondary block font-bold mb-1">CASTING PROCESS</span>
-                  <span>{selectedProduct.category.toUpperCase()} CASTING</span>
+                  <span className="text-secondary block font-bold mb-1">INDUSTRY SECTOR</span>
+                  <span>{getIndustryLabel(selectedProduct.industry).toUpperCase()}</span>
                 </div>
                 <div>
                   <span className="text-secondary block font-bold mb-1">MATERIAL GRADE</span>
@@ -184,13 +203,13 @@ export const Products: React.FC = () => {
               </div>
               <div>
                 <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Technical Description</h4>
-                <p className="text-xs text-on-surface-variant leading-relaxed">
+                <p className="text-xs text-on-surface-variant leading-relaxed font-light">
                   {selectedProduct.description}
                 </p>
               </div>
               <div>
                 <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Primary Industrial Applications</h4>
-                <p className="text-xs text-on-surface-variant leading-relaxed">
+                <p className="text-xs text-on-surface-variant leading-relaxed font-light">
                   {selectedProduct.applications}
                 </p>
               </div>

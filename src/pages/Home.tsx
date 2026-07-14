@@ -2,15 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Hero } from '../components/Hero';
 import { ShieldCheck, ArrowRight, Settings, Activity, Globe, MenuSquare } from 'lucide-react';
-import creatorsImg from '../assets/DSC02667.JPG';
-import whyBhumikaImg from '../assets/DSC02041.JPG';
-import investmentCastingImg from '../assets/DSC01818 (1).JPG';
+import creatorsImg from '../assets/DSC02681.JPG';
+import whyBhumikaImg from '../assets/image copy 6.png';
+import investmentCastingImg from '../assets/image copy 7.png';
 import centrifugalCastingImg from '../assets/Screenshot 2026-07-09 122649.png';
-import machiningImg from '../assets/DSC02512.JPG';
+import machiningImg from '../assets/image copy 8.png';
 import decanterShellImg from '../assets/DSC01066.JPG';
 import pistonRingsImg from '../assets/DSC01053.JPG';
 import bronzeBushesImg from '../assets/DSC01064.JPG';
 import valveCoversImg from '../assets/DSC01068.JPG';
+import whoWeAreImg from '../assets/image copy 5.png';
 
 export const Home: React.FC = () => {
   return (
@@ -26,7 +27,7 @@ export const Home: React.FC = () => {
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 alt="Bhumika Alloy Castings facility in Shimoga"
-                src="/assets/images/about_facility.png"
+                src={whoWeAreImg}
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-primary p-8 text-on-primary hidden lg:block shadow-xl border-l-4 border-molten-glow">
@@ -44,10 +45,13 @@ export const Home: React.FC = () => {
               Leading the Way from the Heart of Shimoga
             </h3>
             <p className="font-body-md text-sm text-on-surface-variant mb-6 leading-relaxed">
-              Established in 1997 by the visionary engineer <strong>Mr. H.S. Diwakar</strong> (who is also one of the founders of Perfect Alloy Components), Bhumika Alloy Castings has evolved from a specialized regional workshop into a world-class manufacturing hub. Operating from our state-of-the-art facility in Karnataka, we combine generational craftsmanship with modern automation.
+              Established in 1997 by the visionary engineer <strong>Mr. H.S. Diwakar</strong>, who is also one of the founders of Perfect Alloy Components, has grown into a trusted investment casting manufacturer.
+            </p>
+            <p className="font-body-md text-sm text-on-surface-variant mb-6 leading-relaxed">
+              For over 29 years we have combined skilled craftsmanship with a combination of modern technology to produce high quality precision castings for customers across diverse industries.
             </p>
             <p className="font-body-md text-sm text-on-surface-variant mb-8 leading-relaxed">
-              We take immense pride in casting complex shapes with micron-level tolerances. Through stringent quality control and advanced testing setups, we ensure every casting meets the global criteria of safety, strength, and structural integrity.
+              Our expertise lies in manufacturing complex cast components with tight dimensional tolerances and consistent quality. Every product is backed by a rigorous quality management system and a commitment to continuous improvement, ensuring reliability from development to final delivery.
             </p>
             <div className="flex items-center gap-4 p-4 border border-outline-variant/30 bg-steel-plate/60 rounded-lg">
               <ShieldCheck className="w-8 h-8 text-secondary flex-shrink-0" />
@@ -73,12 +77,12 @@ export const Home: React.FC = () => {
               The Driving Force Behind Bhumika Alloy Castings
             </h3>
             <p className="font-body-md text-sm text-on-surface-variant mb-6 leading-relaxed">
-              Our operations are led by our Founder, <strong>Mr. H.S. Diwakar</strong>, alongside Director (MD) <strong>Mr. H.D. Deepak</strong> and General Manager <strong>Mr. V. Chandrashekar</strong>. Together, our leadership guides a team of skilled metallurgists, foundry operators, and CNC engineers.
+              Our operations are led by our Founder, <strong>Mr. H.S. Diwakar</strong>, alongside Director (MD) <strong>Mr. H.D. Deepak</strong>, Assistant Director <strong>Mr. Sai Sriniketan</strong>, and General Manager <strong>Mr. V. Chandrashekar</strong>. Together, our leadership guides a team of skilled metallurgists, foundry operators, and CNC engineers.
             </p>
             <p className="font-body-md text-sm text-on-surface-variant mb-8 leading-relaxed">
               By investing in human expertise alongside automated manufacturing technologies, we maintain our commitment to zero-defect casting production and custom material development for global heavy industries.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-molten-glow">
                 <p className="font-headline-md text-xs font-bold text-primary">Mr. H.S. Diwakar</p>
                 <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Founder</p>
@@ -86,6 +90,10 @@ export const Home: React.FC = () => {
               <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-secondary">
                 <p className="font-headline-md text-xs font-bold text-primary">Mr. H.D. Deepak (MD)</p>
                 <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Director</p>
+              </div>
+              <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-tertiary">
+                <p className="font-headline-md text-xs font-bold text-primary">Mr. Sai Sriniketan</p>
+                <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Assistant Director</p>
               </div>
               <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-primary-container">
                 <p className="font-headline-md text-xs font-bold text-primary">Mr. V. Chandrashekar</p>
@@ -198,21 +206,21 @@ export const Home: React.FC = () => {
             </Link>
           </div>
 
-          {/* Card 3: CNC Precision Machining */}
+          {/* Card 3: CNC & VMC Precision Machining */}
           <div className="bg-white p-6 rounded-lg group hover:shadow-2xl transition-all duration-500 flex flex-col premium-card border border-primary/5">
             <div className="h-60 overflow-hidden mb-6 rounded">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                alt="CNC precision turning and machining center"
+                alt="CNC and VMC precision turning and machining center"
                 src={machiningImg}
               />
             </div>
             <span className="font-label-caps text-xs text-secondary mb-2 uppercase font-bold tracking-wider">
               MACHINING
             </span>
-            <h3 className="font-headline-md text-xl text-primary mb-4 font-bold">Precision Machining</h3>
+            <h3 className="font-headline-md text-xl text-primary mb-4 font-bold">CNC &amp; VMC Machining</h3>
             <p className="font-body-md text-on-surface-variant mb-6 flex-grow leading-relaxed text-sm">
-              Our fully-equipped machine shop provides secondary finishing to micron-level tolerances. Features CNC machining centers, turning lathes, and profile projectors.
+              Our fully-equipped machine shop provides secondary finishing to micron-level tolerances. We do both CNC as well as VMC machining to deliver high-precision components tailored to your needs.
             </p>
             <Link
               className="inline-flex items-center text-secondary font-bold text-sm hover:text-molten-glow hover:gap-2 transition-all mt-auto"

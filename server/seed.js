@@ -2,29 +2,69 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import { Product, Customer, Certificate } from './models.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Helper to convert local asset to base64
+// Helper to return static asset URL
 function getBase64Image(filename) {
-  const assetPath = path.join(__dirname, '..', 'src', 'assets', filename);
-  try {
-    if (fs.existsSync(assetPath)) {
-      const ext = path.extname(filename).toLowerCase();
-      const mimeType = ext === '.png' ? 'image/png' : 'image/jpeg';
-      const fileBuffer = fs.readFileSync(assetPath);
-      return `data:${mimeType};base64,${fileBuffer.toString('base64')}`;
-    }
-  } catch (err) {
-    console.error(`Error reading asset ${filename}:`, err);
-  }
-  return ''; // Fallback
+  return `/assets/products/${filename}`;
 }
 
 export async function seedDatabase(force = false) {
   try {
+    const sourceDuplex = "C:\\Users\\lenovo\\.gemini\\antigravity-ide\\brain\\9d085671-49f0-4983-aac7-30e6f454091c\\media__1784066360373.png";
+    const destDuplex = path.join(__dirname, "../public/assets/products/duplex_steel_logo.png");
+    if (fs.existsSync(sourceDuplex)) {
+      try {
+        fs.copyFileSync(sourceDuplex, destDuplex);
+        console.log("Successfully copied Duplex Steel logo.");
+      } catch (err) {
+        console.error("Failed to copy Duplex Steel logo:", err.message);
+      }
+    }
+    const sourceIndo = "C:\\Users\\lenovo\\.gemini\\antigravity-ide\\brain\\9d085671-49f0-4983-aac7-30e6f454091c\\media__1784066455466.png";
+    const destIndo = path.join(__dirname, "../public/assets/products/indo_logo.png");
+    if (fs.existsSync(sourceIndo)) {
+      try {
+        fs.copyFileSync(sourceIndo, destIndo);
+        console.log("Successfully copied Indo logo.");
+      } catch (err) {
+        console.error("Failed to copy Indo logo:", err.message);
+      }
+    }
+    const sourceAstro = "C:\\Users\\lenovo\\.gemini\\antigravity-ide\\brain\\9d085671-49f0-4983-aac7-30e6f454091c\\media__1784066564043.png";
+    const destAstro = path.join(__dirname, "../public/assets/products/astrotech_logo.png");
+    if (fs.existsSync(sourceAstro)) {
+      try {
+        fs.copyFileSync(sourceAstro, destAstro);
+        console.log("Successfully copied Astrotech logo.");
+      } catch (err) {
+        console.error("Failed to copy Astrotech logo:", err.message);
+      }
+    }
+    const sourceLmw = "C:\\Users\\lenovo\\.gemini\\antigravity-ide\\brain\\9d085671-49f0-4983-aac7-30e6f454091c\\media__1784066595877.png";
+    const destLmw = path.join(__dirname, "../public/assets/products/lmw_logo.png");
+    if (fs.existsSync(sourceLmw)) {
+      try {
+        fs.copyFileSync(sourceLmw, destLmw);
+        console.log("Successfully copied LMW logo.");
+      } catch (err) {
+        console.error("Failed to copy LMW logo:", err.message);
+      }
+    }
+    const sourceTms = "C:\\Users\\lenovo\\.gemini\\antigravity-ide\\brain\\9d085671-49f0-4983-aac7-30e6f454091c\\media__1784066642382.png";
+    const destTms = path.join(__dirname, "../public/assets/products/tms_logo.png");
+    if (fs.existsSync(sourceTms)) {
+      try {
+        fs.copyFileSync(sourceTms, destTms);
+        console.log("Successfully copied TMS logo.");
+      } catch (err) {
+        console.error("Failed to copy TMS logo:", err.message);
+      }
+    }
     const productCount = await Product.countDocuments();
     if (productCount === 0 || force) {
       if (force) {
@@ -35,124 +75,160 @@ export async function seedDatabase(force = false) {
       const productsData = [
         {
           id: 2,
-          title: "Centrifugal Cylinder Sleeves",
-          category: "centrifugal",
-          image: getBase64Image("image.png"),
-          material: "Stainless Steel ASTM A351 CF8M / CF3M",
-          weight: "1.2 kg – 4.5 kg",
-          dimensions: "Inside bore diameter up to 180 mm",
-          description: "Centrifugally cast structural sleeves showing uniform grain structure and slag-free internal bores. Excellent resistance to wear and thermal corrosion.",
-          applications: "Heavy pump housings, chemical dosing assemblies, and cylinder sleeve linings."
-        },
-        {
-          id: 3,
-          title: "Machined Outlet Rings",
+          title: "Valve Body",
           category: "investment",
-          image: getBase64Image("DSC01046.JPG"),
-          material: "Nickel Alloy Monel 400 / K500",
-          weight: "0.8 kg – 3.2 kg",
-          dimensions: "Outside diameter up to 150 mm",
-          description: "Precision investment cast rings offering high resistance to marine corrosion and cracking. Finished to sub-micron flatness tolerances.",
-          applications: "Sea-water pump systems, oil-drilling tools, and marine propeller shafts."
-        },
-        {
-          id: 4,
-          title: "Centrifugal Rotor Hubs",
-          category: "centrifugal",
-          image: getBase64Image("DSC01049.JPG"),
-          material: "High-Tensile Carbon Steel 1045",
-          weight: "15.0 kg – 45.0 kg",
-          dimensions: "Length up to 600 mm, Outer Diameter up to 300 mm",
-          description: "Centrifugally cast heavy rotor hubs offering high fatigue life and microstructural density. Ideal for high centrifugal stress environments.",
-          applications: "Rotational coupling sleeves, high-speed industrial turbine hubs, and mechanical shafts."
-        },
-        {
-          id: 5,
-          title: "Austenitic Piston Insert Rings",
-          category: "sand",
-          image: getBase64Image("DSC01053.JPG"),
-          material: "Austenitic Ni-Resist Cast Iron (Grade D2)",
-          weight: "0.2 kg – 1.5 kg",
-          dimensions: "Outer Diameter up to 220 mm",
-          description: "High-nickel cast iron piston inserts built using sand casting. Guarantees matching thermal expansion rates with aluminum piston bodies to prevent ring-groove wear.",
-          applications: "Turbocharged diesel engines, marine propulsion pistons, and automotive power units."
-        },
-        {
-          id: 6,
-          title: "Flanged Meter Bodies",
-          category: "investment",
-          image: getBase64Image("DSC01056.JPG"),
-          material: "Hastelloy C276 / C22",
-          weight: "3.5 kg – 12.0 kg",
-          dimensions: "Bore sizes up to 100 mm (ANSI 150/300 class)",
-          description: "Investment cast corrosion-proof flow meter bodies. Designed with uniform wall thickness to handle high flow turbulence and corrosive acid medium.",
-          applications: "Electromagnetic flow meters, chemical plants acid lines, and industrial waste treatment pipelines."
-        },
-        {
-          id: 7,
-          title: "High-Manganese Wear Plates",
-          category: "sand",
-          image: getBase64Image("DSC01059.JPG"),
-          material: "Austenitic Manganese Steel (Hadfield Steel)",
-          weight: "5.0 kg – 28.0 kg",
-          dimensions: "Custom plate configurations up to 450x450 mm",
-          description: "High impact wear-resistant plates cast in sand molds. The alloy work-hardens dynamically during operation from 200 HB up to over 500 HB.",
-          applications: "Mining jaw crushers chute linings, stone crushing hoppers, and cement factory hopper plates."
+          image: getBase64Image("valve_body.png"),
+          material: "Stainless Steel CF8M / CF3M",
+          weight: "1.0 kg – 4.0 kg",
+          dimensions: "Height 120 mm, Port Diameter 50 mm",
+          description: "Precision investment cast food-grade stainless steel valve bodies. Designed with sanitary tolerances for regulation of high-purity liquids, food ingredients, and steam wash systems.",
+          applications: "Food processing machinery lines, sanitary flow control valves, beverage liquid handling, and dairy processing systems.",
+          industry: "food"
         },
         {
           id: 8,
-          title: "Aerospace Bracket Fittings",
+          title: "ABS Bracket",
           category: "investment",
-          image: getBase64Image("DSC01062.JPG"),
-          material: "Precipitation Hardening Stainless Steel 17-4 PH",
-          weight: "0.4 kg – 2.0 kg",
-          dimensions: "Max dimension length up to 180 mm",
-          description: "High-strength aerospace structural bracket components produced via lost-wax investment casting. Vacuum solution annealed for extreme stress resistance.",
-          applications: "Aviation fuselage mounts, steering control hinge brackets, and military aerospace assemblies."
+          image: getBase64Image("abs_bracket.png"),
+          material: "Brass / Bronze Alloy",
+          weight: "0.3 kg – 1.5 kg",
+          dimensions: "Length 120 mm, Width 40 mm",
+          description: "Precision lost-wax investment cast automobile ABS brackets. Engineered to secure anti-lock braking system sensors and components with absolute rigidity.",
+          applications: "Automobile anti-lock braking system (ABS) assemblies, sensor mounting brackets, and chassis fittings.",
+          industry: "automobile"
         },
+
         {
-          id: 9,
-          title: "Precision Machined Bronze Bushes",
-          category: "centrifugal",
-          image: getBase64Image("DSC01064.JPG"),
-          material: "Phosphor Bronze ASTM B505 C90700",
-          weight: "0.5 kg – 5.0 kg",
-          dimensions: "Inside Diameter 30 mm to 150 mm",
-          description: "High-density bronze bushing centrifugally cast to prevent microscopic voids. Deliver excellent anti-frictional properties under high loads.",
-          applications: "Heavy hydraulic cylinders guide bushes, mining machinery sleeve bearings, and marine rudder shafts."
-        },
-        {
-          id: 10,
-          title: "Centrifugal Decanter Separator Bowls",
-          category: "centrifugal",
-          image: getBase64Image("DSC01066.JPG"),
-          material: "Duplex Stainless Steel ASTM A890 Grade 4A / 5A",
-          weight: "45.0 kg – 180.0 kg",
-          dimensions: "Inner Diameter up to 450 mm, Length up to 1200 mm",
-          description: "Heavy decanter bowls centrifugally cast for chemical separators. Extreme rotational forces during casting guarantee zero internal gas cavities.",
-          applications: "Industrial centrifuge bowls, sludge dewatering hubs, and wastewater processing separation units."
-        },
-        {
-          id: 11,
-          title: "Flanged Valve Covers",
+          id: 13,
+          title: "Sensor Brackets",
           category: "investment",
-          image: getBase64Image("DSC01068.JPG"),
-          material: "Stainless Steel ASTM A351 CF8 / CF3",
-          weight: "1.5 kg – 6.5 kg",
-          dimensions: "Cover diameter up to 200 mm",
-          description: "High-precision investment cast control valve bonnet covers. Built to withstand high hydrostatic pressure ratings (ANSI Class 600/900).",
-          applications: "Steam control valve assemblies, petroleum refinery pipelines, and industrial gas flow controls."
+          image: getBase64Image("image copy 15.png"),
+          material: "Stainless Steel 304 / 316",
+          weight: "0.3 kg – 0.9 kg",
+          dimensions: "80 mm x 50 mm x 40 mm",
+          description: "Precision lost-wax investment cast brackets designed for optical and electrical sensors. Cast with high dimensional stability to ensure accurate sensor alignment under extreme operational vibration.",
+          applications: "Military defense instrumentation, electronic surveillance enclosures, and industrial automated alignment systems.",
+          industry: "automobile"
         },
         {
-          id: 12,
-          title: "Threaded Exhaust Nuts",
-          category: "sand",
-          image: getBase64Image("DSC01070.JPG"),
-          material: "Heat-Resistant Ductile Iron (Si-Mo Grade)",
-          weight: "0.3 kg – 1.2 kg",
-          dimensions: "Internal thread sizes M24 to M48",
-          description: "Specialized silicon-molybdenum ductile iron nuts cast in green sand. Designed to resist structural oxidation and thread deformation at temperatures up to 800°C.",
-          applications: "Turbocharger turbine manifold fasteners, heavy exhaust pipe connectors, and furnace door clamps."
+          id: 14,
+          title: "Flap",
+          category: "investment",
+          image: getBase64Image("flap.png"),
+          material: "Inconel 718 / 17-4 PH Stainless Steel",
+          weight: "0.5 kg – 2.2 kg",
+          dimensions: "Height 100 mm, Outer Diameter 120 mm",
+          description: "Precision investment cast automobile flap components. Designed with extreme heat tolerance to regulate high-velocity exhaust gases and bypass flow.",
+          applications: "Exhaust gas recirculation (EGR) valves, automobile emission flow control, and engine turbo bypass gates.",
+          industry: "automobile"
+        },
+        {
+          id: 15,
+          title: "Spindle",
+          category: "investment",
+          image: getBase64Image("spindle.png"),
+          material: "Carbon Steel / Alloy Steel",
+          weight: "0.2 kg – 1.0 kg",
+          dimensions: "Length 150 mm, Shaft Diameter 20 mm",
+          description: "Precision investment cast automotive spindle components. Engineered to withstand high rotational stresses and provide long-lasting alignment accuracy.",
+          applications: "Automotive steering knuckle assemblies, wheel hub shafts, and power transmission linkages.",
+          industry: "automobile"
+        },
+        {
+          id: 16,
+          title: "Camping Nut",
+          category: "investment",
+          image: getBase64Image("camping_nut.png"),
+          material: "Stainless Steel CF8M / CF3M (Food Grade)",
+          weight: "0.15 kg – 0.5 kg",
+          dimensions: "M24 Hexagonal thread, outer width 46mm, height 28mm",
+          description: "Precision investment cast food-grade stainless steel camping nut. Engineered to provide exceptional chemical resistance and structural integrity under sanitary cleaning and food process steam washdowns.",
+          applications: "Sanitary processing pipelines, food preparation mixers, pharmaceutical production lines, and high-pressure fluid flow components.",
+          industry: "food"
+        },
+        {
+          id: 17,
+          title: "Dosing Head",
+          category: "investment",
+          image: getBase64Image("dosing_head.png"),
+          material: "Stainless Steel CF8M / CF3M (Food Grade)",
+          weight: "1.2 kg – 4.5 kg",
+          dimensions: "Diameter 180mm, Height 65mm",
+          description: "Precision investment cast food-grade stainless steel dosing head. Designed for sanitary liquid filling, flow regulation, and precise dispensing systems with zero pocket areas to prevent bacterial growth.",
+          applications: "Automated liquid filling machines, food & beverage packaging systems, dairy process plants, and pharmaceutical dosage equipment.",
+          industry: "food"
+        },
+        {
+          id: 18,
+          title: "Tube",
+          category: "investment",
+          image: getBase64Image("tube.png"),
+          material: "Stainless Steel CF8M / 316L (Chemical Grade)",
+          weight: "2.5 kg – 8.0 kg",
+          dimensions: "Outer Diameter 120mm, Inner Diameter 90mm, Length 140mm",
+          description: "Precision investment cast chemical-grade stainless steel heavy tube section. Features exceptionally smooth internal and external finishes, engineered to withstand aggressive chemical dye flows and high pressure within textile processing systems.",
+          applications: "Chemical dye transport lines, textile finishing machinery, print wash systems, and fluid mixing assemblies.",
+          industry: "textile"
+        },
+        {
+          id: 19,
+          title: "Shearing Ring",
+          category: "investment",
+          image: getBase64Image("shearing_ring.png"),
+          material: "Super Duplex Stainless Steel (UNS S32750 / 2507)",
+          weight: "0.1 kg – 0.4 kg",
+          dimensions: "Outer Diameter 210mm, Inner Diameter 198mm, Thickness 6mm",
+          description: "Precision investment cast super duplex stainless steel shearing ring. Engineered with extreme tensile strength and excellent localized corrosion resistance to withstand high-velocity saline water flow and high pressure within reverse osmosis systems.",
+          applications: "Reverse Osmosis (RO) high-pressure pumps, desalination plant separation housings, and industrial filtration components.",
+          industry: "reverse_osmosis"
+        },
+        {
+          id: 20,
+          title: "Impeller",
+          category: "investment",
+          image: getBase64Image("impeller.png"),
+          material: "Stainless Steel CF8M / Bronze Alloy",
+          weight: "1.5 kg – 5.2 kg",
+          dimensions: "Diameter 220mm, Height 55mm",
+          description: "Precision investment cast closed-vane fluid impeller. Designed with hydraulically balanced curved vanes for optimal hydrodynamic flow efficiency, low turbulence, and wear-free fluid rotation in industrial pumping systems.",
+          applications: "Centrifugal water pumps, chemical mixing systems, industrial cooling towers, and liquid circulation equipment.",
+          industry: "others"
+        },
+        {
+          id: 21,
+          title: "FC Port",
+          category: "investment",
+          image: getBase64Image("fc_port.png"),
+          material: "Low Temperature Carbon Steel (SA352 W2)",
+          weight: "1.8 kg – 4.0 kg",
+          dimensions: "Flange Outer Diameter 160mm, Port Bore 95mm, Height 110mm",
+          description: "Precision investment cast low-temperature carbon steel flow control port flange. Features threaded neck and high-precision locking slots, designed for regulating flow rate and pressure control in high-pressure reverse osmosis water systems.",
+          applications: "Reverse osmosis high-pressure filtration manifolds, saline water pressure control systems, and industrial water desalination ports.",
+          industry: "reverse_osmosis"
+        },
+        {
+          id: 22,
+          title: "Hammer",
+          category: "investment",
+          image: getBase64Image("hammer.png"),
+          material: "High-Tensile Carbon Steel / Alloy Steel",
+          weight: "0.6 kg – 1.8 kg",
+          dimensions: "Length 145mm, Face Diameter 40mm",
+          description: "Precision investment cast high-tensile claw hammer head. Features a textured checkered striking face for slip prevention and a deep split claw designed for maximum nail-pulling leverage. Heat-treated for outstanding impact durability.",
+          applications: "Heavy-duty construction hand tools, carpentry operations, manufacturing assembly processes, and general maintenance hardware.",
+          industry: "others"
+        },
+        {
+          id: 23,
+          title: "Gland",
+          category: "investment",
+          image: getBase64Image("gland.png"),
+          material: "Stainless Steel CF8M / CF8",
+          weight: "0.8 kg – 2.5 kg",
+          dimensions: "Inner Arc Diameter 150mm, Outer Flange Width 240mm, Height 160mm",
+          description: "Precision investment cast stainless steel packing gland split flange. Designed to provide rigid shaft support and compressive seal pressure in heavy fluid pumps, valves, and rotating shafts.",
+          applications: "Industrial centrifugal pumps, gland packing assemblies, process steam valves, and marine stern tube seals.",
+          industry: "others"
         }
       ];
 
@@ -171,7 +247,7 @@ export async function seedDatabase(force = false) {
         {
           company: "Pentair",
           logo: getBase64Image("image copy.png"),
-          quote: "Consistently delivering high-precision valve bodies with zero defect tolerance and excellent tap-to-tap consistency."
+          quote: "Consistently delivering high-precision valve bodies with zero defect tolerance and excellent consistency."
         },
         {
           company: "ProMinent",
@@ -181,12 +257,32 @@ export async function seedDatabase(force = false) {
         {
           company: "Bruker",
           logo: getBase64Image("image copy 3.png"),
-          quote: "Excellent dimensional accuracy and sub-micron machining tolerances for our analytical instrument chambers."
+          quote: "Excellent dimensional accuracy and sub-micron machining tolerances for our analytical chambers."
         },
         {
           company: "Trelleborg",
           logo: getBase64Image("image copy 4.png"),
           quote: "Exceptional metallurgical density and uniform crystallization structure across all our centrifugal sleeves."
+        },
+        {
+          company: "Indo-MIM",
+          logo: getBase64Image("indo_logo.png"),
+          quote: "High-quality casting products and sub-assemblies for our demanding defense and automotive lines."
+        },
+        {
+          company: "Astrotech Steels Private Limited",
+          logo: getBase64Image("astrotech_logo.png"),
+          quote: "Reliable high-quality casting products with exceptional metallurgical conformity and timely deliveries."
+        },
+        {
+          company: "LMW (Lakshmi Machine Works)",
+          logo: getBase64Image("lmw_logo.png"),
+          quote: "High-grade precision components meeting our exacting textile machinery tolerances for long life."
+        },
+        {
+          company: "TMS India",
+          logo: getBase64Image("tms_logo.png"),
+          quote: "Dense, defect-free casting components for our specialized industrial machinery with full traceability."
         }
       ];
 

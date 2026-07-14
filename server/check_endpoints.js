@@ -2,9 +2,9 @@
 
 async function test() {
   const urls = [
-    'http://localhost:5000/api/products',
-    'http://localhost:5000/api/customers',
-    'http://localhost:5000/api/certificates'
+    'http://localhost:5040/api/products',
+    'http://localhost:5040/api/customers',
+    'http://localhost:5040/api/certificates'
   ];
   
   for (const url of urls) {
