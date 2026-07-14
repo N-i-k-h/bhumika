@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Shield, Wrench, Settings } from 'lucide-react';
+import { Shield, Settings } from 'lucide-react';
 import waxInjectionImg from '../assets/DSC02157.JPG';
 import preAssemblyImg from '../assets/image copy 10.png';
 import shellBuildingImg from '../assets/DSC02302.JPG';
@@ -14,11 +14,9 @@ import shotBlastingImg from '../assets/Screenshot 2026-07-09 143429.png';
 import grindingImg from '../assets/DSC01997.JPG';
 import testingImg from '../assets/DSC01942.JPG';
 import centrifugalImg from '../assets/Screenshot 2026-07-09 122649.png';
-import machiningImg from '../assets/DSC02512.JPG';
 import vmcMachiningImg from '../assets/image copy 8.png';
 import moldPrepImg from '../assets/Screenshot 2026-07-09 173251.png';
 import pouringImg from '../assets/DSC01737.JPG';
-import machiningCentrifugalImg from '../assets/image.png';
 import finishMachiningImg from '../assets/finish_machining.png';
 import cncTurningImg from '../assets/cnc_turning.png';
 
