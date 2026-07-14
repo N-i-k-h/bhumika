@@ -20,6 +20,7 @@ import moldPrepImg from '../assets/Screenshot 2026-07-09 173251.png';
 import pouringImg from '../assets/DSC01737.JPG';
 import machiningCentrifugalImg from '../assets/image.png';
 import finishMachiningImg from '../assets/finish_machining.png';
+import cncTurningImg from '../assets/cnc_turning.png';
 
 interface GalleryItem {
   title: string;
@@ -406,7 +407,7 @@ export const Capabilities: React.FC = () => {
                 <img
                   className="w-full h-full object-cover"
                   alt="CNC turning lathe carving steel"
-                  src={machiningImg}
+                  src={cncTurningImg}
                 />
                 <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] font-label-caps py-1.5 px-3">
                   CNC Turning
