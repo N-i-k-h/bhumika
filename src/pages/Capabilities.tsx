@@ -1,22 +1,25 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Shield, Settings } from 'lucide-react';
-import waxInjectionImg from '../assets/DSC02157.JPG';
-import preAssemblyImg from '../assets/image copy 10.png';
+import { Shield, Settings, Layers, Zap } from 'lucide-react';
+import waxInjectionImg from '../assets/wax_injection.png';
+import preAssemblyImg from '../assets/pre_assembly.png';
 import shellBuildingImg from '../assets/DSC02302.JPG';
 import dewaxingImg from '../assets/image copy 13.png';
 import shellFiringKilnImg from '../assets/DSC01818 (1).JPG';
 import shellFiringImg from '../assets/image copy 9.png';
-import knockoutImg from '../assets/Screenshot 2026-07-09 142152.png';
+import knockoutImg from '../assets/knockout.png';
 import fettlingImg from '../assets/DSC02041.JPG';
+import cuttingImg from '../../public/assets/images/gallery/photo_5.jpg';
 import heatTreatmentImg from '../assets/image copy 14.png';
-import shotBlastingImg from '../assets/Screenshot 2026-07-09 143429.png';
+import shotBlastingImg from '../assets/shot_blasting.png';
 import grindingImg from '../assets/DSC01997.JPG';
-import testingImg from '../assets/DSC01942.JPG';
+import testingImg from '../../public/assets/images/gallery/photo_14.jpg';
 import centrifugalImg from '../assets/Screenshot 2026-07-09 122649.png';
 import vmcMachiningImg from '../assets/image copy 8.png';
 import moldPrepImg from '../assets/Screenshot 2026-07-09 173251.png';
 import pouringImg from '../assets/DSC01737.JPG';
+import pouringMainImg from '../assets/pouring_main.png';
+import heatTreatmentCentrifugalImg from '../assets/heat_treatment_centrifugal.png';
 import finishMachiningImg from '../assets/finish_machining.png';
 import cncTurningImg from '../assets/cnc_turning.png';
 
@@ -62,7 +65,7 @@ const investmentSteps: GalleryItem[] = [
     title: "Pouring",
     subtitle: "High-Temp Alloy Transfer",
     desc: "Molten metal is tapped from induction furnaces into a ladle and carefully poured into the preheated ceramic shells to form the cast parts.",
-    image: pouringImg
+    image: pouringMainImg
   },
   {
     title: "Knockout",
@@ -71,9 +74,15 @@ const investmentSteps: GalleryItem[] = [
     image: knockoutImg
   },
   {
+    title: "Cutting",
+    subtitle: "Runner Separation",
+    desc: "Individual castings are mechanically cut off from the main central runner tree system using abrasive cut-off wheels and band saws, cleanly separating each component.",
+    image: cuttingImg
+  },
+  {
     title: "Fettling",
-    subtitle: "Gate Removal & Cutoff",
-    desc: "Individual castings are mechanically cut off from the main central runner tree system using abrasive saws or cut-off wheels.",
+    subtitle: "Gate Removal & Dressing",
+    desc: "Remaining gate stubs and flash are dressed and blended to flush tolerances using grinding wheels and pneumatic tools, preparing the surface for finishing.",
     image: fettlingImg
   },
   {
@@ -119,7 +128,7 @@ const centrifugalSteps: GalleryItem[] = [
     title: "Heat Treatment",
     subtitle: "Microstructure Refinement",
     desc: "Castings undergo thermal cycles (normalizing or tempering) to release internal spin stresses and refine the crystalline grain structure for strength.",
-    image: heatTreatmentImg
+    image: heatTreatmentCentrifugalImg
   },
   {
     title: "Finish Machining",
@@ -181,7 +190,7 @@ export const Capabilities: React.FC = () => {
               <div className="grid grid-cols-2 gap-4 text-xs font-label-caps">
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">WEIGHT SPECS</span>
-                  5 grams up to 10 kilograms
+                  10 grams up to 20 kilograms
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">SURFACE FINISH</span>
@@ -189,19 +198,19 @@ export const Capabilities: React.FC = () => {
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">TYPICAL TOLERANCE</span>
-                  ±0.15 mm per 25 mm
+                  ±0.37 mm
                 </div>
-                <div className="bg-steel-plate p-4 rounded">
+                <div className="bg-steel-plate p-4 rounded border-l-4 border-molten-glow">
                   <span className="text-secondary block font-bold mb-1">BEST FOR</span>
-                  Complex geometric details
+                  Complex Geometry
                 </div>
               </div>
             </div>
              <div className="aspect-video bg-steel-plate rounded-lg overflow-hidden shadow-md">
               <img
                 className="w-full h-full object-cover"
-                alt="Lost wax ceramic shell patterns"
-                src={shellFiringImg}
+                alt="Molten metal pouring into ceramic shells"
+                src={pouringMainImg}
               />
             </div>
           </div>
@@ -282,20 +291,20 @@ export const Capabilities: React.FC = () => {
               </p>
               <div className="grid grid-cols-2 gap-4 text-xs font-label-caps">
                 <div className="bg-steel-plate p-4 rounded">
-                  <span className="text-secondary block font-bold mb-1">MOLDING LINES</span>
-                  8 horizontal spin lines
+                  <span className="text-secondary block font-bold mb-1">WEIGHT RANGE</span>
+                  5 Kgs – 500 Kgs
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
-                  <span className="text-secondary block font-bold mb-1">WALL INTEGRITY</span>
-                  Slag-free inner structures
+                  <span className="text-secondary block font-bold mb-1">OD RANGE</span>
+                  60 – 400 mm
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
-                  <span className="text-secondary block font-bold mb-1">DIMENSIONS</span>
-                  OD up to 500 mm, length custom
+                  <span className="text-secondary block font-bold mb-1">MIN ID</span>
+                  50 mm
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
-                  <span className="text-secondary block font-bold mb-1">APPLICATIONS</span>
-                  Bushes, sleeves, outlet rings
+                  <span className="text-secondary block font-bold mb-1">MAX LENGTH</span>
+                  2500 mm
                 </div>
               </div>
             </div>
@@ -445,13 +454,13 @@ export const Capabilities: React.FC = () => {
               <tbody className="divide-y divide-primary/5 font-body-md text-xs text-on-surface-variant">
                 <tr>
                   <td className="p-4 font-bold text-primary">Investment Casting</td>
-                  <td className="p-4">5 g – 10 kg</td>
-                  <td className="p-4">±0.15 mm per 25 mm</td>
+                  <td className="p-4">10 g – 20 kg</td>
+                  <td className="p-4">±0.37 mm</td>
                   <td className="p-4">3.2 – 6.3 µm</td>
                 </tr>
                 <tr>
                   <td className="p-4 font-bold text-primary">Centrifugal Casting</td>
-                  <td className="p-4">1.0 kg – 120 kg</td>
+                  <td className="p-4">5 kg – 500 kg</td>
                   <td className="p-4">Machined bore (±0.01 mm)</td>
                   <td className="p-4">Machined finishes</td>
                 </tr>
@@ -487,11 +496,29 @@ export const Capabilities: React.FC = () => {
               </p>
               <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
                 <span className="bg-steel-plate px-2 py-1 rounded">CF8 (304)</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CF3 (304L)</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">CF8M (316)</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">CF3M (316L)</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">Duplex (CD4MCu)</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">CB7Cu-1 (17-4 PH)</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">CB7Cu-2 (15-5 PH)</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">1.4841</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">1.4785</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">1.4845</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">1.4408</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">1.4864</span>
+              </div>
+            </div>
+
+            {/* Super Duplex Steel */}
+            <div className="p-6 border border-primary/10 rounded-lg hover:border-secondary transition-all">
+              <h4 className="font-headline-md text-base font-bold text-primary mb-3 flex items-center justify-between">
+                Super Duplex Steel <Zap className="w-5 h-5 text-secondary" />
+              </h4>
+              <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
+                High-strength duplex and super duplex alloys offering superior resistance to pitting, crevice corrosion, and stress corrosion cracking in aggressive environments.
+              </p>
+              <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
+                <span className="bg-steel-plate px-2 py-1 rounded">CD4MCuN</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CD3MWCuN</span>
               </div>
             </div>
 
@@ -504,10 +531,25 @@ export const Capabilities: React.FC = () => {
                 Providing high structural tensile strength, weldability, and impact endurance for structural heavy machine blocks.
               </p>
               <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
-                <span className="bg-steel-plate px-2 py-1 rounded">WCB</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">WCC</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">LCB / LCC</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">4130 / 8620</span>
+              </div>
+            </div>
+
+            {/* Mild Steel */}
+            <div className="p-6 border border-primary/10 rounded-lg hover:border-secondary transition-all">
+              <h4 className="font-headline-md text-base font-bold text-primary mb-3 flex items-center justify-between">
+                Mild Steel <Layers className="w-5 h-5 text-secondary" />
+              </h4>
+              <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
+                Versatile mild steel grades suited for general-purpose structural castings, valve bodies, and industrial fittings requiring good machinability and weldability.
+              </p>
+              <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
+                <span className="bg-steel-plate px-2 py-1 rounded">IC1020</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">C12-3</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">C40</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">WCB</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">WCC</span>
               </div>
             </div>
           </div>

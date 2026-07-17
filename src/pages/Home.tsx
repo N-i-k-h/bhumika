@@ -11,7 +11,7 @@ import decanterShellImg from '../assets/DSC01066.JPG';
 import pistonRingsImg from '../assets/DSC01053.JPG';
 import bronzeBushesImg from '../assets/DSC01064.JPG';
 import valveCoversImg from '../assets/DSC01068.JPG';
-import whoWeAreImg from '../assets/image copy 5.png';
+import whoWeAreImg from '../assets/who_we_are_casting.png';
 
 export const Home: React.FC = () => {
   return (
