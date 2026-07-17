@@ -6,7 +6,6 @@ import preAssemblyImg from '../assets/pre_assembly.png';
 import shellBuildingImg from '../assets/DSC02302.JPG';
 import dewaxingImg from '../assets/image copy 13.png';
 import shellFiringKilnImg from '../assets/DSC01818 (1).JPG';
-import shellFiringImg from '../assets/image copy 9.png';
 import knockoutImg from '../assets/knockout.png';
 import fettlingImg from '../assets/DSC02041.JPG';
 import cuttingImg from '../../public/assets/images/gallery/photo_5.jpg';
