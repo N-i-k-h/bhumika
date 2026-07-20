@@ -1,8 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import { Quote, ShieldCheck, Award, Users } from 'lucide-react';
+import technoVisionLogo from '../assets/techno_vision_tools_logo.png';
+import automotiveAxlesLogo from '../assets/automotive_axles_logo.png';
+import weirMineralsLogo from '../assets/weir_minerals_logo.png';
+
+const defaultCustomers = [
+  {
+    company: "Pentair",
+    logo: "/assets/products/image copy.png",
+    quote: "Consistently delivering high-precision valve bodies with zero defect tolerance and excellent consistency."
+  },
+  {
+    company: "ProMinent",
+    logo: "/assets/products/image copy 2.png",
+    quote: "Outstanding casting quality for critical pump housings with highly reliable lead times since 2018."
+  },
+  {
+    company: "Bruker",
+    logo: "/assets/products/image copy 3.png",
+    quote: "Excellent dimensional accuracy and sub-micron machining tolerances for our analytical chambers."
+  },
+  {
+    company: "Trelleborg",
+    logo: "/assets/products/image copy 4.png",
+    quote: "Exceptional metallurgical density and uniform crystallization structure across all our centrifugal sleeves."
+  },
+  {
+    company: "Indo-MIM",
+    logo: "/assets/products/indo_logo.png",
+    quote: "High-quality casting products and sub-assemblies for our demanding defense and automotive lines."
+  },
+  {
+    company: "Astrotech Steels Private Limited",
+    logo: "/assets/products/astrotech_logo.png",
+    quote: "Reliable high-quality casting products with exceptional metallurgical conformity and timely deliveries."
+  },
+  {
+    company: "LMW (Lakshmi Machine Works)",
+    logo: "/assets/products/lmw_logo.png",
+    quote: "High-grade precision components meeting our exacting textile machinery tolerances for long life."
+  },
+  {
+    company: "TMS India",
+    logo: "/assets/products/tms_logo.png",
+    quote: "Dense, defect-free casting components for our specialized industrial machinery with full traceability."
+  },
+  {
+    company: "Techno Vision Tools",
+    logo: technoVisionLogo,
+    quote: "High-precision investment casting components delivering superior dimensional accuracy and tooling reliability."
+  },
+  {
+    company: "Automotive Axles Limited",
+    logo: automotiveAxlesLogo,
+    quote: "Trusted supplier for heavy-duty automotive axle casting assemblies with zero porosity and strict tolerances."
+  },
+  {
+    company: "Weir Minerals",
+    logo: weirMineralsLogo,
+    quote: "Robust centrifugal and investment alloys tailored for demanding slurry pumps and mineral processing equipment."
+  }
+];
 
 export const Customers: React.FC = () => {
-  const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [testimonials, setTestimonials] = useState<any[]>(defaultCustomers);
 
   useEffect(() => {
     fetch('/api/customers')
@@ -11,7 +72,7 @@ export const Customers: React.FC = () => {
         return res.json();
       })
       .then(data => {
-        if (Array.isArray(data)) {
+        if (Array.isArray(data) && data.length > 0) {
           setTestimonials(data);
         }
       })

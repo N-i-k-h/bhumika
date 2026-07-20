@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Download } from 'lucide-react';
 
 interface Slide {
   image: string;
@@ -87,6 +88,15 @@ export const HeroCarousel: React.FC = () => {
             >
               Request Engineering Quote
             </Link>
+            <a
+              href="/Bhumika_Alloy_Castings_Brochure.pdf"
+              download="Bhumika_Alloy_Castings_Brochure.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 border border-white/80 bg-white/10 text-white px-7 py-4 rounded font-bold hover:bg-white/20 transition-all text-center"
+            >
+              <Download className="w-5 h-5" /> Download Brochure
+            </a>
             <Link
               to="/capabilities"
               className="border border-white/60 text-white px-8 py-4 rounded font-bold hover:bg-white/10 transition-all text-center"

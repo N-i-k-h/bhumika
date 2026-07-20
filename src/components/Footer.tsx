@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Phone } from 'lucide-react';
+import { MapPin, Mail, Phone, Download } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -14,21 +14,34 @@ export const Footer: React.FC = () => {
           <p className="font-body-md text-surface-variant/80 text-sm leading-relaxed max-w-xs">
             Shimoga's premier engineering casting facility. Delivering metallurgical excellence and certified components since 1997.
           </p>
-          <div className="flex gap-4">
-            <Link
-              aria-label="Find Location"
-              className="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-on-primary hover:bg-molten-glow transition-colors"
-              to="/contact"
-            >
-              <MapPin className="w-5 h-5" />
-            </Link>
-            <a
-              className="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-on-primary hover:bg-molten-glow transition-colors"
-              href="mailto:marketing@bhumikacastings.com"
-              aria-label="Email Us"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
+          <div className="flex flex-col gap-3">
+            <div className="flex gap-4">
+              <Link
+                aria-label="Find Location"
+                className="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-on-primary hover:bg-molten-glow transition-colors"
+                to="/contact"
+              >
+                <MapPin className="w-5 h-5" />
+              </Link>
+              <a
+                className="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-on-primary hover:bg-molten-glow transition-colors"
+                href="mailto:marketing@bhumikacastings.com"
+                aria-label="Email Us"
+              >
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
+            <div>
+              <a
+                href="/Bhumika_Alloy_Castings_Brochure.pdf"
+                download="Bhumika_Alloy_Castings_Brochure.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-molten-glow hover:bg-opacity-90 text-white text-xs px-4 py-2.5 rounded font-bold transition-all shadow-md uppercase font-label-caps tracking-wider cursor-pointer mt-2"
+              >
+                <Download className="w-4 h-4" /> Download Brochure
+              </a>
+            </div>
           </div>
         </div>
         
@@ -57,6 +70,17 @@ export const Footer: React.FC = () => {
               <Link className="font-body-md text-surface-variant hover:text-molten-glow transition-colors duration-200" to="/process">
                 Metallurgy Grades
               </Link>
+            </li>
+            <li>
+              <a
+                href="/Bhumika_Alloy_Castings_Brochure.pdf"
+                download="Bhumika_Alloy_Castings_Brochure.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-body-md text-tertiary-fixed hover:text-molten-glow transition-colors duration-200 inline-flex items-center gap-1.5 font-bold"
+              >
+                <Download className="w-3.5 h-3.5" /> Company Brochure (PDF)
+              </a>
             </li>
           </ul>
         </div>

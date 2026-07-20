@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, UploadCloud, CheckCircle2, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, UploadCloud, CheckCircle2, Send, Download, FileText } from 'lucide-react';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -41,6 +41,35 @@ export const Contact: React.FC = () => {
     // Generate a random Reference ID
     const ref = "BAC-RFQ-" + Math.floor(1000 + Math.random() * 9000);
     setReferenceId(ref);
+
+    const processLabel =
+      formData.process === 'investment'
+        ? 'Investment Casting'
+        : formData.process === 'centrifugal'
+        ? 'Centrifugal Casting'
+        : 'Consult Engineering';
+
+    const rawSubject = `RFQ Package Submission - ${ref} (${formData.company})`;
+    const rawBody =
+      `Bhumika Alloy Castings - RFQ Submission\n` +
+      `-----------------------------------------\n` +
+      `Reference ID: ${ref}\n` +
+      `Name: ${formData.name}\n` +
+      `Company: ${formData.company}\n` +
+      `Email: ${formData.email}\n` +
+      `Phone: ${formData.phone}\n` +
+      `Preferred Process: ${processLabel}\n` +
+      `Material / Alloy Grade: ${formData.material || 'N/A'}\n` +
+      `Est. Annual Qty: ${formData.quantity || 'N/A'}\n` +
+      `${selectedFile ? `Attached File: ${selectedFile.name}\n` : ''}\n` +
+      `Technical Requirements / Scope:\n` +
+      `${formData.message || 'None provided'}\n`;
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=marketing@bhumikacastings.com&su=${encodeURIComponent(rawSubject)}&body=${encodeURIComponent(rawBody)}`;
+
+    // Open Gmail Web compose in a new tab by default
+    window.open(gmailUrl, '_blank');
+
     setIsSubmitted(true);
   };
 
@@ -141,6 +170,25 @@ export const Contact: React.FC = () => {
                   <span>Saturday – Sunday</span> <span>By Appointment Only</span>
                 </li>
               </ul>
+            </div>
+
+            {/* Download Brochure Card */}
+            <div className="bg-steel-plate/80 p-6 rounded-lg border border-primary/10 space-y-3 shadow-sm">
+              <h4 className="font-headline-md text-sm font-bold text-primary flex items-center gap-2">
+                <FileText className="w-5 h-5 text-secondary" /> Company Brochure
+              </h4>
+              <p className="text-xs text-on-surface-variant leading-relaxed">
+                Download our official company catalog containing detailed foundry specifications, equipment specs, and technical alloy matrices.
+              </p>
+              <a
+                href="/Bhumika_Alloy_Castings_Brochure.pdf"
+                download="Bhumika_Alloy_Castings_Brochure.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-secondary hover:bg-opacity-90 text-white px-5 py-3 rounded font-bold transition-all text-xs uppercase font-label-caps tracking-wider cursor-pointer shadow-sm"
+              >
+                <Download className="w-4 h-4" /> Download Brochure (PDF)
+              </a>
             </div>
             
             {/* Google Maps Embed */}
@@ -346,9 +394,51 @@ export const Contact: React.FC = () => {
                   </p>
                 </div>
                 <p className="text-xs text-on-surface-variant max-w-md leading-relaxed mx-auto">
-                  Thank you. Your drawings and metallurgical data sheets have been securely transmitted to our engineering team in Shimoga. We will review your tolerances and respond with a formal quote within <strong>24 to 48 business hours</strong>.
+                  A Gmail draft with your RFQ details has been opened in a new tab to send directly to <strong>marketing@bhumikacastings.com</strong>.
                 </p>
-                <div className="pt-4">
+                <div className="pt-2 flex flex-col sm:flex-row flex-wrap gap-3 justify-center items-center">
+                  <a
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=marketing@bhumikacastings.com&su=${encodeURIComponent(`RFQ Package Submission - ${referenceId} (${formData.company})`)}&body=${encodeURIComponent(
+                      `Bhumika Alloy Castings - RFQ Submission\n` +
+                      `-----------------------------------------\n` +
+                      `Reference ID: ${referenceId}\n` +
+                      `Name: ${formData.name}\n` +
+                      `Company: ${formData.company}\n` +
+                      `Email: ${formData.email}\n` +
+                      `Phone: ${formData.phone}\n` +
+                      `Preferred Process: ${formData.process}\n` +
+                      `Material: ${formData.material || 'N/A'}\n` +
+                      `Qty: ${formData.quantity || 'N/A'}\n\n` +
+                      `Message:\n${formData.message || 'None'}\n`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded font-bold text-xs inline-flex items-center gap-2 cursor-pointer shadow-md uppercase font-label-caps"
+                  >
+                    <Mail className="w-4 h-4" /> Re-Open in Gmail Web
+                  </a>
+
+                  <a
+                    href={`mailto:marketing@bhumikacastings.com?subject=${encodeURIComponent(`RFQ Package Submission - ${referenceId} (${formData.company})`)}&body=${encodeURIComponent(
+                      `Bhumika Alloy Castings - RFQ Submission\n` +
+                      `-----------------------------------------\n` +
+                      `Reference ID: ${referenceId}\n` +
+                      `Name: ${formData.name}\n` +
+                      `Company: ${formData.company}\n` +
+                      `Email: ${formData.email}\n` +
+                      `Phone: ${formData.phone}\n` +
+                      `Preferred Process: ${formData.process}\n` +
+                      `Material: ${formData.material || 'N/A'}\n` +
+                      `Qty: ${formData.quantity || 'N/A'}\n\n` +
+                      `Message:\n${formData.message || 'None'}\n`
+                    )}`}
+                    className="bg-steel-plate hover:bg-slate-200 text-primary px-5 py-2.5 rounded font-bold text-xs inline-flex items-center gap-2 cursor-pointer border border-primary/10"
+                  >
+                    <Mail className="w-4 h-4" /> Default Email App
+                  </a>
+                </div>
+
+                <div className="pt-2">
                   <button
                     className="bg-primary hover:bg-secondary text-white px-6 py-2.5 rounded font-bold text-xs cursor-pointer"
                     onClick={resetForm}

@@ -283,6 +283,21 @@ export async function seedDatabase(force = false) {
           company: "TMS India",
           logo: getBase64Image("tms_logo.png"),
           quote: "Dense, defect-free casting components for our specialized industrial machinery with full traceability."
+        },
+        {
+          company: "Techno Vision Tools",
+          logo: getBase64Image("techno_vision_tools_logo.png"),
+          quote: "High-precision investment casting components delivering superior dimensional accuracy and tooling reliability."
+        },
+        {
+          company: "Automotive Axles Limited",
+          logo: getBase64Image("automotive_axles_logo.png"),
+          quote: "Trusted supplier for heavy-duty automotive axle casting assemblies with zero porosity and strict tolerances."
+        },
+        {
+          company: "Weir Minerals",
+          logo: getBase64Image("weir_minerals_logo.png"),
+          quote: "Robust centrifugal and investment alloys tailored for demanding slurry pumps and mineral processing equipment."
         }
       ];
 

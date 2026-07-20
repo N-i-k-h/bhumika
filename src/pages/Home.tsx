@@ -11,7 +11,7 @@ import decanterShellImg from '../assets/DSC01066.JPG';
 import pistonRingsImg from '../assets/DSC01053.JPG';
 import bronzeBushesImg from '../assets/DSC01064.JPG';
 import valveCoversImg from '../assets/DSC01068.JPG';
-import whoWeAreImg from '../assets/who_we_are_casting.png';
+import whoWeAreImg from '../assets/pouring_main.png';
 
 export const Home: React.FC = () => {
   return (
@@ -23,9 +23,9 @@ export const Home: React.FC = () => {
       <section className="py-20 bg-white">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
           <div className="relative group">
-            <div className="aspect-square bg-steel-plate overflow-hidden rounded-lg shadow-lg">
+            <div className="bg-steel-plate overflow-hidden rounded-lg shadow-lg flex items-center justify-center p-2 border border-primary/10">
               <img
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-auto max-h-[480px] object-contain rounded group-hover:scale-[1.02] transition-transform duration-700"
                 alt="Bhumika Alloy Castings facility in Shimoga"
                 src={whoWeAreImg}
               />

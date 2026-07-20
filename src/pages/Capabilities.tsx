@@ -12,12 +12,13 @@ import cuttingImg from '../../public/assets/images/gallery/photo_5.jpg';
 import heatTreatmentImg from '../assets/image copy 14.png';
 import shotBlastingImg from '../assets/shot_blasting.png';
 import grindingImg from '../assets/DSC01997.JPG';
-import testingImg from '../../public/assets/images/gallery/photo_14.jpg';
+import testingImg from '../assets/inspection_testing.png';
 import centrifugalImg from '../assets/Screenshot 2026-07-09 122649.png';
 import vmcMachiningImg from '../assets/image copy 8.png';
 import moldPrepImg from '../assets/Screenshot 2026-07-09 173251.png';
 import pouringImg from '../assets/DSC01737.JPG';
 import pouringMainImg from '../assets/pouring_main.png';
+import whoWeAreCastingImg from '../assets/who_we_are_casting.png';
 import heatTreatmentCentrifugalImg from '../assets/heat_treatment_centrifugal.png';
 import finishMachiningImg from '../assets/finish_machining.png';
 import cncTurningImg from '../assets/cnc_turning.png';
@@ -205,11 +206,11 @@ export const Capabilities: React.FC = () => {
                 </div>
               </div>
             </div>
-             <div className="aspect-video bg-steel-plate rounded-lg overflow-hidden shadow-md">
+             <div className="bg-steel-plate rounded-lg overflow-hidden shadow-md flex items-center justify-center p-2 border border-primary/10">
               <img
-                className="w-full h-full object-cover"
-                alt="Molten metal pouring into ceramic shells"
-                src={pouringMainImg}
+                className="w-full h-auto max-h-[480px] object-contain rounded"
+                alt="Precision Investment Casting process"
+                src={whoWeAreCastingImg}
               />
             </div>
           </div>
@@ -242,7 +243,7 @@ export const Capabilities: React.FC = () => {
                     <img
                       src={step.image}
                       alt={step.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
                     <>
@@ -344,7 +345,7 @@ export const Capabilities: React.FC = () => {
                     <img
                       src={step.image}
                       alt={step.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
                     <>
@@ -547,6 +548,7 @@ export const Capabilities: React.FC = () => {
                 <span className="bg-steel-plate px-2 py-1 rounded">IC1020</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">C12-3</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">C40</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">S45C</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">WCB</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">WCC</span>
               </div>

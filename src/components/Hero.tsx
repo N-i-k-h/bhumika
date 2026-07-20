@@ -1,4 +1,5 @@
 import React from 'react';
+import { Download } from 'lucide-react';
 import facilityImg from '../assets/DSC00691.JPG';
 
 export const Hero: React.FC = () => {
@@ -39,6 +40,17 @@ export const Hero: React.FC = () => {
             Manufacturer of high quality investment &amp; centrifugal castings in as-cast and machined condition.
           </p>
 
+          <div className="flex flex-wrap gap-4 pt-2">
+            <a
+              href="/Bhumika_Alloy_Castings_Brochure.pdf"
+              download="Bhumika_Alloy_Castings_Brochure.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-molten-glow hover:bg-opacity-90 text-white px-7 py-3.5 rounded font-bold transition-all text-sm shadow-lg shadow-molten-glow/30 uppercase font-label-caps tracking-wider cursor-pointer"
+            >
+              <Download className="w-5 h-5" /> Download Company Brochure
+            </a>
+          </div>
 
         </div>
       </div>
