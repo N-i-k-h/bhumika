@@ -32,7 +32,7 @@ export const AdminPage: React.FC = () => {
 
   // Form Fields: Products
   const [prodTitle, setProdTitle] = useState('');
-  const [prodCategory, setProdCategory] = useState<'centrifugal' | 'investment' | 'sand'>('investment');
+  const [prodIndustry, setProdIndustry] = useState<'automobile' | 'food' | 'textile' | 'reverse_osmosis' | 'others'>('others');
   const [prodImage, setProdImage] = useState<string>(''); // Base64 string
   const [prodMaterial, setProdMaterial] = useState('');
   const [prodWeight, setProdWeight] = useState('');
@@ -54,6 +54,17 @@ export const AdminPage: React.FC = () => {
   const [certImage, setCertImage] = useState<string>(''); // Base64 string
 
   const API_URL = '/api';
+
+  const getIndustryLabel = (industry: string) => {
+    switch (industry) {
+      case 'automobile': return 'Automobile';
+      case 'food': return 'Food Industry';
+      case 'textile': return 'Textile';
+      case 'reverse_osmosis': return 'Reverse Osmosis';
+      case 'others': return 'Others';
+      default: return industry;
+    }
+  };
 
   useEffect(() => {
     if (isAdmin) {
@@ -151,7 +162,7 @@ export const AdminPage: React.FC = () => {
 
     // Product Reset
     setProdTitle('');
-    setProdCategory('investment');
+    setProdIndustry('others');
     setProdImage('');
     setProdMaterial('');
     setProdWeight('');
@@ -194,7 +205,8 @@ export const AdminPage: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: prodTitle,
-          category: prodCategory,
+          category: undefined,
+          industry: prodIndustry,
           image: prodImage || undefined, // Only pass image if updated
           material: prodMaterial,
           weight: prodWeight,
@@ -224,7 +236,7 @@ export const AdminPage: React.FC = () => {
   const startEditProduct = (item: any) => {
     setEditingItem({ type: 'products', id: item.id });
     setProdTitle(item.title);
-    setProdCategory(item.category);
+    setProdIndustry(item.industry || 'others');
     setProdMaterial(item.material);
     setProdWeight(item.weight);
     setProdDimensions(item.dimensions);
@@ -575,15 +587,17 @@ export const AdminPage: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Process Category</label>
+                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Product Category</label>
                     <select
-                      value={prodCategory}
-                      onChange={(e) => setProdCategory(e.target.value as any)}
+                      value={prodIndustry}
+                      onChange={(e) => setProdIndustry(e.target.value as any)}
                       className="w-full p-2.5 border border-primary/10 rounded text-xs bg-white"
                     >
-                      <option value="investment">Investment Casting</option>
-                      <option value="centrifugal">Centrifugal Casting</option>
-                      <option value="sand">Sand Casting</option>
+                      <option value="automobile">Automobile</option>
+                      <option value="food">Food Industry</option>
+                      <option value="textile">Textile</option>
+                      <option value="reverse_osmosis">Reverse Osmosis</option>
+                      <option value="others">Others</option>
                     </select>
                   </div>
                   <div>
@@ -870,7 +884,7 @@ export const AdminPage: React.FC = () => {
                         <div className="min-w-0">
                           <h4 className="font-bold text-sm text-primary truncate">{prod.title}</h4>
                           <span className="text-[10px] text-secondary font-bold font-label-caps block uppercase mt-0.5">
-                            {prod.category} Casting • {prod.material}
+                            {getIndustryLabel(prod.industry)} • {prod.material}
                           </span>
                         </div>
                       </div>

@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Shield, Settings, Layers, Zap } from 'lucide-react';
-import waxInjectionImg from '../assets/wax_injection.png';
+import waxInjectionImg from '../assets/wax_injection_process.png';
 import preAssemblyImg from '../assets/pre_assembly.png';
 import shellBuildingImg from '../assets/DSC02302.JPG';
 import dewaxingImg from '../assets/image copy 13.png';
 import shellFiringKilnImg from '../assets/DSC01818 (1).JPG';
-import knockoutImg from '../assets/knockout.png';
+import knockoutImg from '../assets/knockout_process.png';
 import fettlingImg from '../assets/DSC02041.JPG';
 import cuttingImg from '../../public/assets/images/gallery/photo_5.jpg';
 import heatTreatmentImg from '../assets/image copy 14.png';
-import shotBlastingImg from '../assets/shot_blasting.png';
+import shotBlastingImg from '../assets/shot_blasting_process.png';
 import grindingImg from '../assets/DSC01997.JPG';
 import testingImg from '../assets/inspection_testing.png';
-import centrifugalImg from '../assets/Screenshot 2026-07-09 122649.png';
+import centrifugalImg from '../assets/centrifugal_casting_process.png';
 import vmcMachiningImg from '../assets/image copy 8.png';
 import moldPrepImg from '../assets/Screenshot 2026-07-09 173251.png';
 import pouringImg from '../assets/DSC01737.JPG';
@@ -38,7 +38,7 @@ const investmentSteps: GalleryItem[] = [
     image: waxInjectionImg
   },
   {
-    title: "Pre-Assembly",
+    title: "Tree Assembly",
     subtitle: "Wax Tree Fabrication",
     desc: "Individual wax patterns are welded onto a central wax sprue (runner system) by skilled operators to create a tree structure, enabling efficient batch pouring.",
     image: preAssemblyImg
@@ -50,13 +50,13 @@ const investmentSteps: GalleryItem[] = [
     image: shellBuildingImg
   },
   {
-    title: "Dewaxing",
+    title: "Dewaxing (removal of wax)",
     subtitle: "Steam Autoclave Wax Removal",
     desc: "The shell is placed in a high-pressure steam autoclave. The wax melts and drains out, leaving behind a hollow ceramic mold containing the precise cavity of the parts.",
     image: dewaxingImg
   },
   {
-    title: "Shell Firing",
+    title: "Shell Pre-heating",
     subtitle: "Mold Sintering",
     desc: "The empty ceramic shells are fired in high-temperature ovens (around 1000°C) to strengthen the ceramic structure and remove any residual moisture or wax, preparing them for receiving molten metal.",
     image: shellFiringKilnImg
@@ -74,13 +74,13 @@ const investmentSteps: GalleryItem[] = [
     image: knockoutImg
   },
   {
-    title: "Cutting",
+    title: "Cutting (gate trimming)",
     subtitle: "Runner Separation",
     desc: "Individual castings are mechanically cut off from the main central runner tree system using abrasive cut-off wheels and band saws, cleanly separating each component.",
     image: cuttingImg
   },
   {
-    title: "Fettling",
+    title: "Fettling (grinding)",
     subtitle: "Gate Removal & Dressing",
     desc: "Remaining gate stubs and flash are dressed and blended to flush tolerances using grinding wheels and pneumatic tools, preparing the surface for finishing.",
     image: fettlingImg
@@ -98,13 +98,13 @@ const investmentSteps: GalleryItem[] = [
     image: shotBlastingImg
   },
   {
-    title: "Grinding & Gunwork",
+    title: "Gunwork",
     subtitle: "Gate Dressing & Cleaning",
     desc: "Operators use grinding wheels and specialized pneumatic tools to dress and blend the remaining runner gates on the casting surface to flush tolerances.",
     image: grindingImg
   },
   {
-    title: "Inspection & Testing",
+    title: "Inspection",
     subtitle: "Zero-Defect Quality Control",
     desc: "Final castings undergo rigorous checks: chemical spectrometry, dye-penetrant (FPI) cracks search, dimensional reports, and final visual verification before packaging.",
     image: testingImg
@@ -194,15 +194,15 @@ export const Capabilities: React.FC = () => {
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">SURFACE FINISH</span>
-                  3.2 µm Ra or better
+                  3.2 µm Ra
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">TYPICAL TOLERANCE</span>
-                  ±0.37 mm
+                  +/-0.37 mm
                 </div>
                 <div className="bg-steel-plate p-4 rounded border-l-4 border-molten-glow">
                   <span className="text-secondary block font-bold mb-1">BEST FOR</span>
-                  Complex Geometry
+                  Complex in geometry
                 </div>
               </div>
             </div>
@@ -225,7 +225,7 @@ export const Capabilities: React.FC = () => {
               PRODUCTION WORKFLOW
             </span>
             <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
-              Investment Casting Sub-Processes
+              Investment Casting Processes
             </h2>
             <p className="font-body-md text-sm text-on-surface-variant mt-4 max-w-xl mx-auto">
               Follow our comprehensive 10-step lost-wax casting cycle, engineered to deliver absolute dimensional precision and zero metallurgical defects.
@@ -327,7 +327,7 @@ export const Capabilities: React.FC = () => {
               SPINNING WORKFLOW
             </span>
             <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
-              Centrifugal Casting Sub-Processes
+              Centrifugal Casting Processes
             </h2>
             <p className="font-body-md text-sm text-on-surface-variant mt-4 max-w-xl mx-auto">
               Follow our horizontal centrifugal casting method, designed to eliminate internal gas cavities and deliver maximum structural density.
@@ -455,13 +455,13 @@ export const Capabilities: React.FC = () => {
                 <tr>
                   <td className="p-4 font-bold text-primary">Investment Casting</td>
                   <td className="p-4">10 g – 20 kg</td>
-                  <td className="p-4">±0.37 mm</td>
+                  <td className="p-4">+/-0.37 mm</td>
                   <td className="p-4">3.2 – 6.3 µm</td>
                 </tr>
                 <tr>
                   <td className="p-4 font-bold text-primary">Centrifugal Casting</td>
                   <td className="p-4">5 kg – 500 kg</td>
-                  <td className="p-4">Machined bore (±0.01 mm)</td>
+                  <td className="p-4">Machined bore (+/-0.01 mm)</td>
                   <td className="p-4">Machined finishes</td>
                 </tr>
               </tbody>

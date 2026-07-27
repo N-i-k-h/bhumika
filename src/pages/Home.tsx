@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Hero } from '../components/Hero';
 import { ShieldCheck, ArrowRight, Settings, Activity, Globe, MenuSquare } from 'lucide-react';
 import creatorsImg from '../assets/DSC02681.JPG';
-import whyBhumikaImg from '../assets/image copy 6.png';
-import investmentCastingImg from '../assets/image copy 7.png';
-import centrifugalCastingImg from '../assets/Screenshot 2026-07-09 122649.png';
+import whyBhumikaImg from '../assets/why_bhumika_products.jpg';
+import investmentCastingImg from '../assets/investment_casting_patterns.jpg';
+import centrifugalCastingImg from '../assets/centrifugal_casting_process.png';
 import machiningImg from '../assets/image copy 8.png';
 import decanterShellImg from '../assets/DSC01066.JPG';
 import pistonRingsImg from '../assets/DSC01053.JPG';
@@ -77,7 +77,7 @@ export const Home: React.FC = () => {
               The Driving Force Behind Bhumika Alloy Castings
             </h3>
             <p className="font-body-md text-sm text-on-surface-variant mb-6 leading-relaxed">
-              Our operations are led by our Founder, <strong>Mr. H.S. Diwakar</strong>, alongside Director (MD) <strong>Mr. H.D. Deepak</strong>, Assistant Director <strong>Mr. Sai Sriniketan</strong>, and General Manager <strong>Mr. V. Chandrashekar</strong>. Together, our leadership guides a team of skilled metallurgists, foundry operators, and CNC engineers.
+              Our operations are led by our Founder, <strong>Mr. H.S. Diwakar</strong>, alongside Director (MD) <strong>Mr. H.D. Deepak</strong>, Assistant Director <strong>Mr. Sai Srinikethan</strong>, and General Manager <strong>Mr. V. Chandrashekar</strong>. Together, our leadership guides a team of skilled metallurgists, foundry operators, and CNC engineers.
             </p>
             <p className="font-body-md text-sm text-on-surface-variant mb-8 leading-relaxed">
               By investing in human expertise alongside automated manufacturing technologies, we maintain our commitment to zero-defect casting production and custom material development for global heavy industries.
@@ -92,7 +92,7 @@ export const Home: React.FC = () => {
                 <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Director</p>
               </div>
               <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-tertiary">
-                <p className="font-headline-md text-xs font-bold text-primary">Mr. Sai Sriniketan</p>
+                <p className="font-headline-md text-xs font-bold text-primary">Mr. Sai Srinikethan</p>
                 <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Assistant Director</p>
               </div>
               <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-primary-container">
@@ -122,7 +122,7 @@ export const Home: React.FC = () => {
             <div className="relative aspect-[4/3] bg-steel-plate overflow-hidden rounded-lg shadow-lg border border-primary/5">
               <img
                 className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-                alt="Bhumika Alloy Castings testing laboratory"
+                alt="Bhumika Alloy Castings high-precision casting components"
                 src={whyBhumikaImg}
               />
             </div>
