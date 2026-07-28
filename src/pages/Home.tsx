@@ -77,7 +77,7 @@ export const Home: React.FC = () => {
               The Driving Force Behind Bhumika Alloy Castings
             </h3>
             <p className="font-body-md text-sm text-on-surface-variant mb-6 leading-relaxed">
-              Our operations are led by our Founder, <strong>Mr. H.S. Diwakar</strong>, alongside Director (MD) <strong>Mr. H.D. Deepak</strong>, Assistant Director <strong>Mr. Sai Srinikethan</strong>, and General Manager <strong>Mr. V. Chandrashekar</strong>. Together, our leadership guides a team of skilled metallurgists, foundry operators, and CNC engineers.
+              Our operations are led by our Founder, <strong>Mr. H.S. Diwakar</strong>, alongside Director (MD) <strong>Mr. H.D. Deepak</strong>, Assistant Director <strong>Mr. Sai Sriniketh</strong>, and General Manager <strong>Mr. V. Chandrashekar</strong>. Together, our leadership guides a team of skilled metallurgists, foundry operators, and CNC engineers.
             </p>
             <p className="font-body-md text-sm text-on-surface-variant mb-8 leading-relaxed">
               By investing in human expertise alongside automated manufacturing technologies, we maintain our commitment to zero-defect casting production and custom material development for global heavy industries.
@@ -92,7 +92,7 @@ export const Home: React.FC = () => {
                 <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Director</p>
               </div>
               <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-tertiary">
-                <p className="font-headline-md text-xs font-bold text-primary">Mr. Sai Srinikethan</p>
+                <p className="font-headline-md text-xs font-bold text-primary">Mr. Sai Sriniketh</p>
                 <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Assistant Director</p>
               </div>
               <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-primary-container">

@@ -148,89 +148,11 @@ export const Products: React.FC = () => {
                 <p className="text-xs text-on-surface-variant font-label-caps line-clamp-1 mb-4">
                   {p.material}
                 </p>
-                <button
-                  onClick={() => setSelectedProduct(p)}
-                  className="w-full mt-auto bg-steel-plate hover:bg-primary hover:text-white text-primary text-xs font-bold py-2.5 rounded transition-all cursor-pointer"
-                >
-                  View Technical Specs
-                </button>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Specifications Modal */}
-      {selectedProduct && (
-        <div
-          onClick={() => setSelectedProduct(null)}
-          className="fixed inset-0 bg-primary/60 backdrop-blur-sm z-[80] flex items-center justify-center p-4 transition-all"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-primary/10 flex flex-col page-transition"
-          >
-            <div className="p-6 border-b border-primary/10 flex items-center justify-between bg-primary text-on-primary">
-              <h3 className="font-headline-md text-xl font-bold">
-                {selectedProduct.title} Specs
-              </h3>
-              <button
-                onClick={() => setSelectedProduct(null)}
-                className="p-2 hover:bg-white/10 rounded transition-colors text-on-primary cursor-pointer"
-                aria-label="Close modal"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-            <div className="p-8 space-y-6 flex-grow">
-              <div className="grid grid-cols-2 gap-4 text-xs font-label-caps border-b border-primary/10 pb-6">
-                <div>
-                  <span className="text-secondary block font-bold mb-1">INDUSTRY SECTOR</span>
-                  <span>{getIndustryLabel(selectedProduct.industry).toUpperCase()}</span>
-                </div>
-                <div>
-                  <span className="text-secondary block font-bold mb-1">MATERIAL GRADE</span>
-                  <span>{selectedProduct.material}</span>
-                </div>
-                <div className="mt-4">
-                  <span className="text-secondary block font-bold mb-1">WEIGHT RANGE</span>
-                  <span>{selectedProduct.weight}</span>
-                </div>
-                <div className="mt-4">
-                  <span className="text-secondary block font-bold mb-1">DIMENSIONAL RANGE</span>
-                  <span>{selectedProduct.dimensions}</span>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Technical Description</h4>
-                <p className="text-xs text-on-surface-variant leading-relaxed font-light">
-                  {selectedProduct.description}
-                </p>
-              </div>
-              <div>
-                <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Primary Industrial Applications</h4>
-                <p className="text-xs text-on-surface-variant leading-relaxed font-light">
-                  {selectedProduct.applications}
-                </p>
-              </div>
-            </div>
-            <div className="p-6 border-t border-primary/10 bg-steel-plate/50 flex justify-end gap-3">
-              <button
-                onClick={() => setSelectedProduct(null)}
-                className="bg-white hover:bg-steel-plate text-primary border border-primary/20 px-5 py-2.5 rounded font-bold text-xs cursor-pointer"
-              >
-                Close Details
-              </button>
-              <Link
-                to="/contact"
-                className="bg-molten-glow hover:bg-tertiary text-on-primary px-5 py-2.5 rounded font-bold text-xs flex items-center gap-2"
-              >
-                Request Engineering Quote <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

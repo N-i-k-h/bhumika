@@ -6,11 +6,11 @@ const productSchema = new mongoose.Schema({
   title: { type: String, required: true },
   category: { type: String }, // Optional/legacy field
   image: { type: String, required: true }, // Base64 or URL
-  material: { type: String, required: true },
-  weight: { type: String, required: true },
-  dimensions: { type: String, required: true },
-  description: { type: String, required: true },
-  applications: { type: String, required: true },
+  material: { type: String },
+  weight: { type: String },
+  dimensions: { type: String },
+  description: { type: String },
+  applications: { type: String },
   industry: { type: String, enum: ['automobile', 'food', 'textile', 'reverse_osmosis', 'others'], default: 'others', required: true }
 }, { timestamps: true });
 

@@ -585,78 +585,19 @@ export const AdminPage: React.FC = () => {
                     placeholder="e.g. Lost-Wax Valve Bonnet"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Product Category</label>
-                    <select
-                      value={prodIndustry}
-                      onChange={(e) => setProdIndustry(e.target.value as any)}
-                      className="w-full p-2.5 border border-primary/10 rounded text-xs bg-white"
-                    >
-                      <option value="automobile">Automobile</option>
-                      <option value="food">Food Industry</option>
-                      <option value="textile">Textile</option>
-                      <option value="reverse_osmosis">Reverse Osmosis</option>
-                      <option value="others">Others</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Material Standard</label>
-                    <input
-                      type="text"
-                      required
-                      value={prodMaterial}
-                      onChange={(e) => setProdMaterial(e.target.value)}
-                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                      placeholder="e.g. ASTM A351 CF8M"
-                    />
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Part Weight Range</label>
-                    <input
-                      type="text"
-                      required
-                      value={prodWeight}
-                      onChange={(e) => setProdWeight(e.target.value)}
-                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                      placeholder="e.g. 1.5 kg – 12.0 kg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Dimensions / Envelope</label>
-                    <input
-                      type="text"
-                      required
-                      value={prodDimensions}
-                      onChange={(e) => setProdDimensions(e.target.value)}
-                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                      placeholder="e.g. Custom up to 250 mm"
-                    />
-                  </div>
-                </div>
                 <div>
-                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Technical Description</label>
-                  <textarea
-                    required
-                    rows={3}
-                    value={prodDescription}
-                    onChange={(e) => setProdDescription(e.target.value)}
-                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                    placeholder="Describe casting tolerances, gas porosity levels, metallurgy..."
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Target Applications</label>
-                  <input
-                    type="text"
-                    required
-                    value={prodApplications}
-                    onChange={(e) => setProdApplications(e.target.value)}
-                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                    placeholder="e.g. High pressure piping, marine systems"
-                  />
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Product Category</label>
+                  <select
+                    value={prodIndustry}
+                    onChange={(e) => setProdIndustry(e.target.value as any)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs bg-white"
+                  >
+                    <option value="automobile">Automobile</option>
+                    <option value="food">Food Industry</option>
+                    <option value="textile">Textile</option>
+                    <option value="reverse_osmosis">Reverse Osmosis</option>
+                    <option value="others">Others</option>
+                  </select>
                 </div>
                 <div>
                   <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">

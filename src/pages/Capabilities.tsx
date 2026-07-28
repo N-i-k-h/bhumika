@@ -16,7 +16,7 @@ import testingImg from '../assets/inspection_testing.png';
 import centrifugalImg from '../assets/centrifugal_casting_process.png';
 import vmcMachiningImg from '../assets/image copy 8.png';
 import moldPrepImg from '../assets/Screenshot 2026-07-09 173251.png';
-import pouringImg from '../assets/DSC01737.JPG';
+import pouringImg from '../assets/pouring_spinning_process.png';
 import pouringMainImg from '../assets/pouring_main.png';
 import whoWeAreCastingImg from '../assets/who_we_are_casting.png';
 import heatTreatmentCentrifugalImg from '../assets/heat_treatment_centrifugal.png';
@@ -194,7 +194,7 @@ export const Capabilities: React.FC = () => {
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">SURFACE FINISH</span>
-                  3.2 µm Ra
+                  Ra 3.2 µm
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">TYPICAL TOLERANCE</span>
