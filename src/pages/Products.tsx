@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
-import { X, ArrowRight } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 
 interface Product {
   id: number;
@@ -21,7 +20,6 @@ export const Products: React.FC = () => {
 
   const [products, setProducts] = useState<Product[]>([]);
   const [activeFilter, setActiveFilter] = useState(filterParam);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     fetch('/api/products')
