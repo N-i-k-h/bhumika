@@ -71,6 +71,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, onLoginSuccess }) 
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
     { label: 'Process', path: '/process' },
+    { label: 'Quality', path: '/quality' },
     { label: 'Products', path: '/products' },
     { label: 'Customers', path: '/customers' },
     { label: 'Certificates', path: '/certificates' },

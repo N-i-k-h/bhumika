@@ -134,11 +134,8 @@ export const Home: React.FC = () => {
             <h3 className="font-headline-md text-lg sm:text-xl text-secondary mb-6 molten-border pb-4 font-extrabold leading-tight">
               Uncompromising Quality, Certified Metallurgy &amp; Complete Traceability
             </h3>
-            <p className="font-body-md text-sm text-on-surface-variant mb-6 leading-relaxed">
-              Bhumika Alloy Castings stands as a trusted manufacturing partner for high-integrity components. Our specialized dual-induction melting furnace infrastructure, coupled with on-site optical emission spectrometry, guarantees that every single batch tapped conforms precisely to requested chemical specifications.
-            </p>
             <p className="font-body-md text-sm text-on-surface-variant mb-8 leading-relaxed">
-              By integrating in-house CAD tooling design, solidification simulations, horizontal centrifugal spinning lines, and high-precision CNC machining centers, we control the entire lifecycle of your casting. This end-to-end oversight ensures zero porosity, strict dimensional tolerances, and absolute batch traceability.
+              Bhumika Alloy Castings stands as a trusted manufacturing partner for high-integrity components. Our specialized dual-induction melting furnace infrastructure, coupled with on-site optical emission spectrometry, guarantees that every single batch tapped conforms precisely to requested chemical specifications.
             </p>
           </div>
         </div>

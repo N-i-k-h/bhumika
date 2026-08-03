@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Shield, Settings, Layers, Zap } from 'lucide-react';
+import { Shield, Settings, Layers, Zap, Target, Shuffle, Coins } from 'lucide-react';
 import waxInjectionImg from '../assets/wax_injection_process.png';
 import preAssemblyImg from '../assets/pre_assembly.png';
 import shellBuildingImg from '../assets/DSC02302.JPG';
@@ -15,7 +15,7 @@ import grindingImg from '../assets/DSC01997.JPG';
 import testingImg from '../assets/inspection_testing.png';
 import centrifugalImg from '../assets/centrifugal_casting_process.png';
 import vmcMachiningImg from '../assets/image copy 8.png';
-import moldPrepImg from '../assets/Screenshot 2026-07-09 173251.png';
+import moldPrepImg from '../assets/mold_prep_spinning.png';
 import pouringImg from '../assets/pouring_spinning_process.png';
 import pouringMainImg from '../assets/pouring_main.png';
 import whoWeAreCastingImg from '../assets/who_we_are_casting.png';
@@ -34,7 +34,7 @@ const investmentSteps: GalleryItem[] = [
   {
     title: "Wax Injection",
     subtitle: "Creating Replica Patterns",
-    desc: "Molten wax is injected into highly polished steel dies under pressure to form precise wax patterns that duplicate the final component geometry, accounting for shrinkage.",
+    desc: "Molten wax is injected into highly polished aluminium dies under pressure to form precise wax patterns that duplicate the final component geometry, accounting for shrinkage.",
     image: waxInjectionImg
   },
   {
@@ -115,7 +115,7 @@ const centrifugalSteps: GalleryItem[] = [
   {
     title: "Mold Preparation",
     subtitle: "Die Coating & Preheating",
-    desc: "The cylindrical steel mold is cleaned, preheated, and coated with a refractory slurry. This coating protects the mold and ensures smooth casting extraction.",
+    desc: "Resin-coated sand or slurry binder mixtures are often sprayed, slush-coated, or centrifugally distributed onto the preheated spinning die to achieve an even, consistent thickness before pouring.",
     image: moldPrepImg
   },
   {
@@ -217,6 +217,58 @@ export const Capabilities: React.FC = () => {
         </div>
       </section>
 
+      {/* Advantages of Investment Castings */}
+      <section className="py-16 bg-white border-t border-primary/5">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
+          <div className="text-center mb-12">
+            <h3 className="font-headline-lg text-2xl font-black text-primary relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-16 after:h-[3px] after:bg-secondary after:rounded-sm">
+              Advantages of Investment Castings
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-steel-plate/30 rounded-xl p-6 border border-primary/5 hover:bg-white hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="w-12 h-12 bg-secondary/10 group-hover:bg-secondary flex items-center justify-center rounded-full text-secondary group-hover:text-white shadow-sm mb-4 transition-all duration-300">
+                <Shield className="w-5 h-5" />
+              </div>
+              <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Superior Structural Integrity</h4>
+              <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                Produces castings with tight tolerances and intricate details, reducing the need for additional machining.
+              </p>
+            </div>
+
+            <div className="bg-steel-plate/30 rounded-xl p-6 border border-primary/5 hover:bg-white hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="w-12 h-12 bg-secondary/10 group-hover:bg-secondary flex items-center justify-center rounded-full text-secondary group-hover:text-white shadow-sm mb-4 transition-all duration-300">
+                <Target className="w-5 h-5" />
+              </div>
+              <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Precision and Consistency</h4>
+              <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                The process ensures uniformity in mass production, with minimal variations between castings.
+              </p>
+            </div>
+
+            <div className="bg-steel-plate/30 rounded-xl p-6 border border-primary/5 hover:bg-white hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="w-12 h-12 bg-secondary/10 group-hover:bg-secondary flex items-center justify-center rounded-full text-secondary group-hover:text-white shadow-sm mb-4 transition-all duration-300">
+                <Shuffle className="w-5 h-5" />
+              </div>
+              <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Versatility</h4>
+              <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                Suitable for a wide range of metals and alloys, including stainless steel, carbon steel, and exotic alloys.
+              </p>
+            </div>
+
+            <div className="bg-steel-plate/30 rounded-xl p-6 border border-primary/5 hover:bg-white hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="w-12 h-12 bg-secondary/10 group-hover:bg-secondary flex items-center justify-center rounded-full text-secondary group-hover:text-white shadow-sm mb-4 transition-all duration-300">
+                <Coins className="w-5 h-5" />
+              </div>
+              <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Cost-Effective</h4>
+              <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                High dimensional accuracy and near-net-shape production reduce secondary machining operations, metal waste, and tooling expenses.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Sub-process flow timeline */}
       <section className="py-20 bg-steel-plate/30 border-t border-b border-primary/5">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
@@ -232,11 +284,11 @@ export const Capabilities: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-row lg:grid lg:grid-cols-5 overflow-x-auto lg:overflow-x-visible gap-4 pb-6 lg:pb-0 scrollbar-container">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {investmentSteps.map((step, idx) => (
                <div
                 key={idx}
-                className="bg-white p-3 rounded-lg border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col premium-card w-[240px] sm:w-[280px] lg:w-auto flex-shrink-0 lg:flex-shrink"
+                className="bg-white p-3 rounded-lg border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col premium-card"
               >
                 <div className="aspect-square bg-steel-plate rounded overflow-hidden mb-3 flex flex-col items-center justify-center border border-primary/5 relative">
                   {step.image ? (
@@ -319,6 +371,58 @@ export const Capabilities: React.FC = () => {
         </div>
       </section>
 
+      {/* Advantages of Centrifugal Castings */}
+      <section className="py-16 bg-white border-t border-primary/5">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
+          <div className="text-center mb-12">
+            <h3 className="font-headline-lg text-2xl font-black text-primary relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-16 after:h-[3px] after:bg-secondary after:rounded-sm">
+              Advantages of Centrifugal Castings
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-steel-plate/30 rounded-xl p-6 border border-primary/5 hover:bg-white hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="w-12 h-12 bg-secondary/10 group-hover:bg-secondary flex items-center justify-center rounded-full text-secondary group-hover:text-white shadow-sm mb-4 transition-all duration-300">
+                <Layers className="w-5 h-5" />
+              </div>
+              <h4 className="font-headline-md text-sm font-bold text-primary mb-2">High Structural Density</h4>
+              <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                Centrifugal force drives out gas pockets, voids, and lighter slag, resulting in a highly dense, hollow metal structure.
+              </p>
+            </div>
+
+            <div className="bg-steel-plate/30 rounded-xl p-6 border border-primary/5 hover:bg-white hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="w-12 h-12 bg-secondary/10 group-hover:bg-secondary flex items-center justify-center rounded-full text-secondary group-hover:text-white shadow-sm mb-4 transition-all duration-300">
+                <Target className="w-5 h-5" />
+              </div>
+              <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Precision and Consistency</h4>
+              <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                Delivers consistent, uniform wall thickness and concentricity across high-volume production cycles.
+              </p>
+            </div>
+
+            <div className="bg-steel-plate/30 rounded-xl p-6 border border-primary/5 hover:bg-white hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="w-12 h-12 bg-secondary/10 group-hover:bg-secondary flex items-center justify-center rounded-full text-secondary group-hover:text-white shadow-sm mb-4 transition-all duration-300">
+                <Shuffle className="w-5 h-5" />
+              </div>
+              <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Versatility</h4>
+              <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                Ideal for custom cylinder configurations, bushings, and heavy rollers in diverse ferrous and high-heat alloys.
+              </p>
+            </div>
+
+            <div className="bg-steel-plate/30 rounded-xl p-6 border border-primary/5 hover:bg-white hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="w-12 h-12 bg-secondary/10 group-hover:bg-secondary flex items-center justify-center rounded-full text-secondary group-hover:text-white shadow-sm mb-4 transition-all duration-300">
+                <Coins className="w-5 h-5" />
+              </div>
+              <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Cost-Effective</h4>
+              <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                Reduced machining and minimal material wastage make centrifugal casting a cost-effective solution for producing high-quality components.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Centrifugal Sub-process flow */}
       <section className="py-20 bg-steel-plate/30 border-t border-b border-primary/5">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
@@ -334,11 +438,11 @@ export const Capabilities: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-row lg:grid lg:grid-cols-4 overflow-x-auto lg:overflow-x-visible gap-4 pb-6 lg:pb-0 scrollbar-container">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {centrifugalSteps.map((step, idx) => (
               <div
                 key={idx}
-                className="bg-white p-3 rounded-lg border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col premium-card w-[240px] sm:w-[280px] lg:w-auto flex-shrink-0 lg:flex-shrink"
+                className="bg-white p-3 rounded-lg border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col premium-card"
               >
                 <div className="aspect-square bg-steel-plate rounded overflow-hidden mb-3 flex flex-col items-center justify-center border border-primary/5 relative">
                   {step.image ? (

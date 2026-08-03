@@ -3,6 +3,7 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Capabilities } from './pages/Capabilities';
+import { Quality } from './pages/Quality';
 import { Products } from './pages/Products';
 import { Gallery } from './pages/Gallery';
 import { Contact } from './pages/Contact';
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="process" element={<Capabilities />} />
+          <Route path="quality" element={<Quality />} />
           <Route path="products" element={<Products />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="customers" element={<Customers />} />
