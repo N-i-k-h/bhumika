@@ -65,7 +65,7 @@ export const Contact: React.FC = () => {
       `Technical Requirements / Scope:\n` +
       `${formData.message || 'None provided'}\n`;
 
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=marketing@bhumikacastings.com&su=${encodeURIComponent(rawSubject)}&body=${encodeURIComponent(rawBody)}`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=bhumikacastings@gmail.com&su=${encodeURIComponent(rawSubject)}&body=${encodeURIComponent(rawBody)}`;
 
     // Open Gmail Web compose in a new tab by default
     window.open(gmailUrl, '_blank');
@@ -138,8 +138,8 @@ export const Contact: React.FC = () => {
                   <Phone className="w-5 h-5 text-molten-glow mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-bold text-primary">Phone Infrastructure</h4>
-                    <p className="text-on-surface-variant text-xs mt-1">Landline: +91 8182 600600</p>
-                    <p className="text-on-surface-variant text-xs">Mobile: +91 98805 30102</p>
+                    <p className="text-on-surface-variant text-xs mt-1">Mobile: +91 98805 30102</p>
+                    <p className="text-on-surface-variant text-xs">Mobile: +91 98805 30105</p>
                   </div>
                 </div>
 
@@ -149,10 +149,10 @@ export const Contact: React.FC = () => {
                     <h4 className="font-bold text-primary">Inquiries</h4>
                     <p className="text-on-surface-variant text-xs mt-1">
                       <a
-                        href="mailto:marketing@bhumikacastings.com"
+                        href="mailto:bhumikacastings@gmail.com"
                         className="text-secondary hover:text-molten-glow font-medium"
                       >
-                        marketing@bhumikacastings.com
+                        bhumikacastings@gmail.com
                       </a>
                     </p>
                   </div>
@@ -394,11 +394,11 @@ export const Contact: React.FC = () => {
                   </p>
                 </div>
                 <p className="text-xs text-on-surface-variant max-w-md leading-relaxed mx-auto">
-                  A Gmail draft with your RFQ details has been opened in a new tab to send directly to <strong>marketing@bhumikacastings.com</strong>.
+                  A Gmail draft with your RFQ details has been opened in a new tab to send directly to <strong>bhumikacastings@gmail.com</strong>.
                 </p>
                 <div className="pt-2 flex flex-col sm:flex-row flex-wrap gap-3 justify-center items-center">
                   <a
-                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=marketing@bhumikacastings.com&su=${encodeURIComponent(`RFQ Package Submission - ${referenceId} (${formData.company})`)}&body=${encodeURIComponent(
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=bhumikacastings@gmail.com&su=${encodeURIComponent(`RFQ Package Submission - ${referenceId} (${formData.company})`)}&body=${encodeURIComponent(
                       `Bhumika Alloy Castings - RFQ Submission\n` +
                       `-----------------------------------------\n` +
                       `Reference ID: ${referenceId}\n` +
@@ -419,7 +419,7 @@ export const Contact: React.FC = () => {
                   </a>
 
                   <a
-                    href={`mailto:marketing@bhumikacastings.com?subject=${encodeURIComponent(`RFQ Package Submission - ${referenceId} (${formData.company})`)}&body=${encodeURIComponent(
+                    href={`mailto:bhumikacastings@gmail.com?subject=${encodeURIComponent(`RFQ Package Submission - ${referenceId} (${formData.company})`)}&body=${encodeURIComponent(
                       `Bhumika Alloy Castings - RFQ Submission\n` +
                       `-----------------------------------------\n` +
                       `Reference ID: ${referenceId}\n` +

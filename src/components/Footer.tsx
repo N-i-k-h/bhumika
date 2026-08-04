@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
               </Link>
               <a
                 className="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-on-primary hover:bg-molten-glow transition-colors"
-                href="mailto:marketing@bhumikacastings.com"
+                href="mailto:bhumikacastings@gmail.com"
                 aria-label="Email Us"
               >
                 <Mail className="w-5 h-5" />
@@ -133,17 +133,20 @@ export const Footer: React.FC = () => {
                 Shimoga – 577204, Karnataka, India
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <Phone className="w-5 h-5 text-molten-glow flex-shrink-0" />
-              <p>+91 8182 600600</p>
+            <div className="flex items-start gap-3">
+              <Phone className="w-5 h-5 text-molten-glow flex-shrink-0 mt-0.5" />
+              <div className="flex flex-col">
+                <p>+91 98805 30102</p>
+                <p>+91 98805 30105</p>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-molten-glow flex-shrink-0" />
               <a
-                href="mailto:marketing@bhumikacastings.com"
+                href="mailto:bhumikacastings@gmail.com"
                 className="hover:text-white transition-colors"
               >
-                marketing@bhumikacastings.com
+                bhumikacastings@gmail.com
               </a>
             </div>
           </div>

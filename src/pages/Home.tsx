@@ -77,27 +77,34 @@ export const Home: React.FC = () => {
               The Driving Force Behind Bhumika Alloy Castings
             </h3>
             <p className="font-body-md text-sm text-on-surface-variant mb-6 leading-relaxed">
-              Our operations are led by our Founder, <strong>Mr. H.S. Diwakar</strong>, alongside Director (MD) <strong>Mr. H.D. Deepak</strong>, Assistant Director <strong>Mr. Sai Sriniketh</strong>, and General Manager <strong>Mr. V. Chandrashekar</strong>. Together, our leadership guides a team of skilled metallurgists, foundry operators, and CNC engineers.
+              Our operations are led by our Founder, <strong>Mr. H.S. Diwakar</strong>, alongside Director (MD) <strong>Mr. H.D. Deepak</strong>, Assistant Director <strong>Mr. Sai Sriniketh</strong>, and General Manager <strong>Mr. Chandrashekar K</strong>. Together, our leadership guides a team of skilled metallurgists, foundry operators, and CNC engineers.
             </p>
             <p className="font-body-md text-sm text-on-surface-variant mb-8 leading-relaxed">
               By investing in human expertise alongside automated manufacturing technologies, we maintain our commitment to zero-defect casting production and custom material development for global heavy industries.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-molten-glow">
-                <p className="font-headline-md text-xs font-bold text-primary">Mr. H.S. Diwakar</p>
-                <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Founder</p>
+            <div className="space-y-4">
+              {/* Founder Row */}
+              <div className="flex">
+                <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-molten-glow w-full sm:w-[calc(50%-8px)]">
+                  <p className="font-headline-md text-xs font-bold text-primary">Mr. H.S. Diwakar</p>
+                  <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Founder</p>
+                </div>
               </div>
-              <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-secondary">
-                <p className="font-headline-md text-xs font-bold text-primary">Mr. H.D. Deepak (MD)</p>
-                <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Director</p>
-              </div>
-              <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-tertiary">
-                <p className="font-headline-md text-xs font-bold text-primary">Mr. Sai Sriniketh</p>
-                <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Assistant Director</p>
-              </div>
-              <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-primary-container">
-                <p className="font-headline-md text-xs font-bold text-primary">Mr. V. Chandrashekar</p>
-                <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">General Manager</p>
+              
+              {/* Other Leaders Row with General Manager in the Center */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-secondary">
+                  <p className="font-headline-md text-xs font-bold text-primary">Mr. H.D. Deepak (MD)</p>
+                  <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Director</p>
+                </div>
+                <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-primary-container">
+                  <p className="font-headline-md text-xs font-bold text-primary">Mr. Chandrashekar K</p>
+                  <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">General Manager</p>
+                </div>
+                <div className="p-4 bg-steel-plate/60 rounded border-l-4 border-tertiary">
+                  <p className="font-headline-md text-xs font-bold text-primary">Mr. Sai Sriniketh</p>
+                  <p className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">Assistant Director</p>
+                </div>
               </div>
             </div>
           </div>

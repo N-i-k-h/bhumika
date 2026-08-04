@@ -130,11 +130,11 @@ export const Products: React.FC = () => {
                 key={p.id}
                 className="bg-white p-5 rounded-lg border border-primary/5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col premium-card group"
               >
-                <div className="h-48 mb-4 bg-steel-plate rounded flex items-center justify-center p-2 overflow-hidden">
+                <div className="h-60 mb-4 bg-steel-plate rounded flex items-center justify-center p-2 overflow-hidden">
                   <img
                     src={p.image}
                     alt={p.title}
-                    className="max-w-full max-h-full object-contain w-auto h-auto"
+                    className="max-w-full max-h-full object-contain w-auto h-auto group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <span className="font-label-caps text-[9px] text-secondary font-bold uppercase tracking-wider mb-1 block">

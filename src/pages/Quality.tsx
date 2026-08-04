@@ -6,6 +6,7 @@ import universalTestingImg from '../assets/universal_testing_machine.png';
 import dimensionalImg from '../assets/dimensional_inspection.png';
 import microscopeImg from '../assets/metallurgical_microscope.png';
 import spectrometerImg from '../assets/spectrometer.png';
+import visualInspectionImg from '../assets/visual_inspection.png';
 
 interface TestingMachine {
   title: string;
@@ -123,6 +124,33 @@ export const Quality: React.FC = () => {
                   Calibrated verniers, height masters, and gauges check structural boundaries, guaranteeing parts fit perfectly.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Visual Inspection Section */}
+      <section className="py-20 bg-white border-b border-primary/5">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
+          <div className="space-y-6">
+            <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-wider block">
+              VISUAL INSPECTION
+            </span>
+            <h2 className="font-headline-lg text-3xl font-extrabold text-primary molten-border pb-4">
+              Quality Assurance
+            </h2>
+            <p className="font-body-md text-sm text-on-surface-variant leading-relaxed font-sans">
+              At Bhumika Alloy Castings Pvt. Ltd., visual inspection is an essential part of our quality control process. Our experienced quality team carefully examines every component to identify surface defects, dimensional abnormalities, casting imperfections, machining issues, and other quality concerns.
+            </p>
+          </div>
+          <div className="relative group">
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-molten-glow to-secondary rounded-lg blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+            <div className="relative aspect-[4/3] bg-steel-plate overflow-hidden rounded-lg shadow-md border border-primary/5">
+              <img
+                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                alt="Visual Inspection Process"
+                src={visualInspectionImg}
+              />
             </div>
           </div>
         </div>
