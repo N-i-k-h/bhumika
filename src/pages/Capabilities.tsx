@@ -254,15 +254,15 @@ export const Capabilities: React.FC = () => {
                     </>
                   )}
                 </div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-secondary/10 text-secondary font-label-caps">
+                <div className="flex items-start gap-2 mb-1">
+                  <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-secondary/10 text-secondary font-label-caps mt-0.5">
                     {String(idx + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="font-headline-md text-xs font-black text-primary truncate leading-tight">
+                  <h3 className="font-headline-md text-xs font-black text-primary leading-tight">
                     {step.title}
                   </h3>
                 </div>
-                <h4 className="text-[9px] font-semibold text-secondary italic mb-1.5 truncate">
+                <h4 className="text-[9px] font-semibold text-secondary italic mb-1.5">
                   {step.subtitle}
                 </h4>
                 <p className="text-[10px] text-on-surface-variant leading-relaxed line-clamp-3">
@@ -408,15 +408,15 @@ export const Capabilities: React.FC = () => {
                     </>
                   )}
                 </div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-secondary/10 text-secondary font-label-caps">
+                <div className="flex items-start gap-2 mb-1">
+                  <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-secondary/10 text-secondary font-label-caps mt-0.5">
                     STEP {String(idx + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="font-headline-md text-xs font-black text-primary truncate leading-tight">
+                  <h3 className="font-headline-md text-xs font-black text-primary leading-tight">
                     {step.title}
                   </h3>
                 </div>
-                <h4 className="text-[9px] font-semibold text-secondary italic mb-1.5 truncate">
+                <h4 className="text-[9px] font-semibold text-secondary italic mb-1.5">
                   {step.subtitle}
                 </h4>
                 <p className="text-[10px] text-on-surface-variant leading-relaxed line-clamp-3">
