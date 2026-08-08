@@ -6,7 +6,7 @@ import preAssemblyImg from '../assets/tree_assembly_process.jpg';
 import shellBuildingImg from '../assets/shell_building_process.jpg';
 import dewaxingImg from '../assets/image copy 13.png';
 import shellFiringKilnImg from '../assets/DSC01818 (1).JPG';
-import knockoutImg from '../assets/knockout_process.png';
+import knockoutImg from '../assets/knockout_process.jpg';
 import fettlingImg from '../assets/DSC02041.JPG';
 import cuttingImg from '../../public/assets/images/gallery/photo_5.jpg';
 import heatTreatmentImg from '../assets/image copy 14.png';
@@ -74,7 +74,7 @@ const investmentSteps: GalleryItem[] = [
     image: knockoutImg
   },
   {
-    title: "Cutting (gate trimming)",
+    title: "Cutting (Gate/runner removal)",
     subtitle: "Runner Separation",
     desc: "Individual castings are mechanically cut off from the main central runner tree system using abrasive cut-off wheels and band saws, cleanly separating each component.",
     image: cuttingImg
@@ -98,7 +98,7 @@ const investmentSteps: GalleryItem[] = [
     image: shotBlastingImg
   },
   {
-    title: "Gunwork",
+    title: "Part Trimming/Gunwork",
     subtitle: "Gate Dressing & Cleaning",
     desc: "Operators use grinding wheels and specialized pneumatic tools to dress and blend the remaining runner gates on the casting surface to flush tolerances.",
     image: grindingImg
@@ -115,7 +115,7 @@ const centrifugalSteps: GalleryItem[] = [
   {
     title: "Mold Preparation",
     subtitle: "Die Coating & Preheating",
-    desc: "Resin-coated sand or slurry binder mixtures are often sprayed, slush-coated, or centrifugally distributed onto the preheated spinning die to achieve an even, consistent thickness before pouring.",
+    desc: "slurry binder refractory mixtures are often sprayed, slush-coated, or centrifugally distributed onto the preheated spinning die to achieve an even, consistent thickness before pouring.",
     image: moldPrepImg
   },
   {
@@ -131,7 +131,7 @@ const centrifugalSteps: GalleryItem[] = [
     image: heatTreatmentCentrifugalImg
   },
   {
-    title: "Finish Machining",
+    title: "Semi/ Fully finish Machining",
     subtitle: "Boring & Dressing",
     desc: "The inner slag-rich layer is bored out, and the outer diameter is turned to the precise microns required on finish drawings.",
     image: finishMachiningImg
@@ -309,7 +309,7 @@ export const Capabilities: React.FC = () => {
               </div>
               <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Versatility</h4>
               <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
-                Suitable for a wide range of metals and alloys, including stainless steel, carbon steel, and exotic alloys.
+                Suitable for a wide range of metals and alloys, including carbon steel, stainless steel, and Super Alloys.
               </p>
             </div>
 
@@ -344,11 +344,11 @@ export const Capabilities: React.FC = () => {
               <div className="grid grid-cols-2 gap-4 text-xs font-label-caps">
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">WEIGHT RANGE</span>
-                  5 Kgs – 500 Kgs
+                  10 Kgs – 500 Kgs
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">OD RANGE</span>
-                  60 – 400 mm
+                  70 – 400 mm
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">MIN ID</span>
@@ -356,7 +356,7 @@ export const Capabilities: React.FC = () => {
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">MAX LENGTH</span>
-                  2500 mm
+                  500 mm – 2500 mm
                 </div>
               </div>
             </div>
@@ -463,7 +463,7 @@ export const Capabilities: React.FC = () => {
               </div>
               <h4 className="font-headline-md text-sm font-bold text-primary mb-2">Versatility</h4>
               <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
-                Ideal for custom cylinder configurations, bushings, and heavy rollers in diverse ferrous and high-heat alloys.
+                Ideal for custom cylinder configurations, bushings, and high heat resistance alloys, and heavy rollers.
               </p>
             </div>
 
@@ -564,7 +564,7 @@ export const Capabilities: React.FC = () => {
                 </tr>
                 <tr>
                   <td className="p-4 font-bold text-primary">Centrifugal Casting</td>
-                  <td className="p-4">5 kg – 500 kg</td>
+                  <td className="p-4">10 kg – 500 kg</td>
                   <td className="p-4">Machined bore (+/-0.01 mm)</td>
                   <td className="p-4">Machined finishes</td>
                 </tr>
