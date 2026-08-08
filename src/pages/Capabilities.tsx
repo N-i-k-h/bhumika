@@ -265,7 +265,7 @@ export const Capabilities: React.FC = () => {
                 <h4 className="text-[9px] font-semibold text-secondary italic mb-1.5">
                   {step.subtitle}
                 </h4>
-                <p className="text-[10px] text-on-surface-variant leading-relaxed line-clamp-3">
+                <p className="text-[10px] text-on-surface-variant leading-relaxed">
                   {step.desc}
                 </p>
               </div>
@@ -419,7 +419,7 @@ export const Capabilities: React.FC = () => {
                 <h4 className="text-[9px] font-semibold text-secondary italic mb-1.5">
                   {step.subtitle}
                 </h4>
-                <p className="text-[10px] text-on-surface-variant leading-relaxed line-clamp-3">
+                <p className="text-[10px] text-on-surface-variant leading-relaxed">
                   {step.desc}
                 </p>
               </div>
