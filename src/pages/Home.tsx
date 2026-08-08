@@ -1,16 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Hero } from '../components/Hero';
-import { ShieldCheck, ArrowRight, Settings, Activity, Globe, MenuSquare } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Settings, Activity, Globe } from 'lucide-react';
 import creatorsImg from '../assets/DSC02681.JPG';
 import whyBhumikaImg from '../assets/why_bhumika_products.jpg';
 import investmentCastingImg from '../assets/investment_casting_patterns.jpg';
 import centrifugalCastingImg from '../assets/centrifugal_casting_process.png';
 import machiningImg from '../assets/image copy 8.png';
-import decanterShellImg from '../assets/DSC01066.JPG';
-import pistonRingsImg from '../assets/DSC01053.JPG';
-import bronzeBushesImg from '../assets/DSC01064.JPG';
-import valveCoversImg from '../assets/DSC01068.JPG';
 import whoWeAreImg from '../assets/pouring_main.png';
 
 export const Home: React.FC = () => {
