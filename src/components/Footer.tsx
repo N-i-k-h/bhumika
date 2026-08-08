@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
             </li>
             <li>
               <Link className="font-body-md text-surface-variant hover:text-molten-glow transition-colors duration-200" to="/quality">
-                Quality Assurance
+                Quality Control
               </Link>
             </li>
             <li>

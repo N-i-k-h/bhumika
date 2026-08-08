@@ -7,6 +7,7 @@ import dimensionalImg from '../assets/dimensional_inspection.png';
 import microscopeImg from '../assets/metallurgical_microscope.png';
 import spectrometerImg from '../assets/spectrometer.png';
 import visualInspectionImg from '../assets/visual_inspection.png';
+import visualTestingUserImg from '../assets/visual_testing_user.jpg';
 
 interface TestingMachine {
   title: string;
@@ -53,11 +54,18 @@ const testingMachines: TestingMachine[] = [
     specs: ["Charpy pendulum arm", "Dial energy scale", "Fracture toughness check"]
   },
   {
-    title: "Precision Metrology & Height Gauging",
+    title: "Precision Metrology & Quality Control",
     category: "Dimensional Inspection",
-    description: "Detailed measurement of critical diameters, lengths, and concentricity using digital vernier calipers, digital height gauges, and micro-indicators.",
+    description: "Ensure complete geometric compliance, tight tolerances, and flawless part quality with advanced dimensional inspection services. From initial prototype validation to full-scale production auditing, state-of-the-art metrology technology verifies that every physical part aligns exactly with its CAD specifications.",
     image: dimensionalImg,
     specs: ["Digital height master", "Granite surface plate", "Traceable calibration gauges"]
+  },
+  {
+    title: "Visual Inspection",
+    category: "Surface Integrity",
+    description: "Rigorous visual examination of every cast component to identify surface defects, casting imperfections, dimensional abnormalities, and machining quality issues.",
+    image: visualInspectionImg,
+    specs: ["100% component coverage", "Surface defect classification", "High-intensity inspection stations"]
   }
 ];
 
@@ -75,14 +83,59 @@ export const Quality: React.FC = () => {
         </div>
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop relative z-10">
           <span className="font-label-caps text-xs text-molten-glow uppercase tracking-widest">
-            QUALITY ASSURANCE DEPARTMENT
+            QUALITY CONTROL DEPARTMENT
           </span>
           <h1 className="font-headline-xl text-4xl md:text-6xl font-black mt-2 leading-tight">
-            Quality Assurance
+            Quality Control
           </h1>
-          <p className="font-body-lg text-sm md:text-base text-surface-variant max-w-2xl mt-4 leading-relaxed font-light font-sans">
-            At BHUMIKA ALLOY CASTINGS, we are committed to delivering the highest quality castings. Our shell moulding process includes rigorous quality control measures at every stage, from raw material selection to final inspection. We employ advanced testing methods, including dimensional inspection, metallurgical analysis, and non-destructive testing, to ensure that each casting meets the stringent standards of quality and performance.
-          </p>
+        </div>
+      </section>
+
+      {/* Quality Commitment Section */}
+      <section className="py-20 bg-white border-b border-primary/5">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
+          <div className="grid md:grid-cols-12 gap-12 items-center">
+            {/* Left side: Text Content */}
+            <div className="md:col-span-7 space-y-6">
+              <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block">
+                QUALITY COMMITMENT
+              </span>
+              <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
+                Quality Control
+              </h2>
+              <p className="font-body-md text-base text-on-surface-variant leading-relaxed font-sans font-light">
+                At BHUMIKA ALLOY CASTINGS, we are committed to delivering the highest quality castings. Our shell moulding process includes rigorous quality control measures at every stage, from raw material selection to final inspection. We employ advanced testing methods, including dimensional inspection, metallurgical analysis, and non-destructive testing, to ensure that each casting meets the stringent standards of quality and performance.
+              </p>
+            </div>
+            
+            {/* Right side: Two Images */}
+            <div className="md:col-span-5 grid grid-cols-2 gap-4 sm:gap-6 mt-8 md:mt-0">
+              <div className="space-y-4">
+                <div className="relative aspect-[3/4] bg-steel-plate overflow-hidden rounded-lg shadow-md border border-primary/5 group">
+                  <img
+                    src={visualTestingUserImg}
+                    alt="Visual Testing"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute bottom-2 left-2 bg-primary/95 text-on-primary text-[10px] font-bold px-3 py-1 rounded shadow uppercase tracking-wider font-label-caps">
+                    Visual Testing
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-4 pt-6 md:pt-12">
+                <div className="relative aspect-[3/4] bg-steel-plate overflow-hidden rounded-lg shadow-md border border-primary/5 group">
+                  <img
+                    src={dimensionalImg}
+                    alt="Dimensional Testing"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute bottom-2 left-2 bg-primary/95 text-on-primary text-[10px] font-bold px-3 py-1 rounded shadow uppercase tracking-wider font-label-caps">
+                    Dimensional Testing
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -129,33 +182,6 @@ export const Quality: React.FC = () => {
         </div>
       </section>
 
-      {/* Visual Inspection Section */}
-      <section className="py-20 bg-white border-b border-primary/5">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-wider block">
-              VISUAL INSPECTION
-            </span>
-            <h2 className="font-headline-lg text-3xl font-extrabold text-primary molten-border pb-4">
-              Quality Assurance
-            </h2>
-            <p className="font-body-md text-sm text-on-surface-variant leading-relaxed font-sans">
-              At Bhumika Alloy Castings Pvt. Ltd., visual inspection is an essential part of our quality control process. Our experienced quality team carefully examines every component to identify surface defects, dimensional abnormalities, casting imperfections, machining issues, and other quality concerns.
-            </p>
-          </div>
-          <div className="relative group">
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-molten-glow to-secondary rounded-lg blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
-            <div className="relative aspect-[4/3] bg-steel-plate overflow-hidden rounded-lg shadow-md border border-primary/5">
-              <img
-                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-                alt="Visual Inspection Process"
-                src={visualInspectionImg}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Testing Equipment & Infrastructure */}
       <section className="py-20 bg-steel-plate/30">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
@@ -164,7 +190,7 @@ export const Quality: React.FC = () => {
               LABORATORY INFRASTRUCTURE
             </span>
             <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
-              Advanced Quality Testing Equipment
+              Advanced Quality Testing
             </h2>
             <p className="font-body-md text-sm text-on-surface-variant mt-4 max-w-xl mx-auto">
               Our in-house metrology, chemical, and mechanical testing laboratories are fully outfitted with state-of-the-art instruments for comprehensive casting validation.
@@ -178,11 +204,11 @@ export const Quality: React.FC = () => {
                 className="bg-white rounded-xl border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col premium-card group animate-fadeIn"
               >
                 {/* Image Container */}
-                <div className="aspect-[4/5] bg-steel-plate relative flex items-center justify-center border-b border-primary/5 overflow-hidden">
+                <div className="aspect-[4/5] bg-white relative flex items-center justify-center border-b border-primary/5 overflow-hidden p-6">
                   <img 
                     src={machine.image} 
                     alt={machine.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-bold font-label-caps px-2.5 py-1 rounded shadow-md uppercase tracking-wider">
                     {machine.category}
