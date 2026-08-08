@@ -45,10 +45,10 @@ export const About: React.FC = () => {
               HERITAGE FOUNDATION
             </span>
             <h2 className="font-headline-lg text-3xl font-extrabold text-primary mb-6 leading-tight">
-              Established 1997 by Mr. H.S. Diwakar
+              Established 1997 by Late Mr. H. S. Diwakar
             </h2>
             <p className="font-body-md text-on-surface-variant mb-6 leading-relaxed">
-              Bhumika Alloy Castings Pvt Ltd (BAC) was established in 1997 by <strong>Mr. H.S. Diwakar</strong>, who is also one of the founders of Perfect Alloy Components. With a vision to deliver premium metallurgical products that match strict international standards, the firm set out to fill the gap in high-precision castings for the growing heavy industrial markets.
+              Bhumika Alloy Castings Pvt Ltd (BAC) was established in 1997 by <strong>Late Mr. H. S. Diwakar</strong>, who was also one of the founders of Perfect Alloy Components. With a vision to deliver premium metallurgical products that match strict international standards, the firm set out to fill the gap in high-precision castings for the growing heavy industrial markets.
             </p>
             <p className="font-body-md text-on-surface-variant mb-6 leading-relaxed">
               Built on a strong foundation of metallurgical expertise and manufacturing excellence, the company was established to deliver castings that meet the evolving needs of global industries.
