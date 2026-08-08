@@ -17,7 +17,7 @@ import centrifugalImg from '../assets/centrifugal_casting_process.png';
 import vmcMachiningImg from '../assets/image copy 8.png';
 import moldPrepImg from '../assets/mold_prep_spinning.png';
 import pouringImg from '../assets/pouring_spinning_process.png';
-import pouringMainImg from '../assets/pouring_main.png';
+import pouringMainImg from '../assets/pouring_process_new.png';
 import whoWeAreCastingImg from '../assets/who_we_are_casting.png';
 import heatTreatmentCentrifugalImg from '../assets/heat_treatment_centrifugal.png';
 import finishMachiningImg from '../assets/finish_machining.png';
