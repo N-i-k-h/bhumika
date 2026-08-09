@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema({
   category: { type: String }, // Optional/legacy field
   image: { type: String, required: true }, // Base64 or URL
   material: { type: String },
+  metalGrade: { type: String },
   weight: { type: String },
   dimensions: { type: String },
   description: { type: String },

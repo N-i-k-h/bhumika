@@ -7,6 +7,7 @@ interface Product {
   category?: string;
   image: string;
   material: string;
+  metalGrade?: string;
   weight: string;
   dimensions: string;
   description: string;
@@ -143,9 +144,17 @@ export const Products: React.FC = () => {
                 <h4 className="font-headline-md text-base text-primary font-bold mb-2 group-hover:text-secondary transition-colors line-clamp-1">
                   {p.title}
                 </h4>
-                <p className="text-xs text-on-surface-variant font-label-caps line-clamp-1 mb-4">
+                <p className="text-xs text-on-surface-variant font-label-caps line-clamp-1 mb-3">
                   {p.material}
                 </p>
+                {p.metalGrade && (
+                  <div className="mt-auto pt-2.5 border-t border-primary/5 flex items-center justify-between">
+                    <span className="text-[9px] font-bold text-on-surface-variant/70 uppercase font-label-caps">Metal Grade:</span>
+                    <span className="text-[10px] font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded font-label-caps uppercase tracking-wider">
+                      {p.metalGrade}
+                    </span>
+                  </div>
+                )}
               </div>
             ))}
           </div>

@@ -22,6 +22,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
   const [prodIndustry, setProdIndustry] = useState<'automobile' | 'food' | 'textile' | 'reverse_osmosis' | 'others'>('others');
   const [prodImage, setProdImage] = useState<string>('');
   const [prodMaterial, setProdMaterial] = useState('');
+  const [prodMetalGrade, setProdMetalGrade] = useState('');
   const [prodWeight, setProdWeight] = useState('');
   const [prodDimensions, setProdDimensions] = useState('');
   const [prodDescription, setProdDescription] = useState('');
@@ -107,6 +108,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
           category: 'investment', // default/legacy field
           image: prodImage,
           material: prodMaterial,
+          metalGrade: prodMetalGrade,
           weight: prodWeight,
           dimensions: prodDimensions,
           description: prodDescription,
@@ -119,6 +121,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
         setProdTitle('');
         setProdImage('');
         setProdMaterial('');
+        setProdMetalGrade('');
         setProdWeight('');
         setProdDimensions('');
         setProdDescription('');
@@ -396,9 +399,19 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                       value={prodMaterial}
                       onChange={(e) => setProdMaterial(e.target.value)}
                       className="w-full p-2 border border-primary/10 rounded text-xs rfq-input"
-                      placeholder="e.g. ASTM A351 CF8M"
+                      placeholder="e.g. Stainless Steel / Alloy Steel"
                     />
                   </div>
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Metal Grade</label>
+                  <input
+                    type="text"
+                    value={prodMetalGrade}
+                    onChange={(e) => setProdMetalGrade(e.target.value)}
+                    className="w-full p-2 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="e.g. SS 316L, CF8M, ASTM A216 WCB, CA15, Ni-Hard"
+                  />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -654,9 +667,16 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                         <img src={prod.image} alt={prod.title} className="w-10 h-10 object-contain rounded bg-white border border-primary/5 flex-shrink-0" />
                         <div className="min-w-0">
                           <h4 className="font-bold text-xs text-primary truncate">{prod.title}</h4>
-                          <span className="text-[10px] text-secondary font-semibold font-label-caps block uppercase mt-0.5">
-                            {prod.industry === 'reverse_osmosis' ? 'REVERSE OSMOSIS' : (prod.industry || 'OTHERS').toUpperCase()}
-                          </span>
+                          <div className="flex items-center gap-2 flex-wrap mt-0.5">
+                            <span className="text-[10px] text-secondary font-semibold font-label-caps block uppercase">
+                              {prod.industry === 'reverse_osmosis' ? 'REVERSE OSMOSIS' : (prod.industry || 'OTHERS').toUpperCase()}
+                            </span>
+                            {prod.metalGrade && (
+                              <span className="text-[9px] font-bold text-secondary bg-secondary/10 px-1.5 py-0.2 rounded font-label-caps uppercase">
+                                Grade: {prod.metalGrade}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
                       <button

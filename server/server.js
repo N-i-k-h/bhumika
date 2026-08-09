@@ -76,7 +76,7 @@ app.get('/api/products', async (req, res) => {
 
 app.post('/api/products', async (req, res) => {
   try {
-    const { title, category, image, material, weight, dimensions, description, applications, industry } = req.body;
+    const { title, category, image, material, metalGrade, weight, dimensions, description, applications, industry } = req.body;
     const imageUrl = await uploadToCloudinary(image);
     const id = Date.now(); // Unique number ID
     const newProduct = new Product({
@@ -85,6 +85,7 @@ app.post('/api/products', async (req, res) => {
       category,
       image: imageUrl,
       material,
+      metalGrade,
       weight,
       dimensions,
       description,
@@ -110,8 +111,8 @@ app.delete('/api/products/:id', async (req, res) => {
 
 app.put('/api/products/:id', async (req, res) => {
   try {
-    const { title, category, image, material, weight, dimensions, description, applications, industry } = req.body;
-    const updateData = { title, category, material, weight, dimensions, description, applications, industry };
+    const { title, category, image, material, metalGrade, weight, dimensions, description, applications, industry } = req.body;
+    const updateData = { title, category, material, metalGrade, weight, dimensions, description, applications, industry };
     if (image) {
       updateData.image = await uploadToCloudinary(image);
     }
