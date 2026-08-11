@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Download, ArrowRight, ShieldCheck } from 'lucide-react';
 import facilityImg from '../assets/DSC00691.JPG';
-import pouringImg from '../assets/pouring_process_new.png';
-import centrifugalImg from '../assets/centrifugal_casting_process.png';
 import whyBhumikaImg from '../assets/why_bhumika_products.jpg';
+import pouringMainImg from '../assets/pouring_main.png';
+import centrifugalCastingHeroImg from '../assets/centrifugal_casting_hero.jpg';
+import investmentCastingHeroImg from '../assets/investment_casting_hero.jpg';
 
 interface HeroSlide {
   id: number;
@@ -28,7 +29,7 @@ const heroSlides: HeroSlide[] = [
   },
   {
     id: 2,
-    image: pouringImg,
+    image: investmentCastingHeroImg,
     tagline: 'HIGH-INTEGRITY METALLURGY',
     title: 'Get the Best Investment Casting Solutions from Us',
     subtitle: 'Precision lost-wax molding engineered for aerospace, defense, valve & heavy engineering domains.',
@@ -37,7 +38,7 @@ const heroSlides: HeroSlide[] = [
   },
   {
     id: 3,
-    image: centrifugalImg,
+    image: centrifugalCastingHeroImg,
     tagline: 'HEAVY-DUTY CENTRIFUGAL ALLOYS',
     title: 'High-Density Centrifugal Alloy Castings',
     subtitle: 'Horizontal rotational casting for dense, void-free cylinder wear sleeves, bushes & decanter shells.',
@@ -93,11 +94,11 @@ export const Hero: React.FC = () => {
               src={slide.image}
               alt={slide.title}
               className={`w-full h-full object-cover object-center brightness-[1.05] transition-transform duration-[6500ms] ease-out transform ${
-                idx === currentSlide ? 'scale-110' : 'scale-100'
+                idx === currentSlide ? 'scale-103' : 'scale-100'
               }`}
             />
             {/* Light/Subtle Dark Overlay for High Image Brightness & Text Readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-black/35" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-black/35 z-20" />
           </div>
         ))}
 

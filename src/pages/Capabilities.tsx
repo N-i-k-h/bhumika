@@ -243,7 +243,13 @@ export const Capabilities: React.FC = () => {
                     <img
                       src={step.image}
                       alt={step.title}
-                      className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-500"
+                      className={`w-full h-full transition-transform duration-500 ${
+                        step.title === "Part Trimming/Gunwork"
+                          ? 'object-cover scale-[1.2] group-hover:scale-[1.26] brightness-[1.18]'
+                          : step.title === "Pouring"
+                          ? 'object-cover scale-[1.15] group-hover:scale-[1.21] brightness-[1.3]'
+                          : 'object-contain p-1 group-hover:scale-105'
+                      }`}
                     />
                   ) : (
                     <>

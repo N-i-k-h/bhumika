@@ -65,6 +65,26 @@ export async function seedDatabase(force = false) {
         console.error("Failed to copy TMS logo:", err.message);
       }
     }
+    const sourceNorsok = "C:\\Users\\lenovo\\.gemini\\antigravity-ide\\brain\\3351d04f-1705-4082-b997-fb3354321e4b\\media__1786471205734.png";
+    const destNorsok = path.join(__dirname, "../public/assets/products/norsok_certificate.png");
+    if (fs.existsSync(sourceNorsok)) {
+      try {
+        fs.copyFileSync(sourceNorsok, destNorsok);
+        console.log("Successfully copied NORSOK certificate.");
+      } catch (err) {
+        console.error("Failed to copy NORSOK certificate:", err.message);
+      }
+    }
+    const sourceIso = "C:\\Users\\lenovo\\.gemini\\antigravity-ide\\brain\\3351d04f-1705-4082-b997-fb3354321e4b\\media__1786471302197.png";
+    const destIso = path.join(__dirname, "../public/assets/products/iso_certificate.png");
+    if (fs.existsSync(sourceIso)) {
+      try {
+        fs.copyFileSync(sourceIso, destIso);
+        console.log("Successfully copied ISO certificate.");
+      } catch (err) {
+        console.error("Failed to copy ISO certificate:", err.message);
+      }
+    }
     const productCount = await Product.countDocuments();
     if (productCount === 0 || force) {
       if (force) {
@@ -333,6 +353,22 @@ export async function seedDatabase(force = false) {
           refNumber: "QP/01",
           validity: "Implemented June 2008 (Active)",
           image: getBase64Image("quality_policy.png")
+        },
+        {
+          title: "Statement of Compliance (NORSOK M-650)",
+          authority: "MTIC InterCert India Private Limited",
+          scope: "Qualification of manufacturer of special materials according to NORSOK M-650, Edition 4. Verified and approved for Investment Castings (ASTM A995 Grade 4A and Grade 6A).",
+          refNumber: "NORSOK/M650/MTIC/IND/2023/0101",
+          validity: "Bangalore, 17.07.2023 to 13.07.2028 (5 Years)",
+          image: getBase64Image("norsok_certificate.png")
+        },
+        {
+          title: "DIN EN ISO 9001:2015 Certification",
+          authority: "InterCert GmbH - Group of MTIC",
+          scope: "Manufacture and Supply of Centrifugal Castings and Investment Castings in As Cast and Machined Condition in compliance with DIN EN ISO 9001:2015.",
+          refNumber: "18-Q-1800008-TIC",
+          validity: "Valid from 26.04.2024 to 27.04.2027",
+          image: getBase64Image("iso_certificate.png")
         }
       ];
 

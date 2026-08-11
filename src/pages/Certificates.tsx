@@ -96,18 +96,10 @@ export const Certificates: React.FC = () => {
                 {/* 50% Bottom: Content */}
                 <div className="p-6 flex-grow flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
-                    <span className={`bg-secondary/10 text-secondary rounded font-label-caps inline-block ${
-                      cert.title.toUpperCase().includes('NORSOK') || cert.title.toUpperCase().includes('M650')
-                        ? 'text-sm font-black px-3 py-1.5 border border-secondary/30 shadow-md bg-secondary/15 animate-pulse'
-                        : 'text-[9px] font-black px-2 py-0.5'
-                    }`}>
+                    <span className="bg-secondary/10 text-secondary rounded font-label-caps inline-block text-[9px] font-black px-2 py-0.5">
                       {cert.title}
                     </span>
-                    <h3 className={`font-headline-md font-bold text-primary leading-tight ${
-                      cert.authority.toUpperCase().includes('NORSOK') || cert.authority.toUpperCase().includes('M650')
-                        ? 'text-lg font-black text-secondary'
-                        : 'text-sm'
-                    }`}>
+                    <h3 className="font-headline-md font-bold text-primary leading-tight text-sm">
                       {cert.authority}
                     </h3>
                     <p className="text-xs text-on-surface-variant leading-relaxed line-clamp-3">
@@ -118,11 +110,7 @@ export const Certificates: React.FC = () => {
                   <div className="border-t border-primary/5 pt-3 text-[10px] text-on-surface-variant/60 space-y-1">
                     <div className="flex justify-between items-center">
                       <span>Ref / Registration No:</span>
-                      <span className={`font-mono font-bold text-primary ${
-                        cert.refNumber.toUpperCase().includes('NORSOK') || cert.refNumber.toUpperCase().includes('M650')
-                          ? 'text-sm font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded border border-secondary/20'
-                          : 'text-[10px]'
-                      }`}>{cert.refNumber}</span>
+                      <span className="font-mono font-bold text-primary text-[10px]">{cert.refNumber}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Validity / Status:</span>
@@ -156,18 +144,10 @@ export const Certificates: React.FC = () => {
 
             <div className="mt-4 space-y-6">
               <div>
-                <span className={`bg-secondary/10 text-secondary rounded font-label-caps inline-block mb-2 ${
-                  selectedCert.title.toUpperCase().includes('NORSOK') || selectedCert.title.toUpperCase().includes('M650')
-                    ? 'text-base font-black px-4 py-2 border border-secondary/30 shadow-md bg-secondary/15'
-                    : 'text-[10px] font-black px-2.5 py-0.5'
-                }`}>
+                <span className="bg-secondary/10 text-secondary rounded font-label-caps inline-block mb-2 text-[10px] font-black px-2.5 py-0.5">
                   {selectedCert.title}
                 </span>
-                <h2 className={`font-headline-lg font-black text-primary leading-tight ${
-                  selectedCert.authority.toUpperCase().includes('NORSOK') || selectedCert.authority.toUpperCase().includes('M650')
-                    ? 'text-3xl text-secondary'
-                    : 'text-2xl'
-                }`}>
+                <h2 className="font-headline-lg font-black text-primary leading-tight text-2xl">
                   {selectedCert.authority}
                 </h2>
               </div>
@@ -202,11 +182,7 @@ export const Certificates: React.FC = () => {
                 <div className="grid grid-cols-2 gap-4 border-t border-primary/5 pt-3 text-xs">
                   <div>
                     <span className="text-[10px] text-on-surface-variant/60 block">Reference Code</span>
-                    <span className={`font-mono font-bold text-primary ${
-                      selectedCert.refNumber.toUpperCase().includes('NORSOK') || selectedCert.refNumber.toUpperCase().includes('M650')
-                        ? 'text-sm font-black text-secondary bg-secondary/10 px-2.5 py-1 rounded border border-secondary/20'
-                        : 'text-xs'
-                    }`}>{selectedCert.refNumber}</span>
+                    <span className="font-mono font-bold text-primary text-xs">{selectedCert.refNumber}</span>
                   </div>
                   <div>
                     <span className="text-[10px] text-on-surface-variant/60 block">Current Status</span>

@@ -35,6 +35,7 @@ export const AdminPage: React.FC = () => {
   const [prodIndustry, setProdIndustry] = useState<'automobile' | 'food' | 'textile' | 'reverse_osmosis' | 'others'>('others');
   const [prodImage, setProdImage] = useState<string>(''); // Base64 string
   const [prodMaterial, setProdMaterial] = useState('');
+  const [prodMetalGrade, setProdMetalGrade] = useState('');
   const [prodWeight, setProdWeight] = useState('');
   const [prodDimensions, setProdDimensions] = useState('');
   const [prodDescription, setProdDescription] = useState('');
@@ -165,6 +166,7 @@ export const AdminPage: React.FC = () => {
     setProdIndustry('others');
     setProdImage('');
     setProdMaterial('');
+    setProdMetalGrade('');
     setProdWeight('');
     setProdDimensions('');
     setProdDescription('');
@@ -209,6 +211,7 @@ export const AdminPage: React.FC = () => {
           industry: prodIndustry,
           image: prodImage || undefined, // Only pass image if updated
           material: prodMaterial,
+          metalGrade: prodMetalGrade,
           weight: prodWeight,
           dimensions: prodDimensions,
           description: prodDescription,
@@ -237,11 +240,12 @@ export const AdminPage: React.FC = () => {
     setEditingItem({ type: 'products', id: item.id });
     setProdTitle(item.title);
     setProdIndustry(item.industry || 'others');
-    setProdMaterial(item.material);
-    setProdWeight(item.weight);
-    setProdDimensions(item.dimensions);
-    setProdDescription(item.description);
-    setProdApplications(item.applications);
+    setProdMaterial(item.material || '');
+    setProdMetalGrade(item.metalGrade || '');
+    setProdWeight(item.weight || '');
+    setProdDimensions(item.dimensions || '');
+    setProdDescription(item.description || '');
+    setProdApplications(item.applications || '');
     setProdImage(''); // Clear file picker. Leave empty to keep existing image on server
   };
 
@@ -598,6 +602,16 @@ export const AdminPage: React.FC = () => {
                     <option value="reverse_osmosis">Reverse Osmosis</option>
                     <option value="others">Others</option>
                   </select>
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Metal Grade</label>
+                  <input
+                    type="text"
+                    value={prodMetalGrade}
+                    onChange={(e) => setProdMetalGrade(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="e.g. SS 316, CF8M, WCB (Optional)"
+                  />
                 </div>
                 <div>
                   <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">
