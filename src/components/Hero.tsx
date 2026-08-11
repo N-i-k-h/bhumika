@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Download, ArrowRight, ShieldCheck } from 'lucide-react';
 import facilityImg from '../assets/DSC00691.JPG';
 import whyBhumikaImg from '../assets/why_bhumika_products.jpg';
-import pouringMainImg from '../assets/pouring_main.png';
 import centrifugalCastingHeroImg from '../assets/centrifugal_casting_hero.jpg';
 import investmentCastingHeroImg from '../assets/investment_casting_hero.jpg';
 
