@@ -62,6 +62,110 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Core Identity Highlights Section */}
+      <section className="py-20 bg-surface border-b border-primary/5">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            
+            {/* Manufacturing Facilities Card */}
+            <motion.div
+              whileHover={{ y: -6 }}
+              className="premium-card bg-white p-8 rounded-2xl border border-primary/5 flex flex-col justify-between h-full group cursor-pointer shadow-sm"
+            >
+              <div>
+                <div className="w-16 h-16 rounded-2xl bg-secondary/5 flex items-center justify-center mb-6 border border-secondary/15">
+                  <svg className="premium-icon w-10 h-10 transition-transform duration-500" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 21H2V3l7 4 7-4 6 4v14z" style={{ stroke: 'url(#orange-gradient)' }} />
+                    <path d="M9 21v-8h6v8" style={{ stroke: 'url(#orange-gradient)' }} />
+                    <path d="M6 11h2v2H6z" style={{ stroke: 'url(#orange-gradient)' }} />
+                    <path d="M16 11h2v2h-2z" style={{ stroke: 'url(#orange-gradient)' }} />
+                  </svg>
+                </div>
+                <h3 className="font-condensed text-2xl font-bold uppercase tracking-wider text-primary mb-4 leading-none">
+                  Manufacturing Facilities
+                </h3>
+                <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                  Our Manufacturing Facilities include in house CNC machining, induction hardening, Surface Hardening (Sursulf), Electroplating etc.
+                </p>
+              </div>
+              <Link
+                to="/about#facility"
+                className="mt-8 font-condensed text-xs font-bold text-secondary uppercase tracking-widest border-b border-secondary/20 hover:border-secondary transition-all w-fit"
+              >
+                Read Manufacturing Facilities
+              </Link>
+            </motion.div>
+
+            {/* Technology Leader Card */}
+            <motion.div
+              whileHover={{ y: -6 }}
+              className="premium-card bg-white p-8 rounded-2xl border border-primary/5 flex flex-col justify-between h-full group cursor-pointer shadow-sm"
+            >
+              <div>
+                <div className="w-16 h-16 rounded-2xl bg-secondary/5 flex items-center justify-center mb-6 border border-secondary/15">
+                  <svg className="premium-icon w-10 h-10 transition-transform duration-500" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="3" style={{ stroke: 'url(#orange-gradient)' }} />
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" style={{ stroke: 'url(#orange-gradient)' }} />
+                  </svg>
+                </div>
+                <h3 className="font-condensed text-2xl font-bold uppercase tracking-wider text-primary mb-4 leading-none">
+                  Technology Leader
+                </h3>
+                <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                  We are capable of producing high grade very complex, thin walled, pressure-tight investment casting in a variety of material specifications.
+                </p>
+              </div>
+              <Link
+                to="/process#investment"
+                className="mt-8 font-condensed text-xs font-bold text-secondary uppercase tracking-widest border-b border-secondary/20 hover:border-secondary transition-all w-fit"
+              >
+                Read Technology Leader
+              </Link>
+            </motion.div>
+
+            {/* Customer Focus Card */}
+            <motion.div
+              whileHover={{ y: -6 }}
+              className="premium-card bg-white p-8 rounded-2xl border border-primary/5 flex flex-col justify-between h-full group cursor-pointer shadow-sm"
+            >
+              <div>
+                <div className="w-16 h-16 rounded-2xl bg-secondary/5 flex items-center justify-center mb-6 border border-secondary/15">
+                  <svg className="premium-icon w-10 h-10 transition-transform duration-500" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" style={{ stroke: 'url(#orange-gradient)' }} />
+                    <circle cx="9" cy="7" r="4" style={{ stroke: 'url(#orange-gradient)' }} />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" style={{ stroke: 'url(#orange-gradient)' }} />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" style={{ stroke: 'url(#orange-gradient)' }} />
+                  </svg>
+                </div>
+                <h3 className="font-condensed text-2xl font-bold uppercase tracking-wider text-primary mb-4 leading-none">
+                  Customer Focus
+                </h3>
+                <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                  We are capable of supplying large volume, fully machined, ready to assemble parts to automotive and other customer.
+                </p>
+              </div>
+              <Link
+                to="/customers"
+                className="mt-8 font-condensed text-xs font-bold text-secondary uppercase tracking-widest border-b border-secondary/20 hover:border-secondary transition-all w-fit"
+              >
+                Read Customer Focus
+              </Link>
+            </motion.div>
+
+          </div>
+        </div>
+
+        {/* Linear Gradient SVG Definition for the icons */}
+        <svg width="0" height="0" className="absolute">
+          <defs>
+            <linearGradient id="orange-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#C15C26" />
+              <stop offset="100%" stopColor="#8E2D17" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </section>
+
       {/* Who We Are Section */}
       <section className="py-20 bg-white">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
