@@ -62,8 +62,27 @@ const defaultCustomers = [
   }
 ];
 
+const sortCustomers = (list: any[]) => {
+  const getOrderIndex = (companyName: string) => {
+    const name = companyName.toLowerCase();
+    if (name.includes('trelleborg')) return 0;
+    if (name.includes('indo-mim') || name.includes('indo_mim') || name.includes('indo')) return 1;
+    if (name.includes('tms india') || name.includes('tms_india') || name.includes('tms')) return 2;
+    if (name.includes('pentair')) return 3;
+    if (name.includes('lmw') || name.includes('lakshmi')) return 4;
+    if (name.includes('techno vision') || name.includes('techno virion') || name.includes('technovirion') || name.includes('technovision') || name.includes('techno')) return 5;
+    if (name.includes('automotive axles') || name.includes('automotive axler') || name.includes('automotive')) return 6;
+    if (name.includes('bruker')) return 7;
+    if (name.includes('prominent')) return 8;
+    if (name.includes('weir mineral') || name.includes('weir_mineral') || name.includes('weir')) return 9;
+    if (name.includes('astrotech')) return 10;
+    return 100;
+  };
+  return [...list].sort((a, b) => getOrderIndex(a.company) - getOrderIndex(b.company));
+};
+
 export const Customers: React.FC = () => {
-  const [testimonials, setTestimonials] = useState<any[]>(defaultCustomers);
+  const [testimonials, setTestimonials] = useState<any[]>(sortCustomers(defaultCustomers));
 
   useEffect(() => {
     fetch('/api/customers')
@@ -73,7 +92,7 @@ export const Customers: React.FC = () => {
       })
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
-          setTestimonials(data);
+          setTestimonials(sortCustomers(data));
         }
       })
       .catch(err => {

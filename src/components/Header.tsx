@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface HeaderProps {
   onMenuToggle: () => void;
@@ -82,13 +83,15 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, onLoginSuccess }) 
     <>
       <header
         id="main-header"
-        className={`w-full top-0 sticky bg-white border-b border-primary/10 z-50 transition-all duration-300 ease-in-out ${
-          isScrolled ? 'shadow-lg h-20' : 'h-24'
+        className={`w-full top-0 sticky bg-white/80 backdrop-blur-md border-b border-primary/5 z-50 transition-all duration-300 ease-in-out ${
+          isScrolled ? 'shadow-md h-20' : 'h-24'
         }`}
       >
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop flex items-center justify-between h-full">
           <Link to="/" onClick={handleLogoClick} className="flex items-center">
-            <img
+            <motion.img
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               src="/assets/images/logo.png"
               alt="Bhumika Alloy Castings"
               className={`w-auto object-contain transition-all duration-300 ${
@@ -103,24 +106,37 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, onLoginSuccess }) 
               <Link
                 key={item.path}
                 to={item.path}
-                className={`font-body-md text-body-md transition-colors duration-200 pb-1 ${
+                className={`relative font-body-md text-sm font-semibold tracking-wide transition-all duration-300 pb-1.5 ${
                   isActive(item.path)
-                    ? 'text-secondary border-b-2 border-secondary font-semibold'
+                    ? 'text-secondary font-bold'
                     : 'text-on-surface-variant hover:text-secondary'
                 }`}
               >
                 {item.label}
+                {isActive(item.path) && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary rounded-full"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </Link>
             ))}
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link
-              to="/contact"
-              className="hidden lg:inline-flex bg-secondary hover:bg-opacity-90 text-white px-5 py-2 rounded font-bold text-sm transition-all shadow-md"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden lg:block"
             >
-              Get RFQ
-            </Link>
+              <Link
+                to="/contact"
+                className="bg-secondary hover:bg-opacity-95 text-white px-5 py-2.5 rounded font-bold text-xs uppercase font-label-caps tracking-widest transition-all shadow-md inline-block"
+              >
+                Get RFQ
+              </Link>
+            </motion.div>
             <button
               onClick={onMenuToggle}
               className="p-2 text-primary hover:bg-steel-plate rounded transition-all flex items-center gap-2 group cursor-pointer md:hidden"

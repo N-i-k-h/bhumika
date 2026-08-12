@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ShieldCheck, Flame, Scale } from 'lucide-react';
+import { ShieldCheck, Flame, Scale, Activity, Eye, Settings, Layers } from 'lucide-react';
 import impactTestingImg from '../assets/impact_testing_machine.png';
 import brinellHardnessImg from '../assets/brinell_hardness_testing_machine.png';
 import universalTestingImg from '../assets/universal_testing_machine.png';
@@ -68,6 +68,17 @@ const testingMachines: TestingMachine[] = [
     specs: ["100% component coverage", "Surface defect classification", "High-intensity inspection stations"]
   }
 ];
+
+const getMachineIcon = (category: string) => {
+  const cat = category.toLowerCase();
+  if (cat.includes('chemical')) return <Flame className="w-3.5 h-3.5 text-secondary premium-icon" />;
+  if (cat.includes('microstructure')) return <Eye className="w-3.5 h-3.5 text-secondary premium-icon" />;
+  if (cat.includes('mechanical')) return <Activity className="w-3.5 h-3.5 text-secondary premium-icon" />;
+  if (cat.includes('hardness')) return <Scale className="w-3.5 h-3.5 text-secondary premium-icon" />;
+  if (cat.includes('toughness')) return <ShieldCheck className="w-3.5 h-3.5 text-secondary premium-icon" />;
+  if (cat.includes('dimensional')) return <Settings className="w-3.5 h-3.5 text-secondary premium-icon" />;
+  return <Layers className="w-3.5 h-3.5 text-secondary premium-icon" />;
+};
 
 export const Quality: React.FC = () => {
   useEffect(() => {
@@ -143,10 +154,10 @@ export const Quality: React.FC = () => {
       <section className="py-16 bg-white border-b border-primary/5">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-steel-plate rounded-lg border-l-4 border-secondary flex flex-col justify-between">
+            <div className="premium-card p-6 bg-steel-plate rounded-lg border-l-4 border-secondary flex flex-col justify-between cursor-pointer">
               <div>
                 <div className="w-10 h-10 bg-secondary/10 rounded flex items-center justify-center text-secondary mb-4">
-                  <ShieldCheck className="w-5 h-5" />
+                  <ShieldCheck className="premium-icon w-5 h-5" />
                 </div>
                 <h3 className="font-headline-md text-lg font-bold text-primary mb-2">Rigorous Inspection</h3>
                 <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
@@ -155,10 +166,10 @@ export const Quality: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-6 bg-steel-plate rounded-lg border-l-4 border-secondary flex flex-col justify-between">
+            <div className="premium-card p-6 bg-steel-plate rounded-lg border-l-4 border-secondary flex flex-col justify-between cursor-pointer">
               <div>
                 <div className="w-10 h-10 bg-secondary/10 rounded flex items-center justify-center text-secondary mb-4">
-                  <Flame className="w-5 h-5" />
+                  <Flame className="premium-icon w-5 h-5" />
                 </div>
                 <h3 className="font-headline-md text-lg font-bold text-primary mb-2">Metallurgical Verification</h3>
                 <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
@@ -167,10 +178,10 @@ export const Quality: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-6 bg-steel-plate rounded-lg border-l-4 border-secondary flex flex-col justify-between">
+            <div className="premium-card p-6 bg-steel-plate rounded-lg border-l-4 border-secondary flex flex-col justify-between cursor-pointer">
               <div>
                 <div className="w-10 h-10 bg-secondary/10 rounded flex items-center justify-center text-secondary mb-4">
-                  <Scale className="w-5 h-5" />
+                  <Scale className="premium-icon w-5 h-5" />
                 </div>
                 <h3 className="font-headline-md text-lg font-bold text-primary mb-2">Dimensional Precision</h3>
                 <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
@@ -210,8 +221,9 @@ export const Quality: React.FC = () => {
                     alt={machine.title}
                     className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-bold font-label-caps px-2.5 py-1 rounded shadow-md uppercase tracking-wider">
-                    {machine.category}
+                  <div className="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-bold font-label-caps px-2.5 py-1 rounded shadow-md uppercase tracking-wider flex items-center gap-1.5 border border-white/10">
+                    {getMachineIcon(machine.category)}
+                    <span>{machine.category}</span>
                   </div>
                 </div>
 

@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Download, ArrowRight, ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Download, ArrowRight, Zap } from 'lucide-react';
 import facilityImg from '../assets/DSC00691.JPG';
 import whyBhumikaImg from '../assets/why_bhumika_products.jpg';
 import centrifugalCastingHeroImg from '../assets/centrifugal_casting_hero.jpg';
@@ -55,143 +56,178 @@ const heroSlides: HeroSlide[] = [
   },
 ];
 
+const renderHeadline = (title: string) => {
+  const words = title.split(' ');
+  if (words.length <= 3) {
+    return (
+      <>
+        <span className="text-white">{words[0]}</span>{' '}
+        <span className="text-secondary">{words.slice(1).join(' ')}</span>
+      </>
+    );
+  }
+  const midIndex = Math.ceil(words.length / 2);
+  const firstHalf = words.slice(0, midIndex).join(' ');
+  const secondHalf = words.slice(midIndex).join(' ');
+  return (
+    <>
+      <span className="text-white">{firstHalf}</span>{' '}
+      <span className="text-secondary block sm:inline">{secondHalf}</span>
+    </>
+  );
+};
+
 export const Hero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 4500); // Continuous infinite loop auto-change every 4.5 seconds
-
+    }, 6000); // 6 seconds auto-transition
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="w-full flex flex-col">
-      {/* Full-Width Hero Slider Container */}
-      <section 
-        className="relative w-full h-[460px] sm:h-[520px] md:h-[600px] lg:h-[640px] flex items-center justify-center overflow-hidden bg-black select-none"
-        aria-label="Hero Slider"
-      >
-        {/* Background Images with Fade Transition */}
-        {heroSlides.map((slide, idx) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-              idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-            }`}
+    <div className="w-full relative bg-[#1A1A1A] overflow-hidden select-none" style={{ height: '620px' }}>
+      
+      {/* Background Image Carousel with Ken Burns effect */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1.01 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
+            className="absolute inset-0 w-full h-full"
           >
             <img
-              src={slide.image}
-              alt={slide.title}
-              className={`w-full h-full object-cover object-center brightness-[1.05] transition-transform duration-[6500ms] ease-out transform ${
-                idx === currentSlide ? 'scale-103' : 'scale-100'
-              }`}
+              src={heroSlides[currentSlide].image}
+              alt="Bhumika Alloy Castings facility background"
+              className="w-full h-full object-cover object-center brightness-[0.7] contrast-[1.05]"
             />
-            {/* Light/Subtle Dark Overlay for High Image Brightness & Text Readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-black/35 z-20" />
-          </div>
-        ))}
+            {/* Gradient Overlay for high text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/35 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-transparent to-transparent z-10" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
-        {/* Left Navigation Arrow */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 bg-black/35 hover:bg-molten-glow text-white p-2.5 sm:p-3.5 rounded-lg border border-white/20 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 cursor-pointer group"
-          aria-label="Previous Slide"
-        >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:-translate-x-0.5" />
-        </button>
+      {/* Floating Radial Ambient Background Glow */}
+      <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-secondary/10 rounded-full blur-[120px] pointer-events-none z-10" />
 
-        {/* Right Navigation Arrow */}
-        <button
-          onClick={nextSlide}
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 bg-black/35 hover:bg-molten-glow text-white p-2.5 sm:p-3.5 rounded-lg border border-white/20 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 cursor-pointer group"
-          aria-label="Next Slide"
-        >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:translate-x-0.5" />
-        </button>
+      {/* Main Content Area */}
+      <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop h-full relative z-20 flex items-center justify-start text-left">
+        <div className="max-w-4xl space-y-6 flex flex-col items-start">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+              }}
+              className="space-y-4 sm:space-y-6 flex flex-col items-start text-left"
+            >
+              {/* Tech Tag / Accents */}
+              <motion.div
+                variants={{
+                  hidden: { y: 15, opacity: 0 },
+                  visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 200 } }
+                }}
+                className="inline-flex items-center gap-2 bg-secondary/10 border border-secondary/30 rounded-full px-4 py-1.5 backdrop-blur-md"
+              >
+                <span className="font-label-caps text-[10px] sm:text-xs font-black uppercase tracking-widest text-secondary">
+                  {heroSlides[currentSlide].tagline}
+                </span>
+              </motion.div>
 
-        {/* Hero Content (Centered) */}
-        <div className="max-w-[1280px] mx-auto px-6 sm:px-10 md:px-margin-desktop relative z-20 w-full text-center">
-          <div 
-            key={currentSlide} 
-            className="max-w-4xl mx-auto flex flex-col items-center animate-fadeIn space-y-4 sm:space-y-6"
-          >
-            {/* Tagline */}
-            <span className="font-label-caps text-xs sm:text-sm text-molten-glow font-bold tracking-widest uppercase bg-black/40 px-3.5 py-1 rounded-full border border-molten-glow/30 backdrop-blur-sm">
-              {heroSlides[currentSlide].tagline}
-            </span>
+              {/* Giant Headline in Orange Stroke Only */}
+              <motion.div
+                variants={{
+                  hidden: { y: 20, opacity: 0 },
+                  visible: { y: 0, opacity: 1, transition: { duration: 0.6 } }
+                }}
+                className="space-y-1"
+              >
+                <h1 className="font-headline-xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-[1.1] tracking-tight max-w-4xl text-left">
+                  {renderHeadline(heroSlides[currentSlide].title)}
+                </h1>
+              </motion.div>
 
-            {/* Main Heading */}
-            <h1 className="font-headline-xl text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-black leading-tight tracking-tight uppercase [text-shadow:_0_3px_12px_rgba(0,0,0,0.9)] max-w-3xl">
-              {heroSlides[currentSlide].title}
-            </h1>
+              {/* Subtitle */}
+              <motion.p
+                variants={{
+                  hidden: { y: 15, opacity: 0 },
+                  visible: { y: 0, opacity: 1 }
+                }}
+                className="font-body-lg text-sm sm:text-base md:text-lg text-white/80 max-w-2xl leading-relaxed text-left"
+              >
+                {heroSlides[currentSlide].subtitle}
+              </motion.p>
 
-            {/* Subtitle */}
-            <p className="font-body-lg text-sm sm:text-base md:text-lg text-white/90 leading-relaxed max-w-2xl font-light [text-shadow:_0_2px_8px_rgba(0,0,0,0.8)]">
-              {heroSlides[currentSlide].subtitle}
-            </p>
+              {/* CTA Buttons */}
+              <motion.div
+                variants={{
+                  hidden: { y: 15, opacity: 0 },
+                  visible: { y: 0, opacity: 1 }
+                }}
+                className="pt-2 flex flex-wrap justify-start gap-4"
+              >
+                {heroSlides[currentSlide].isDownload ? (
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href="/Bhumika_Alloy_Castings_Brochure.pdf"
+                    download="Bhumika_Alloy_Castings_Brochure.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2.5 bg-secondary hover:bg-opacity-95 text-white px-6 sm:px-8 py-3.5 rounded-lg font-bold text-xs uppercase font-label-caps tracking-wider cursor-pointer shadow-lg shadow-secondary/25"
+                  >
+                    <Download className="w-4 h-4" />
+                    {heroSlides[currentSlide].ctaText}
+                  </motion.a>
+                ) : (
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href={heroSlides[currentSlide].ctaLink || '/process'}
+                    className="inline-flex items-center gap-2.5 bg-secondary hover:bg-opacity-95 text-white px-6 sm:px-8 py-3.5 rounded-lg font-bold text-xs uppercase font-label-caps tracking-wider cursor-pointer shadow-lg shadow-secondary/25"
+                  >
+                    {heroSlides[currentSlide].ctaText}
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.a>
+                )}
 
-            {/* CTA Button */}
-            <div className="pt-2 sm:pt-4">
-              {heroSlides[currentSlide].isDownload ? (
-                <a
-                  href="/Bhumika_Alloy_Castings_Brochure.pdf"
-                  download="Bhumika_Alloy_Castings_Brochure.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 bg-molten-glow hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded font-bold transition-all text-xs sm:text-sm shadow-xl shadow-molten-glow/30 uppercase font-label-caps tracking-wider cursor-pointer hover:scale-[1.02]"
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="/contact"
+                  className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 text-white border border-white/25 px-6 sm:px-8 py-3.5 rounded-lg font-bold text-xs uppercase font-label-caps tracking-wider cursor-pointer backdrop-blur-md transition-colors"
                 >
-                  <Download className="w-4 h-4 sm:w-5 sm:h-5" />
-                  {heroSlides[currentSlide].ctaText}
-                </a>
-              ) : (
-                <a
-                  href={heroSlides[currentSlide].ctaLink || '/process'}
-                  className="inline-flex items-center gap-2.5 bg-molten-glow hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded font-bold transition-all text-xs sm:text-sm shadow-xl shadow-molten-glow/30 uppercase font-label-caps tracking-wider cursor-pointer hover:scale-[1.02]"
-                >
-                  {heroSlides[currentSlide].ctaText}
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                </a>
-              )}
-            </div>
-          </div>
+                  Request Quote
+                  <ArrowRight className="w-4 h-4" />
+                </motion.a>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </div>
+      </div>
 
-        {/* Slide Indicators / Dots */}
-        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
-          {heroSlides.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className={`transition-all duration-300 cursor-pointer ${
-                idx === currentSlide
-                  ? 'w-7 sm:w-8 h-2 sm:h-2.5 bg-molten-glow rounded-full shadow-md'
-                  : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 hover:bg-white/80 rounded-full'
-              }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
-        </div>
-      </section>
 
-      {/* Bottom Information Bar */}
-      <div className="w-full bg-molten-glow text-white py-3 sm:py-3.5 px-4 shadow-md z-20 border-t border-white/10 flex items-center justify-center">
-        <div className="max-w-[1280px] mx-auto flex items-center justify-center gap-2 sm:gap-3 text-center">
-          <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0 hidden xs:inline-block" />
-          <p className="font-label-caps text-xs sm:text-sm font-black uppercase tracking-wider text-white">
-            Get Products to Perfection with Severe Quality Control Applied at all Levels!
+
+      {/* announcement belt */}
+      <div className="absolute bottom-0 left-0 right-0 bg-secondary text-white py-2.5 px-4 z-20 border-t border-white/10 flex items-center justify-center">
+        <div className="max-w-[1280px] mx-auto flex items-center justify-center gap-2 text-center text-xs">
+          <Zap className="w-3.5 h-3.5 text-white flex-shrink-0 animate-bounce" />
+          <p className="font-label-caps font-black uppercase tracking-wider text-white">
+            Severe Quality Control Applied at all Levels — From Liquid Metal to Final CNC Component.
           </p>
         </div>
       </div>
+
     </div>
   );
 };

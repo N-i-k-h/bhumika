@@ -71,7 +71,7 @@ export const Certificates: React.FC = () => {
                   ) : (
                     <div className="flex flex-col items-center justify-center text-center p-6 space-y-3">
                       <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
-                        <Award className="w-6 h-6 animate-pulse" />
+                        <Award className="premium-icon w-6 h-6 animate-pulse" />
                       </div>
                       <div>
                         <span className="font-label-caps text-[9px] font-bold text-secondary uppercase tracking-wider block">

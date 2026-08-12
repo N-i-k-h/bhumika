@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { Shield, Settings, Layers, Zap, Target, Shuffle, Coins } from 'lucide-react';
 import waxInjectionImg from '../assets/wax_injection_process.png';
 import preAssemblyImg from '../assets/tree_assembly_process.jpg';
-import shellBuildingImg from '../assets/shell_building_process.jpg';
-import dewaxingImg from '../assets/image copy 13.png';
+import shellBuildingImg from '../assets/shell_building_new.jpg';
+import dewaxingImg from '../assets/shell_building_process.jpg';
 import shellFiringKilnImg from '../assets/DSC01818 (1).JPG';
 import knockoutImg from '../assets/knockout_process.jpg';
 import fettlingImg from '../assets/DSC02041.JPG';
@@ -243,12 +243,10 @@ export const Capabilities: React.FC = () => {
                     <img
                       src={step.image}
                       alt={step.title}
-                      className={`w-full h-full transition-transform duration-500 ${
-                        step.title === "Part Trimming/Gunwork"
-                          ? 'object-cover scale-[1.2] group-hover:scale-[1.26] brightness-[1.18]'
-                          : step.title === "Pouring"
-                          ? 'object-cover scale-[1.15] group-hover:scale-[1.21] brightness-[1.3]'
-                          : 'object-contain p-1 group-hover:scale-105'
+                      className={`w-full h-full object-cover scale-[1.15] group-hover:scale-[1.22] transition-transform duration-500 ${
+                        step.title.toLowerCase().includes("knockout")
+                          ? 'object-contain p-1 scale-[1.0] group-hover:scale-[1.05]'
+                          : ''
                       }`}
                     />
                   ) : (
@@ -403,7 +401,7 @@ export const Capabilities: React.FC = () => {
                     <img
                       src={step.image}
                       alt={step.title}
-                      className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover scale-[1.15] group-hover:scale-[1.22] transition-transform duration-500"
                     />
                   ) : (
                     <>

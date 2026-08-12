@@ -42,13 +42,13 @@
   --color-on-error: #ffffff;
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
-  
-  --font-headline-xl: "Hanken Grotesk", sans-serif;
-  --font-headline-lg: "Hanken Grotesk", sans-serif;
-  --font-headline-md: "Hanken Grotesk", sans-serif;
-  --font-body-md: "Inter", sans-serif;
-  --font-body-lg: "Inter", sans-serif;
-  --font-label-caps: "JetBrains Mono", monospace;
+
+  --font-headline-xl: "Syne", "Space Grotesk", sans-serif;
+  --font-headline-lg: "Syne", "Space Grotesk", sans-serif;
+  --font-headline-md: "Space Grotesk", sans-serif;
+  --font-body-md: "Plus Jakarta Sans", sans-serif;
+  --font-body-lg: "Plus Jakarta Sans", sans-serif;
+  --font-label-caps: "Space Mono", monospace;
   
   --spacing-gutter: 24px;
   --spacing-margin-desktop: 64px;
@@ -69,7 +69,7 @@
     min-height: 100vh;
     background-color: var(--color-surface);
     color: var(--color-on-surface);
-    font-family: var(--font-body-md);
+    font-family: "Plus Jakarta Sans", sans-serif;
     overflow-x: hidden;
   }
 
@@ -78,6 +78,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: var(--color-surface);
   }
 
   /* Custom Scrollbar - Molten Steel Theme */
@@ -100,36 +101,7 @@
     background: #E0692D; /* Molten Hover Orange */
   }
 
-  /* Molten Border with Shimmer */
-  .molten-border {
-    position: relative;
-  }
-
-  .molten-border::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, #C15C26, #E0692D, #C15C26);
-    background-size: 200% auto;
-    animation: moltenShimmer 3s linear infinite;
-    border-radius: 2px;
-    transition: width 0.3s ease;
-  }
-
-  .group:hover .molten-border::after {
-    width: 120px;
-  }
-
-  @keyframes moltenShimmer {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Pulsing molten glow effect */
+  /* Glow Pulse Effect */
   .glow-pulse {
     animation: glowPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
@@ -140,66 +112,74 @@
       box-shadow: 0 0 15px rgba(193, 92, 38, 0.6);
     }
     50% {
-      opacity: .8;
+      opacity: 0.8;
       box-shadow: 0 0 25px rgba(193, 92, 38, 0.9);
     }
   }
 
-  /* Glassmorphism for floating cards */
+  /* Glassmorphism Panel */
   .glass-panel {
-    background: rgba(45, 45, 45, 0.75);
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
-  /* Premium Card Hover Transitions */
-  .premium-card {
+  /* Bento Grid Card */
+  .bento-card {
+    background: #ffffff;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 1.5rem; /* 24px */
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .premium-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  .bento-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(193, 92, 38, 0.3); /* Brand orange glow */
+    box-shadow: 0 12px 30px -10px rgba(193, 92, 38, 0.2);
   }
 
-  /* Custom tabs / filter button animations */
-  .filter-btn {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Outline text stroke */
+  .text-stroke {
+    -webkit-text-stroke: 1.5px rgba(45, 45, 45, 0.12);
+    color: transparent;
+  }
+  .text-stroke-orange {
+    -webkit-text-stroke: 1.5px rgba(193, 92, 38, 0.5);
+    color: transparent;
   }
 
-  .filter-btn.active {
-    background-color: #C15C26;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(193, 92, 38, 0.3);
+  /* Infinite Marquee */
+  @keyframes marquee {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
   }
 
-  /* Page Loader (for transition state effect) */
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 25s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  /* Page Entrance Fade-in */
   .page-transition {
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Input styles for RFQ */
-  .rfq-input:focus {
-    border-color: #C15C26;
-    box-shadow: 0 0 0 3px rgba(193, 92, 38, 0.25);
-    outline: none;
-  }
-
-  /* Hero Carousel Animations */
-  .slide-up-animation {
-    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  @keyframes slideUpFade {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
@@ -207,7 +187,7 @@
     }
   }
 
-  /* Thin horizontal scrollbars for sub-processes on responsive viewports */
+  /* Thin horizontal scrollbars for sub-processes */
   .scrollbar-container::-webkit-scrollbar {
     height: 6px;
   }
@@ -218,6 +198,23 @@
   .scrollbar-container::-webkit-scrollbar-thumb {
     background: #C15C26;
     border-radius: 3px;
-    border: none;
+  }
+
+  /* Premium Card & Interactive Icon hover styling */
+  .premium-card {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+  }
+  .premium-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px -15px rgba(193, 92, 38, 0.15);
+    border-color: rgba(193, 92, 38, 0.25);
+  }
+  .premium-card:hover .premium-icon,
+  .premium-card:hover svg.premium-icon {
+    transform: scale(1.22) rotate(12deg);
+    color: #C15C26 !important;
+  }
+  .premium-icon {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
   }
 }

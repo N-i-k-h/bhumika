@@ -97,8 +97,8 @@ export const About: React.FC = () => {
       <section className="py-16 bg-steel-plate/30 border-t border-b border-primary/5">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop grid md:grid-cols-2 gap-12">
           {/* Vision */}
-          <div className="bg-white p-8 rounded-lg shadow-sm border-t-4 border-secondary flex gap-4">
-            <Eye className="w-8 h-8 text-secondary flex-shrink-0 mt-1" />
+          <div className="premium-card bg-white p-8 rounded-lg shadow-sm border-t-4 border-secondary flex gap-4 cursor-pointer">
+            <Eye className="premium-icon w-8 h-8 text-secondary flex-shrink-0 mt-1" />
             <div>
               <h3 className="font-headline-md text-xl font-bold text-primary mb-3">Our Vision</h3>
               <p className="text-sm text-on-surface-variant leading-relaxed">
@@ -107,8 +107,8 @@ export const About: React.FC = () => {
             </div>
           </div>
           {/* Mission */}
-          <div className="bg-white p-8 rounded-lg shadow-sm border-t-4 border-molten-glow flex gap-4">
-            <Send className="w-8 h-8 text-molten-glow flex-shrink-0 mt-1" />
+          <div className="premium-card bg-white p-8 rounded-lg shadow-sm border-t-4 border-molten-glow flex gap-4 cursor-pointer">
+            <Send className="premium-icon w-8 h-8 text-molten-glow flex-shrink-0 mt-1" />
             <div>
               <h3 className="font-headline-md text-xl font-bold text-primary mb-3">Our Mission</h3>
               <p className="text-sm text-on-surface-variant leading-relaxed">
@@ -136,9 +136,9 @@ export const About: React.FC = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Furnace Capacities */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-primary/5">
+            <div className="premium-card bg-white p-6 rounded-lg shadow-sm border border-primary/5 cursor-pointer">
               <div className="w-12 h-12 bg-primary/10 rounded flex items-center justify-center text-primary mb-6">
-                <Flame className="w-6 h-6" />
+                <Flame className="premium-icon w-6 h-6" />
               </div>
               <h3 className="font-headline-md text-lg text-primary font-bold mb-4">
                 Furnace &amp; Melting Facilities
@@ -174,9 +174,9 @@ export const About: React.FC = () => {
             </div>
 
             {/* CNC Machine Shop */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-primary/5">
+            <div className="premium-card bg-white p-6 rounded-lg shadow-sm border border-primary/5 cursor-pointer">
               <div className="w-12 h-12 bg-primary/10 rounded flex items-center justify-center text-primary mb-6">
-                <Settings className="w-6 h-6" />
+                <Settings className="premium-icon w-6 h-6" />
               </div>
               <h3 className="font-headline-md text-lg text-primary font-bold mb-4">In-House Machining</h3>
               <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
@@ -191,9 +191,9 @@ export const About: React.FC = () => {
             </div>
 
             {/* Design & Simulation */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-primary/5">
+            <div className="premium-card bg-white p-6 rounded-lg shadow-sm border border-primary/5 cursor-pointer">
               <div className="w-12 h-12 bg-primary/10 rounded flex items-center justify-center text-primary mb-6">
-                <Layers className="w-6 h-6" />
+                <Layers className="premium-icon w-6 h-6" />
               </div>
               <h3 className="font-headline-md text-lg text-primary font-bold mb-4">Design &amp; Engineering</h3>
               <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
