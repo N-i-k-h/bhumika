@@ -100,8 +100,9 @@ export const Contact: React.FC = () => {
           <span className="font-label-caps text-xs text-molten-glow uppercase tracking-widest">
             GET A QUOTE
           </span>
-          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2">
-            RFQ &amp; Contact Engineering
+          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2 font-reveal tracking-wide">
+            <span className="text-white">RFQ &amp; Contact </span>
+            <span className="text-secondary">Engineering</span>
           </h1>
           <p className="font-body-lg text-sm md:text-base text-surface-variant max-w-xl mt-4 leading-relaxed font-light">
             Have a design drawing or metallurgical request? Fill out our RFQ matrix or reach out to our team directly.
@@ -119,7 +120,10 @@ export const Contact: React.FC = () => {
               <span className="font-label-caps text-label-caps text-secondary mb-4 block uppercase tracking-wider text-xs font-bold">
                 OFFICE CONTACTS
               </span>
-              <h2 className="font-headline-lg text-2xl font-bold text-primary mb-6">Direct Channels</h2>
+              <h2 className="font-headline-lg text-2xl font-bold mb-6">
+                <span className="text-primary">Direct </span>
+                <span className="text-secondary">Channels</span>
+              </h2>
               
               <div className="space-y-6 text-sm">
                 <div className="flex items-start gap-4">

@@ -28,8 +28,9 @@ export const About: React.FC = () => {
           <span className="font-label-caps text-xs text-molten-glow uppercase tracking-widest">
             ABOUT BHUMIKA
           </span>
-          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2">
-            Our Story &amp; Infrastructure
+          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2 font-reveal tracking-wide">
+            <span className="text-white">Our Story &amp; </span>
+            <span className="text-secondary">Infrastructure</span>
           </h1>
           <p className="font-body-lg text-sm md:text-base text-surface-variant max-w-xl mt-4 leading-relaxed font-light">
             An inside look at our 27+ years history, our founder's mission, and the metallurgical testing infrastructure of our Shimoga facility.
@@ -44,8 +45,9 @@ export const About: React.FC = () => {
             <span className="font-label-caps text-label-caps text-secondary mb-4 block uppercase tracking-wider text-xs">
               HERITAGE FOUNDATION
             </span>
-            <h2 className="font-headline-lg text-3xl font-extrabold text-primary mb-6 leading-tight">
-              Established 1997 by Late Mr. H. S. Diwakar
+            <h2 className="font-headline-lg text-3xl font-extrabold mb-6 leading-tight">
+              <span className="text-primary">Established 1997 by </span>
+              <span className="text-secondary">Late Mr. H. S. Diwakar</span>
             </h2>
             <p className="font-body-md text-on-surface-variant mb-6 leading-relaxed">
               Bhumika Alloy Castings Pvt Ltd (BAC) was established in 1997 by <strong>Late Mr. H. S. Diwakar</strong>, who was also one of the founders of Perfect Alloy Components. With a vision to deliver premium metallurgical products that match strict international standards, the firm set out to fill the gap in high-precision castings for the growing heavy industrial markets.
@@ -126,8 +128,9 @@ export const About: React.FC = () => {
             <span className="font-label-caps text-label-caps text-secondary block mb-2 uppercase tracking-widest text-xs">
               PRODUCTION POWER
             </span>
-            <h2 className="font-headline-lg text-3xl font-black text-primary">
-              Foundry &amp; Machining Infrastructure
+            <h2 className="font-headline-lg text-3xl font-black">
+              <span className="text-primary">Foundry &amp; Machining </span>
+              <span className="text-secondary">Infrastructure</span>
             </h2>
             <p className="text-sm text-on-surface-variant mt-3">
               Our plant houses vertically integrated facilities, allowing us to execute and control the process from design analysis to final custom-machined products.

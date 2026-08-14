@@ -199,8 +199,9 @@ export const Home: React.FC = () => {
             <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-4 shadow-sm">
               <Award className="w-6 h-6" />
             </div>
-            <h2 className="font-headline-xl text-3xl sm:text-5xl text-primary mb-3 font-black leading-tight tracking-wide uppercase">
-              Who We Are
+            <h2 className="font-headline-xl text-3xl sm:text-5xl font-black mb-3 leading-tight tracking-wide uppercase">
+              <span className="text-primary">Who We </span>
+              <span className="text-secondary">Are</span>
             </h2>
             <h3 className="font-headline-md text-lg text-secondary mb-6 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-secondary after:rounded font-extrabold leading-tight">
               Leading the Way from the Heart of Shimoga
@@ -240,8 +241,9 @@ export const Home: React.FC = () => {
             <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-4 shadow-sm">
               <Users className="w-6 h-6" />
             </div>
-            <h2 className="font-headline-xl text-3xl sm:text-5xl text-primary mb-3 font-black leading-tight tracking-wide uppercase">
-              Creators &amp; Leaders
+            <h2 className="font-headline-xl text-3xl sm:text-5xl font-black mb-3 leading-tight tracking-wide uppercase">
+              <span className="text-primary">Creators &amp; </span>
+              <span className="text-secondary">Leaders</span>
             </h2>
             <h3 className="font-headline-md text-lg text-secondary mb-6 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-secondary after:rounded font-extrabold leading-tight">
               The Driving Force Behind Bhumika Alloy Castings
@@ -314,8 +316,9 @@ export const Home: React.FC = () => {
             <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-4 shadow-sm">
               <ShieldCheck className="w-6 h-6" />
             </div>
-            <h2 className="font-headline-xl text-3xl sm:text-5xl text-primary mb-3 font-black leading-tight tracking-wide uppercase">
-              Why Bhumika
+            <h2 className="font-headline-xl text-3xl sm:text-5xl font-black mb-3 leading-tight tracking-wide uppercase">
+              <span className="text-primary">Why </span>
+              <span className="text-secondary">Bhumika</span>
             </h2>
             <h3 className="font-headline-md text-lg text-secondary mb-6 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-secondary after:rounded font-extrabold leading-tight">
               Uncompromising Quality, Certified Metallurgy &amp; Complete Traceability
@@ -381,8 +384,9 @@ export const Home: React.FC = () => {
           <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-wider block mb-2">
             OUR CAPABILITIES
           </span>
-          <h2 className="font-headline-xl text-3xl sm:text-5xl font-black text-primary uppercase">
-            What We Do
+          <h2 className="font-headline-xl text-3xl sm:text-5xl font-black uppercase">
+            <span className="text-primary">What We </span>
+            <span className="text-secondary">Do</span>
           </h2>
           <p className="font-body-md text-sm text-on-surface-variant mt-4 max-w-xl mx-auto leading-relaxed">
             From lost-wax precision castings to heavy centrifugal alloys, we operate fully-integrated production lines supporting custom requirements.

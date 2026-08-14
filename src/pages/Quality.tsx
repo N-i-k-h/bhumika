@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { ShieldCheck, Flame, Scale, Activity, Eye, Settings, Layers } from 'lucide-react';
 import impactTestingImg from '../assets/impact_testing_machine.png';
 import brinellHardnessImg from '../assets/brinell_hardness_testing_machine.png';
@@ -96,8 +97,9 @@ export const Quality: React.FC = () => {
           <span className="font-label-caps text-xs text-molten-glow uppercase tracking-widest">
             QUALITY CONTROL DEPARTMENT
           </span>
-          <h1 className="font-headline-xl text-4xl md:text-6xl font-black mt-2 leading-tight">
-            Quality Control
+          <h1 className="font-headline-xl text-4xl md:text-6xl font-black mt-2 leading-tight font-reveal tracking-wide">
+            <span className="text-white">Quality </span>
+            <span className="text-secondary">Control</span>
           </h1>
         </div>
       </section>
@@ -111,8 +113,9 @@ export const Quality: React.FC = () => {
               <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block">
                 QUALITY COMMITMENT
               </span>
-              <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
-                Quality Control
+              <h2 className="font-headline-lg text-3xl md:text-4xl font-black">
+                <span className="text-primary">Quality </span>
+                <span className="text-secondary">Control</span>
               </h2>
               <p className="font-body-md text-base text-on-surface-variant leading-relaxed font-sans font-light">
                 At BHUMIKA ALLOY CASTINGS, we are committed to delivering the highest quality castings. Our shell moulding process includes rigorous quality control measures at every stage, from raw material selection to final inspection. We employ advanced testing methods, including dimensional inspection, metallurgical analysis, and non-destructive testing, to ensure that each casting meets the stringent standards of quality and performance.
@@ -200,8 +203,9 @@ export const Quality: React.FC = () => {
             <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block mb-2">
               LABORATORY INFRASTRUCTURE
             </span>
-            <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
-              Advanced Quality Testing
+            <h2 className="font-headline-lg text-3xl md:text-4xl font-black">
+              <span className="text-primary">Advanced Quality </span>
+              <span className="text-secondary">Testing</span>
             </h2>
             <p className="font-body-md text-sm text-on-surface-variant mt-4 max-w-xl mx-auto">
               Our in-house metrology, chemical, and mechanical testing laboratories are fully outfitted with state-of-the-art instruments for comprehensive casting validation.
@@ -210,8 +214,12 @@ export const Quality: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testingMachines.map((machine, index) => (
-              <div 
+              <motion.div 
                 key={index}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (index % 3) * 0.1 }}
                 className="bg-white rounded-xl border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col premium-card group animate-fadeIn"
               >
                 {/* Image Container */}
@@ -238,7 +246,7 @@ export const Quality: React.FC = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

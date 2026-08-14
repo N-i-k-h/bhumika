@@ -43,13 +43,13 @@
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
 
-  --font-headline-xl: "Syne", "Space Grotesk", sans-serif;
-  --font-headline-lg: "Syne", "Space Grotesk", sans-serif;
-  --font-headline-md: "Space Grotesk", sans-serif;
+  --font-headline-xl: "Cinzel", "Playfair Display", "Outfit", sans-serif;
+  --font-headline-lg: "Cinzel", "Playfair Display", "Outfit", sans-serif;
+  --font-headline-md: "Outfit", "Playfair Display", sans-serif;
   --font-body-md: "Plus Jakarta Sans", sans-serif;
   --font-body-lg: "Plus Jakarta Sans", sans-serif;
-  --font-label-caps: "Space Mono", monospace;
-  --font-condensed: "Oswald", sans-serif;
+  --font-label-caps: "Outfit", sans-serif;
+  --font-condensed: "Cinzel", sans-serif;
   
   --spacing-gutter: 24px;
   --spacing-margin-desktop: 64px;
@@ -137,9 +137,41 @@
   }
 
   .bento-card:hover {
-    transform: translateY(-6px) scale(1.01);
-    border-color: rgba(193, 92, 38, 0.3); /* Brand orange glow */
-    box-shadow: 0 12px 30px -10px rgba(193, 92, 38, 0.2);
+    transform: translateY(-8px) scale(1.015);
+    border-color: rgba(193, 92, 38, 0.4); /* Brand orange glow */
+    box-shadow: 0 20px 40px -10px rgba(193, 92, 38, 0.25);
+  }
+
+  /* Animated Gradient Text Effect */
+  .text-gradient-molten {
+    background: linear-gradient(135deg, #C15C26 0%, #E06D2E 50%, #D97706 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Text Entrance Reveal Animation */
+  .font-reveal {
+    animation: textReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes textReveal {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+      letter-spacing: normal;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Outline text stroke */
@@ -201,18 +233,18 @@
     border-radius: 3px;
   }
 
-  /* Premium Card & Interactive Icon hover styling */
+  /* Premium Universal Card Hover & Scale Animations */
   .premium-card {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
   }
   .premium-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px -15px rgba(193, 92, 38, 0.15);
-    border-color: rgba(193, 92, 38, 0.25);
+    box-shadow: 0 22px 45px -12px rgba(193, 92, 38, 0.2);
+    border-color: rgba(193, 92, 38, 0.4);
   }
   .premium-card:hover .premium-icon,
   .premium-card:hover svg.premium-icon {
-    transform: scale(1.22) rotate(12deg);
+    transform: scale(1.2) rotate(8deg);
     color: #C15C26 !important;
   }
   .premium-icon {

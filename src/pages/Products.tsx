@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 interface Product {
   id: number;
@@ -82,8 +83,9 @@ export const Products: React.FC = () => {
           <span className="font-label-caps text-xs text-molten-glow uppercase tracking-widest">
             PRODUCT PORTFOLIO
           </span>
-          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2">
-            Precision Component Catalog
+          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2 font-reveal tracking-wide">
+            <span className="text-white">Precision Component </span>
+            <span className="text-secondary">Catalog</span>
           </h1>
           <p className="font-body-lg text-sm md:text-base text-surface-variant max-w-xl mt-4 leading-relaxed font-light">
             Filter through our high-integrity castings categorized by industrial applications, review technical specifications, and download engineering reference sheets.
@@ -125,17 +127,21 @@ export const Products: React.FC = () => {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {filteredProducts.map((p) => (
-              <div
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProducts.map((p, idx) => (
+              <motion.div
                 key={p.id}
-                className="bg-white p-5 rounded-lg border border-primary/5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col premium-card group"
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (idx % 3) * 0.1 }}
+                className="bg-white p-5 rounded-xl border border-primary/5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col premium-card group"
               >
-                <div className="h-60 mb-4 bg-steel-plate rounded flex items-center justify-center p-2 overflow-hidden">
+                <div className="h-80 mb-4 bg-steel-plate rounded flex items-center justify-center p-0 overflow-hidden">
                   <img
                     src={p.image}
                     alt={p.title}
-                    className="max-w-full max-h-full object-contain w-auto h-auto group-hover:scale-105 transition-transform duration-300"
+                    className="max-w-full max-h-full object-contain w-auto h-auto group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
                 <span className="font-label-caps text-[9px] text-secondary font-bold uppercase tracking-wider mb-1 block">
@@ -144,9 +150,6 @@ export const Products: React.FC = () => {
                 <h4 className="font-headline-md text-base text-primary font-bold mb-2 group-hover:text-secondary transition-colors line-clamp-1">
                   {p.title}
                 </h4>
-                <p className="text-xs text-on-surface-variant font-label-caps line-clamp-1 mb-3">
-                  {p.material}
-                </p>
                 {p.metalGrade && (
                   <div className="mt-auto pt-2.5 border-t border-primary/5 flex items-center justify-between">
                     <span className="text-[9px] font-bold text-on-surface-variant/70 uppercase font-label-caps">Metal Grade:</span>
@@ -155,7 +158,7 @@ export const Products: React.FC = () => {
                     </span>
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

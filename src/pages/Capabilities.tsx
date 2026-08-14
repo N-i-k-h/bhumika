@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Shield, Settings, Layers, Zap, Target, Shuffle, Coins } from 'lucide-react';
 import waxInjectionImg from '../assets/wax_injection_process.png';
 import preAssemblyImg from '../assets/tree_assembly_process.jpg';
@@ -163,8 +164,9 @@ export const Capabilities: React.FC = () => {
           <span className="font-label-caps text-xs text-molten-glow uppercase tracking-widest">
             METALLURGY &amp; ENGINEERING
           </span>
-          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2">
-            Processes &amp; Materials
+          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2 font-reveal tracking-wide">
+            <span className="text-white">Processes &amp; </span>
+            <span className="text-secondary">Materials</span>
           </h1>
           <p className="font-body-lg text-sm md:text-base text-surface-variant max-w-xl mt-4 leading-relaxed font-light">
             Review the technical boundaries of our Investment Casting, Centrifugal Casting, CNC tolerances, and chemical alloy spectrum.
@@ -181,8 +183,9 @@ export const Capabilities: React.FC = () => {
               <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-wider block">
                 PROCESS 01
               </span>
-              <h2 className="font-headline-lg text-3xl font-extrabold text-primary molten-border pb-4">
-                Precision Investment Casting
+              <h2 className="font-headline-lg text-3xl font-extrabold molten-border pb-4">
+                <span className="text-primary">Precision Investment </span>
+                <span className="text-secondary">Casting</span>
               </h2>
               <p className="font-body-md text-on-surface-variant leading-relaxed">
                 Our investment casting uses the <strong>lost-wax injection technique</strong> to produce near-net-shape components. Wax patterns are pressed, assembled into clusters (trees), coated in refractory ceramic, fired to melt out the wax, and filled with custom molten alloys.
@@ -224,28 +227,33 @@ export const Capabilities: React.FC = () => {
             <span className="font-label-caps text-label-caps text-secondary mb-2 block uppercase tracking-widest text-xs font-bold">
               PRODUCTION WORKFLOW
             </span>
-            <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
-              Investment Casting Processes
+            <h2 className="font-headline-lg text-3xl md:text-4xl font-black">
+              <span className="text-primary">Investment Casting </span>
+              <span className="text-secondary">Processes</span>
             </h2>
             <p className="font-body-md text-sm text-on-surface-variant mt-4 max-w-xl mx-auto">
               Follow our comprehensive 10-step lost-wax casting cycle, engineered to deliver absolute dimensional precision and zero metallurgical defects.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {investmentSteps.map((step, idx) => (
-               <div
+               <motion.div
                 key={idx}
-                className="bg-white p-3 rounded-lg border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col premium-card"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (idx % 4) * 0.08 }}
+                className="bg-white p-5 rounded-xl border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col premium-card group"
               >
-                <div className="aspect-square bg-steel-plate rounded overflow-hidden mb-3 flex flex-col items-center justify-center border border-primary/5 relative">
+                <div className="aspect-square bg-steel-plate rounded overflow-hidden mb-4 flex flex-col items-center justify-center border border-primary/5 relative">
                   {step.image ? (
                     <img
                       src={step.image}
                       alt={step.title}
                       className={`w-full h-full object-cover scale-[1.15] group-hover:scale-[1.22] transition-transform duration-500 ${
                         step.title.toLowerCase().includes("knockout")
-                          ? 'object-contain p-1 scale-[1.0] group-hover:scale-[1.05]'
+                          ? 'object-contain p-4 scale-[0.7] group-hover:scale-[0.75]'
                           : ''
                       }`}
                     />
@@ -258,21 +266,21 @@ export const Capabilities: React.FC = () => {
                     </>
                   )}
                 </div>
-                <div className="flex items-start gap-2 mb-1">
-                  <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-secondary/10 text-secondary font-label-caps mt-0.5">
+                <div className="flex items-start gap-2 mb-2">
+                  <span className="text-[10px] font-black px-2 py-0.5 rounded bg-secondary/10 text-secondary font-label-caps mt-0.5">
                     {String(idx + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="font-headline-md text-xs font-black text-primary leading-tight">
+                  <h3 className="font-headline-md text-sm font-black text-primary leading-tight">
                     {step.title}
                   </h3>
                 </div>
-                <h4 className="text-[9px] font-semibold text-secondary italic mb-1.5">
+                <h4 className="text-[10px] font-semibold text-secondary italic mb-2">
                   {step.subtitle}
                 </h4>
-                <p className="text-[10px] text-on-surface-variant leading-relaxed">
+                <p className="text-xs text-on-surface-variant leading-relaxed">
                   {step.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -390,13 +398,17 @@ export const Capabilities: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {centrifugalSteps.map((step, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="bg-white p-3 rounded-lg border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col premium-card"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="bg-white p-5 rounded-xl border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col premium-card group"
               >
-                <div className="aspect-square bg-steel-plate rounded overflow-hidden mb-3 flex flex-col items-center justify-center border border-primary/5 relative">
+                <div className="aspect-square bg-steel-plate rounded overflow-hidden mb-4 flex flex-col items-center justify-center border border-primary/5 relative">
                   {step.image ? (
                     <img
                       src={step.image}
@@ -412,21 +424,21 @@ export const Capabilities: React.FC = () => {
                     </>
                   )}
                 </div>
-                <div className="flex items-start gap-2 mb-1">
-                  <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-secondary/10 text-secondary font-label-caps mt-0.5">
+                <div className="flex items-start gap-2 mb-2">
+                  <span className="text-[10px] font-black px-2 py-0.5 rounded bg-secondary/10 text-secondary font-label-caps mt-0.5">
                     STEP {String(idx + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="font-headline-md text-xs font-black text-primary leading-tight">
+                  <h3 className="font-headline-md text-sm font-black text-primary leading-tight">
                     {step.title}
                   </h3>
                 </div>
-                <h4 className="text-[9px] font-semibold text-secondary italic mb-1.5">
+                <h4 className="text-[10px] font-semibold text-secondary italic mb-2">
                   {step.subtitle}
                 </h4>
-                <p className="text-[10px] text-on-surface-variant leading-relaxed">
+                <p className="text-xs text-on-surface-variant leading-relaxed">
                   {step.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import prod2 from '../assets/image.png';
@@ -258,8 +259,9 @@ export const Gallery: React.FC = () => {
           <span className="font-label-caps text-xs text-molten-glow uppercase tracking-widest">
             REAL FOOTAGE & MEDIA
           </span>
-          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2">
-            Shimoga Facility & Product Gallery
+          <h1 className="font-headline-xl text-3xl md:text-5xl font-black mt-2 font-reveal tracking-wide">
+            <span className="text-white">Shimoga Facility &amp; </span>
+            <span className="text-secondary">Product Gallery</span>
           </h1>
           <p className="font-body-lg text-sm md:text-base text-surface-variant max-w-xl mt-4 leading-relaxed font-light">
             Real photos detailing our automated foundry floor, CNC machinery, and high-performance casting components supplied worldwide.

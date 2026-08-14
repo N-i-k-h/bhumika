@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Shield, ZoomIn, X, Award } from 'lucide-react';
 
 interface Certificate {
@@ -41,7 +42,8 @@ export const Certificates: React.FC = () => {
               STANDARDS & COMPLIANCE
             </span>
             <h1 className="font-headline-xl text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Certifications & Quality Policy
+              <span className="text-white">Certifications &amp; </span>
+              <span className="text-secondary">Quality Policy</span>
             </h1>
             <p className="font-body-lg text-lg text-surface-variant/80 max-w-2xl leading-relaxed">
               We maintain strict conformity with global aerospace, pressure vessel, and quality management standards. Click any certificate card to view full documentation.
@@ -55,8 +57,12 @@ export const Certificates: React.FC = () => {
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {certificatesList.map((cert, index) => (
-              <div 
+              <motion.div 
                 key={index}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (index % 3) * 0.1 }}
                 onClick={() => setSelectedCert(cert)}
                 className="bg-white rounded-xl border border-primary/5 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col premium-card cursor-pointer group"
               >
@@ -118,7 +124,7 @@ export const Certificates: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

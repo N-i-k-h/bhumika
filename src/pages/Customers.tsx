@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Quote, ShieldCheck, Award, Users } from 'lucide-react';
 import technoVisionLogo from '../assets/techno_vision_tools_logo.png';
 import automotiveAxlesLogo from '../assets/automotive_axles_logo.png';
@@ -111,7 +112,8 @@ export const Customers: React.FC = () => {
               GLOBAL PARTNERSHIPS
             </span>
             <h1 className="font-headline-xl text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Our Trusted Customers
+              <span className="text-white">Our Trusted </span>
+              <span className="text-secondary">Customers</span>
             </h1>
             <p className="font-body-lg text-lg text-surface-variant/80 max-w-2xl leading-relaxed">
               From water infrastructure and scientific instrumentation to heavy flow-control valves, we deliver high-integrity castings for global industry leaders.
@@ -163,8 +165,9 @@ export const Customers: React.FC = () => {
             <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-wider block mb-2">
               VOICES OF SATISFACTION
             </span>
-            <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
-              Metallurgical Excellence in Action
+            <h2 className="font-headline-lg text-3xl md:text-4xl font-black">
+              <span className="text-primary">Metallurgical Excellence in </span>
+              <span className="text-secondary">Action</span>
             </h2>
             <p className="font-body-md text-sm text-on-surface-variant mt-4">
               Here is what our global partners say about their engineering collaboration with Bhumika Alloy Castings.
@@ -173,8 +176,12 @@ export const Customers: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {testimonials.map((t, idx) => (
-              <div
+              <motion.div
                 key={idx}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (idx % 3) * 0.1 }}
                 className="bg-white rounded-xl border border-primary/5 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col premium-card h-72 group"
               >
                 {/* 50% Top: Logo */}
@@ -182,7 +189,7 @@ export const Customers: React.FC = () => {
                   <img
                     src={t.logo}
                     alt={`${t.company} Logo`}
-                    className="h-full max-h-12 w-full object-contain"
+                    className="h-full max-h-12 w-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 {/* 50% Bottom: Content */}
@@ -194,7 +201,7 @@ export const Customers: React.FC = () => {
                     "{t.quote}"
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -204,7 +211,8 @@ export const Customers: React.FC = () => {
       <section className="py-20 bg-primary text-on-primary">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop text-center">
           <h2 className="font-headline-lg text-3xl md:text-4xl font-extrabold mb-6">
-            Ready to Partner with Bhumika?
+            <span className="text-white">Ready to Partner with </span>
+            <span className="text-secondary">Bhumika?</span>
           </h2>
           <p className="font-body-lg text-sm text-surface-variant/80 max-w-xl mx-auto mb-8 leading-relaxed">
             From design prototyping to full-scale automated manufacturing batches, find out why leading multinational manufacturers rely on our casting division.
