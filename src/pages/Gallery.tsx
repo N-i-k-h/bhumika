@@ -306,8 +306,12 @@ export const Gallery: React.FC = () => {
           {/* Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredItems.map((item, index) => (
-              <div
+              <motion.div
                 key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: (index % 4) * 0.05 }}
                 onClick={() => setLightboxIdx(index)}
                 className="group relative bg-steel-plate overflow-hidden rounded shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer aspect-[4/3] border border-primary/5"
               >
@@ -325,7 +329,7 @@ export const Gallery: React.FC = () => {
                   <h4 className="font-headline-md text-base font-bold line-clamp-1 mb-1">{item.title}</h4>
                   <p className="text-[11px] text-white/80 line-clamp-2 leading-relaxed font-light">{item.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
