@@ -41,7 +41,7 @@ const heroSlides: HeroSlide[] = [
     image: centrifugalCastingHeroImg,
     tagline: 'HEAVY-DUTY CENTRIFUGAL ALLOYS',
     title: 'High-Density Centrifugal Alloy Castings',
-    subtitle: 'Horizontal rotational casting for dense, void-free cylinder wear sleeves, bushes & decanter shells.',
+    subtitle: 'Horizontal rotational casting for dense, void-free rings, tubes & decanter shells.',
     ctaText: 'View Product Catalog',
     ctaLink: '/products',
   },

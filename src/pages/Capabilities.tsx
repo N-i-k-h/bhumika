@@ -24,6 +24,7 @@ import heatTreatmentCentrifugalImg from '../assets/heat_treatment_centrifugal.pn
 import finishMachiningImg from '../assets/finish_machining.png';
 import cncTurningImg from '../assets/cnc_turning.png';
 import packagingImg from '../assets/packaging_process.jpg';
+import centrifugalPackagingImg from '../assets/centrifugal_packaging_process.png';
 
 interface GalleryItem {
   title: string;
@@ -148,7 +149,7 @@ const centrifugalSteps: GalleryItem[] = [
     title: "Packaging",
     subtitle: "Heavy-Duty Industrial Dispatch",
     desc: "Large centrifugal sleeves and cylinders are treated with corrosion inhibitors, safely loaded onto heavy-duty wooden pallets, secured with steel bands, and shrink-wrapped for transit.",
-    image: packagingImg
+    image: centrifugalPackagingImg
   }
 ];
 
@@ -197,8 +198,8 @@ export const Capabilities: React.FC = () => {
                 PROCESS 01
               </span>
               <h2 className="font-headline-lg text-3xl font-extrabold molten-border pb-4">
-                <span className="text-primary">Precision Investment </span>
-                <span className="text-secondary">Casting</span>
+                <span className="text-primary">Precision </span>
+                <span className="text-secondary">Investment Casting</span>
               </h2>
               <p className="font-body-md text-on-surface-variant leading-relaxed">
                 Our investment casting uses the <strong>lost-wax injection technique</strong> to produce near-net-shape components. Wax patterns are pressed, assembled into clusters (trees), coated in refractory ceramic, fired to melt out the wax, and filled with custom molten alloys.

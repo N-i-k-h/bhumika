@@ -135,28 +135,19 @@ export const Certificates: React.FC = () => {
         >
           <div 
             onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-lg max-w-3xl w-full p-6 flex flex-col shadow-2xl relative page-transition border border-primary/10"
+            className="bg-white rounded-lg max-w-3xl w-full p-4 flex flex-col shadow-2xl relative page-transition border border-primary/10"
           >
             <button 
               onClick={() => setSelectedCert(null)}
-              className="absolute top-4 right-4 p-2 bg-primary/10 hover:bg-primary/20 rounded-full transition-colors text-primary cursor-pointer z-10"
+              className="absolute top-2 right-2 p-2 bg-primary/10 hover:bg-primary/20 rounded-full transition-colors text-primary cursor-pointer z-10"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="mt-4 space-y-6">
-              <div>
-                <span className="bg-secondary/10 text-secondary rounded font-label-caps inline-block mb-2 text-[10px] font-black px-2.5 py-0.5">
-                  {selectedCert.title}
-                </span>
-                <h2 className="font-headline-lg font-black text-primary leading-tight text-2xl">
-                  {selectedCert.authority}
-                </h2>
-              </div>
-
+            <div className="flex justify-center items-center w-full">
               {selectedCert.image ? (
-                <div className="max-h-[65vh] overflow-y-auto flex justify-center bg-steel-plate p-2 rounded border border-primary/5">
+                <div className="max-h-[80vh] w-full overflow-y-auto flex justify-center bg-steel-plate p-1 rounded border border-primary/5">
                   <img 
                     src={selectedCert.image} 
                     alt={selectedCert.title} 
@@ -164,7 +155,7 @@ export const Certificates: React.FC = () => {
                   />
                 </div>
               ) : (
-                <div className="bg-steel-plate p-6 rounded-lg border border-primary/5 flex flex-col items-center justify-center text-center space-y-3">
+                <div className="bg-steel-plate p-12 w-full rounded-lg border border-primary/5 flex flex-col items-center justify-center text-center space-y-3 min-h-[300px]">
                   <Shield className="w-12 h-12 text-secondary" />
                   <div>
                     <h4 className="font-headline-md text-sm font-bold text-primary">Official Certification Document</h4>
@@ -174,19 +165,6 @@ export const Certificates: React.FC = () => {
                   </div>
                 </div>
               )}
-
-              <div className="space-y-4 bg-steel-plate/50 p-4 rounded-lg border border-primary/5">
-                <div className="grid grid-cols-2 gap-4 text-xs">
-                  <div>
-                    <span className="text-[10px] text-on-surface-variant/60 block">Reference Code</span>
-                    <span className="font-mono font-bold text-primary text-xs">{selectedCert.refNumber}</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-on-surface-variant/60 block">Current Status</span>
-                    <span className="font-bold text-secondary">{selectedCert.validity}</span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

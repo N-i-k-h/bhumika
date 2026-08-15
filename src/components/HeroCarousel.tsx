@@ -26,7 +26,7 @@ const slides: Slide[] = [
     image: '/assets/images/centrifugal_casting.png',
     tagline: 'HEAVY-DUTY METALLURGY',
     title: 'High-Density Centrifugal Alloys.',
-    desc: 'Horizontal centrifugal rotational processes delivering dense, cavity-free cylinder wear sleeves, bushes, and decanter structures.',
+    desc: 'Horizontal centrifugal rotational processes delivering dense, cavity-free rings, tubes, and decanter structures.',
   },
   {
     image: '/assets/images/cnc_precision_machining.png',

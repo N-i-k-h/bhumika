@@ -438,7 +438,7 @@ export const Home: React.FC = () => {
             </span>
             <h3 className="font-headline-md text-xl text-primary mb-4 font-bold">Centrifugal Casting</h3>
             <p className="font-body-md text-on-surface-variant mb-6 flex-grow leading-relaxed text-xs">
-              Operating 8 horizontal molding lines to produce cylindrical components, bushes, and sleeves with exceptional metallurgical density. Eliminates internal voids and gas pockets.
+              Operating 8 horizontal molding lines to produce cylindrical components, rings, and tubes with exceptional metallurgical density. Eliminates internal voids and gas pockets.
             </p>
             <Link
               className="inline-flex items-center text-secondary font-bold text-xs hover:gap-2 transition-all mt-auto uppercase tracking-wider font-label-caps"

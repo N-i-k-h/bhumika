@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
       <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Brand Column */}
         <div className="flex flex-col gap-6">
-          <div className="inline-block bg-white p-2 rounded-lg mb-4 max-w-[200px]">
+          <div className="mb-4 max-w-[200px]">
             <img src="/assets/images/logo.png" alt="Bhumika Alloy Castings" className="h-10 w-auto" />
           </div>
           <p className="font-body-md text-surface-variant/80 text-sm leading-relaxed max-w-xs">
