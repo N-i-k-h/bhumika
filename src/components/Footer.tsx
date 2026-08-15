@@ -8,8 +8,8 @@ export const Footer: React.FC = () => {
       <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Brand Column */}
         <div className="flex flex-col gap-6">
-          <div className="mb-4 max-w-[200px]">
-            <img src="/assets/images/logo.png" alt="Bhumika Alloy Castings" className="h-10 w-auto" />
+          <div className="mb-4">
+            <img src="/assets/images/logo.png" alt="Bhumika Alloy Castings" className="h-16 md:h-20 w-auto object-contain" />
           </div>
           <p className="font-body-md text-surface-variant/80 text-sm leading-relaxed max-w-xs">
             Shimoga's premier engineering casting facility. Delivering metallurgical excellence and certified components since 1997.
