@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
         {/* Brand Column */}
         <div className="flex flex-col gap-6">
           <div className="mb-4">
-            <img src="/assets/images/logo.png" alt="Bhumika Alloy Castings" className="h-16 md:h-20 w-auto object-contain" />
+            <img src="/assets/images/logo.png" alt="Bhumika Alloy Castings" className="h-12 md:h-16 w-auto object-contain" />
           </div>
           <p className="font-body-md text-surface-variant/80 text-sm leading-relaxed max-w-xs">
             Shimoga's premier engineering casting facility. Delivering metallurgical excellence and certified components since 1997.
