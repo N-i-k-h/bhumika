@@ -5,7 +5,7 @@ import { Shield, ZoomIn, X, Award } from 'lucide-react';
 interface Certificate {
   title: string;
   authority: string;
-  scope: string;
+  scope?: string;
   refNumber: string;
   validity: string;
   image?: string;
@@ -108,9 +108,6 @@ export const Certificates: React.FC = () => {
                     <h3 className="font-headline-md font-bold text-primary leading-tight text-sm">
                       {cert.authority}
                     </h3>
-                    <p className="text-xs text-on-surface-variant leading-relaxed line-clamp-3">
-                      {cert.scope}
-                    </p>
                   </div>
 
                   <div className="border-t border-primary/5 pt-3 text-[10px] text-on-surface-variant/60 space-y-1">
@@ -138,7 +135,7 @@ export const Certificates: React.FC = () => {
         >
           <div 
             onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-lg max-w-xl w-full p-6 flex flex-col shadow-2xl relative page-transition border border-primary/10"
+            className="bg-white rounded-lg max-w-3xl w-full p-6 flex flex-col shadow-2xl relative page-transition border border-primary/10"
           >
             <button 
               onClick={() => setSelectedCert(null)}
@@ -159,7 +156,7 @@ export const Certificates: React.FC = () => {
               </div>
 
               {selectedCert.image ? (
-                <div className="max-h-[50vh] overflow-y-auto flex justify-center bg-steel-plate p-2 rounded border border-primary/5">
+                <div className="max-h-[65vh] overflow-y-auto flex justify-center bg-steel-plate p-2 rounded border border-primary/5">
                   <img 
                     src={selectedCert.image} 
                     alt={selectedCert.title} 
@@ -179,13 +176,7 @@ export const Certificates: React.FC = () => {
               )}
 
               <div className="space-y-4 bg-steel-plate/50 p-4 rounded-lg border border-primary/5">
-                <div>
-                  <h4 className="font-headline-md text-xs font-bold text-primary uppercase tracking-wider mb-1">Scope of Accreditation</h4>
-                  <p className="text-xs text-on-surface-variant leading-relaxed">
-                    {selectedCert.scope}
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 gap-4 border-t border-primary/5 pt-3 text-xs">
+                <div className="grid grid-cols-2 gap-4 text-xs">
                   <div>
                     <span className="text-[10px] text-on-surface-variant/60 block">Reference Code</span>
                     <span className="font-mono font-bold text-primary text-xs">{selectedCert.refNumber}</span>

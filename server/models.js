@@ -26,7 +26,6 @@ const customerSchema = new mongoose.Schema({
 const certificateSchema = new mongoose.Schema({
   title: { type: String, required: true },
   authority: { type: String, required: true },
-  scope: { type: String, required: true },
   refNumber: { type: String, required: true },
   validity: { type: String, required: true },
   image: { type: String } // Optional base64 or URL

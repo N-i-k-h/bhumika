@@ -49,7 +49,6 @@ export const AdminPage: React.FC = () => {
   // Form Fields: Certificates
   const [certTitle, setCertTitle] = useState('');
   const [certAuthority, setCertAuthority] = useState('');
-  const [certScope, setCertScope] = useState('');
   const [certRefNumber, setCertRefNumber] = useState('');
   const [certValidity, setCertValidity] = useState('');
   const [certImage, setCertImage] = useState<string>(''); // Base64 string
@@ -180,7 +179,6 @@ export const AdminPage: React.FC = () => {
     // Certificate Reset
     setCertTitle('');
     setCertAuthority('');
-    setCertScope('');
     setCertRefNumber('');
     setCertValidity('');
     setCertImage('');
@@ -355,7 +353,6 @@ export const AdminPage: React.FC = () => {
         body: JSON.stringify({
           title: certTitle,
           authority: certAuthority,
-          scope: certScope,
           refNumber: certRefNumber,
           validity: certValidity,
           image: certImage || undefined
@@ -382,7 +379,6 @@ export const AdminPage: React.FC = () => {
     setEditingItem({ type: 'certificates', id: item._id });
     setCertTitle(item.title);
     setCertAuthority(item.authority);
-    setCertScope(item.scope);
     setCertRefNumber(item.refNumber);
     setCertValidity(item.validity);
     setCertImage(''); // Clear file picker
@@ -731,17 +727,7 @@ export const AdminPage: React.FC = () => {
                     placeholder="e.g. TUV SUD South Asia"
                   />
                 </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Scope of Certification</label>
-                  <textarea
-                    required
-                    rows={2}
-                    value={certScope}
-                    onChange={(e) => setCertScope(e.target.value)}
-                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                    placeholder="Describe manufacturing lines covered..."
-                  />
-                </div>
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Reference / Cert Code</label>

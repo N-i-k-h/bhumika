@@ -49,7 +49,7 @@ export const Home: React.FC = () => {
             {marqueeItems.map((partner, idx) => (
               <div
                 key={idx}
-                className="h-12 w-32 flex items-center justify-center flex-shrink-0 grayscale opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                className="h-12 w-32 flex items-center justify-center flex-shrink-0 opacity-90 hover:opacity-100 transition-all duration-300"
               >
                 <img
                   src={partner.src}
@@ -411,7 +411,7 @@ export const Home: React.FC = () => {
             </span>
             <h3 className="font-headline-md text-xl text-primary mb-4 font-bold">Investment Casting</h3>
             <p className="font-body-md text-on-surface-variant mb-6 flex-grow leading-relaxed text-xs">
-              Utilizing the Lost-Wax Process to create complex, net-shape parts with superior surface finishes and tight tolerances. Ranging from 5g to 10kg, ideal for high-alloy steels and superalloys.
+              Utilizing the Lost-Wax Process to create complex, net-shape parts with superior surface finishes and tight tolerances. Ranging from 10g to 20kg, ideal for high-alloy steels and superalloys.
             </p>
             <Link
               className="inline-flex items-center text-secondary font-bold text-xs hover:gap-2 transition-all mt-auto uppercase tracking-wider font-label-caps"

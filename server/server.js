@@ -191,9 +191,9 @@ app.get('/api/certificates', async (req, res) => {
 
 app.post('/api/certificates', async (req, res) => {
   try {
-    const { title, authority, scope, refNumber, validity, image } = req.body;
+    const { title, authority, refNumber, validity, image } = req.body;
     const imageUrl = image ? await uploadToCloudinary(image) : undefined;
-    const newCertificate = new Certificate({ title, authority, scope, refNumber, validity, image: imageUrl });
+    const newCertificate = new Certificate({ title, authority, refNumber, validity, image: imageUrl });
     await newCertificate.save();
     res.status(201).json(newCertificate);
   } catch (error) {
@@ -213,8 +213,8 @@ app.delete('/api/certificates/:id', async (req, res) => {
 
 app.put('/api/certificates/:id', async (req, res) => {
   try {
-    const { title, authority, scope, refNumber, validity, image } = req.body;
-    const updateData = { title, authority, scope, refNumber, validity };
+    const { title, authority, refNumber, validity, image } = req.body;
+    const updateData = { title, authority, refNumber, validity };
     if (image) {
       updateData.image = await uploadToCloudinary(image);
     }

@@ -7,22 +7,23 @@ import preAssemblyImg from '../assets/tree_assembly_process.jpg';
 import shellBuildingImg from '../assets/shell_building_new.jpg';
 import dewaxingImg from '../assets/shell_building_process.jpg';
 import shellFiringKilnImg from '../assets/DSC01818 (1).JPG';
-import knockoutImg from '../assets/knockout_process.jpg';
+import knockoutImg from '../assets/knockout_process_new.png';
 import fettlingImg from '../assets/DSC02041.JPG';
 import cuttingImg from '../../public/assets/images/gallery/photo_5.jpg';
 import heatTreatmentImg from '../assets/image copy 14.png';
 import shotBlastingImg from '../assets/shot_blasting_process.png';
 import grindingImg from '../assets/DSC01997.JPG';
-import testingImg from '../assets/inspection_testing.png';
+import testingImg from '../assets/inspection_testing_new.jpg';
 import centrifugalImg from '../assets/centrifugal_casting_process.png';
 import vmcMachiningImg from '../assets/image copy 8.png';
-import moldPrepImg from '../assets/mold_prep_spinning.png';
+import moldPrepImg from '../assets/mold_prep_spinning_new.png';
 import pouringImg from '../assets/pouring_spinning_process.png';
 import pouringMainImg from '../assets/pouring_process_new.png';
 import whoWeAreCastingImg from '../assets/who_we_are_casting.png';
 import heatTreatmentCentrifugalImg from '../assets/heat_treatment_centrifugal.png';
 import finishMachiningImg from '../assets/finish_machining.png';
 import cncTurningImg from '../assets/cnc_turning.png';
+import packagingImg from '../assets/packaging_process.jpg';
 
 interface GalleryItem {
   title: string;
@@ -109,6 +110,12 @@ const investmentSteps: GalleryItem[] = [
     subtitle: "Zero-Defect Quality Control",
     desc: "Final castings undergo rigorous checks: chemical spectrometry, dye-penetrant (FPI) cracks search, dimensional reports, and final visual verification before packaging.",
     image: testingImg
+  },
+  {
+    title: "Packaging",
+    subtitle: "Precision Component Packing",
+    desc: "Finished investment castings are coated with rust-preventive oil, packed in custom boxes with protective foam dividers, and strap-sealed for secure delivery.",
+    image: packagingImg
   }
 ];
 
@@ -136,6 +143,12 @@ const centrifugalSteps: GalleryItem[] = [
     subtitle: "Boring & Dressing",
     desc: "The inner slag-rich layer is bored out, and the outer diameter is turned to the precise microns required on finish drawings.",
     image: finishMachiningImg
+  },
+  {
+    title: "Packaging",
+    subtitle: "Heavy-Duty Industrial Dispatch",
+    desc: "Large centrifugal sleeves and cylinders are treated with corrosion inhibitors, safely loaded onto heavy-duty wooden pallets, secured with steel bands, and shrink-wrapped for transit.",
+    image: packagingImg
   }
 ];
 
@@ -227,9 +240,8 @@ export const Capabilities: React.FC = () => {
             <span className="font-label-caps text-label-caps text-secondary mb-2 block uppercase tracking-widest text-xs font-bold">
               PRODUCTION WORKFLOW
             </span>
-            <h2 className="font-headline-lg text-3xl md:text-4xl font-black">
-              <span className="text-primary">Investment Casting </span>
-              <span className="text-secondary">Processes</span>
+            <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
+              <span className="text-secondary">Investment Casting</span> Processes
             </h2>
             <p className="font-body-md text-sm text-on-surface-variant mt-4 max-w-xl mx-auto">
               Follow our comprehensive 10-step lost-wax casting cycle, engineered to deliver absolute dimensional precision and zero metallurgical defects.
@@ -251,10 +263,12 @@ export const Capabilities: React.FC = () => {
                     <img
                       src={step.image}
                       alt={step.title}
-                      className={`w-full h-full object-cover scale-[1.15] group-hover:scale-[1.22] transition-transform duration-500 ${
+                      className={`w-full h-full object-cover transition-transform duration-500 ${
                         step.title.toLowerCase().includes("knockout")
-                          ? 'object-contain p-4 scale-[0.7] group-hover:scale-[0.75]'
-                          : ''
+                          ? 'object-top scale-[0.9] group-hover:scale-[0.96]'
+                          : step.title.toLowerCase().includes("shot blasting")
+                          ? 'scale-[0.98] group-hover:scale-[1.05]'
+                          : 'scale-[1.15] group-hover:scale-[1.22]'
                       }`}
                     />
                   ) : (
@@ -347,8 +361,9 @@ export const Capabilities: React.FC = () => {
               <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-wider block">
                 PROCESS 02
               </span>
-              <h2 className="font-headline-lg text-3xl font-extrabold text-primary molten-border pb-4">
-                Horizontal Centrifugal Casting
+              <h2 className="font-headline-lg text-3xl font-extrabold molten-border pb-4">
+                <span className="text-primary">Horizontal </span>
+                <span className="text-secondary">Centrifugal Casting</span>
               </h2>
               <p className="font-body-md text-on-surface-variant leading-relaxed">
                 By introducing molten alloy into a <strong>rapidly rotating steel die</strong>, centrifugal force pushes the liquid metal outwards. Impurities and lighter slag float to the hollow inner bore (which is later machined away), creating a completely dense metal wall with uniform grain crystallization and zero internal gas pockets.
@@ -391,7 +406,7 @@ export const Capabilities: React.FC = () => {
               SPINNING WORKFLOW
             </span>
             <h2 className="font-headline-lg text-3xl md:text-4xl font-black text-primary">
-              Centrifugal Casting Processes
+              <span className="text-secondary">Centrifugal Casting</span> Processes
             </h2>
             <p className="font-body-md text-sm text-on-surface-variant mt-4 max-w-xl mx-auto">
               Follow our horizontal centrifugal casting method, designed to eliminate internal gas cavities and deliver maximum structural density.
@@ -499,7 +514,7 @@ export const Capabilities: React.FC = () => {
       {/* CNC & VMC Precision Machining */}
       <section className="py-20 bg-white" id="machining">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid md:grid-cols-[4fr_5fr] gap-10 items-center">
             <div className="space-y-6">
               <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-wider block">
                 MACHINING
@@ -529,24 +544,25 @@ export const Capabilities: React.FC = () => {
                 </div>
               </div>
             </div>
+
             <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-[4/3] bg-steel-plate rounded-lg overflow-hidden shadow-md relative group">
+              <div className="aspect-[3/2] bg-steel-plate rounded-lg overflow-hidden shadow-md relative group">
                 <img
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   alt="CNC turning lathe carving steel"
                   src={cncTurningImg}
                 />
-                <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] font-label-caps py-1.5 px-3">
+                <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] font-label-caps py-2 px-3">
                   CNC Turning
                 </div>
               </div>
-              <div className="aspect-[4/3] bg-steel-plate rounded-lg overflow-hidden shadow-md relative group">
+              <div className="aspect-[3/2] bg-steel-plate rounded-lg overflow-hidden shadow-md relative group">
                 <img
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   alt="VMC vertical milling center in action"
                   src={vmcMachiningImg}
                 />
-                <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] font-label-caps py-1.5 px-3">
+                <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] font-label-caps py-2 px-3">
                   VMC Vertical Milling
                 </div>
               </div>
@@ -581,7 +597,7 @@ export const Capabilities: React.FC = () => {
                 <tr>
                   <td className="p-4 font-bold text-primary">Centrifugal Casting</td>
                   <td className="p-4">10 kg – 500 kg</td>
-                  <td className="p-4">Machined bore (+/-0.01 mm)</td>
+                  <td className="p-4">Machined bore (+/-1.00 mm)</td>
                   <td className="p-4">Machined finishes</td>
                 </tr>
               </tbody>

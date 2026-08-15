@@ -8,7 +8,7 @@ import dimensionalImg from '../assets/dimensional_inspection.png';
 import microscopeImg from '../assets/metallurgical_microscope.png';
 import spectrometerImg from '../assets/spectrometer.png';
 import visualInspectionImg from '../assets/visual_inspection.png';
-import visualTestingUserImg from '../assets/visual_testing_user.jpg';
+import qualityCycleImg from '../assets/quality_cycle_diagram.png';
 
 interface TestingMachine {
   title: string;
@@ -20,9 +20,9 @@ interface TestingMachine {
 
 const testingMachines: TestingMachine[] = [
   {
-    title: "Optical Emission Spectrometer",
+    title: "Optical Emission Spectrometer (OES)",
     category: "Chemical Composition",
-    description: "Determines precise chemical and elemental makeup of cast melts. Helps verify alloying compliance (Carbon, Manganese, Chrome, Nickel) before mold pouring.",
+    description: "Our Optical Emission Spectrometer enables accurate chemical composition analysis of metals and alloys, ensuring material quality and grade verification. It supports reliable quality control by identifying alloying elements and maintaining consistency across every batch.",
     image: spectrometerImg,
     specs: ["Metromaxx Analyzer", "Multi-base capability", "Fe, Ni, Co alloy matrices"]
   },
@@ -117,36 +117,19 @@ export const Quality: React.FC = () => {
                 <span className="text-primary">Quality </span>
                 <span className="text-secondary">Control</span>
               </h2>
-              <p className="font-body-md text-base text-on-surface-variant leading-relaxed font-sans font-light">
+              <p className="font-body-md text-base text-on-surface-variant leading-relaxed">
                 At BHUMIKA ALLOY CASTINGS, we are committed to delivering the highest quality castings. Our shell moulding process includes rigorous quality control measures at every stage, from raw material selection to final inspection. We employ advanced testing methods, including dimensional inspection, metallurgical analysis, and non-destructive testing, to ensure that each casting meets the stringent standards of quality and performance.
               </p>
             </div>
             
-            {/* Right side: Two Images */}
-            <div className="md:col-span-5 grid grid-cols-2 gap-4 sm:gap-6 mt-8 md:mt-0">
-              <div className="space-y-4">
-                <div className="relative aspect-[3/4] bg-steel-plate overflow-hidden rounded-lg shadow-md border border-primary/5 group">
-                  <img
-                    src={visualTestingUserImg}
-                    alt="Visual Testing"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute bottom-2 left-2 bg-primary/95 text-on-primary text-[10px] font-bold px-3 py-1 rounded shadow uppercase tracking-wider font-label-caps">
-                    Visual Testing
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-4 pt-6 md:pt-12">
-                <div className="relative aspect-[3/4] bg-steel-plate overflow-hidden rounded-lg shadow-md border border-primary/5 group">
-                  <img
-                    src={dimensionalImg}
-                    alt="Dimensional Testing"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute bottom-2 left-2 bg-primary/95 text-on-primary text-[10px] font-bold px-3 py-1 rounded shadow uppercase tracking-wider font-label-caps">
-                    Dimensional Testing
-                  </div>
-                </div>
+            {/* Right side: Quality Cycle Diagram */}
+            <div className="md:col-span-5 flex justify-center mt-8 md:mt-0">
+              <div className="relative aspect-square w-full max-w-[420px] bg-white overflow-hidden rounded-xl shadow-sm border border-primary/10 group p-4 flex items-center justify-center">
+                <img
+                  src={qualityCycleImg}
+                  alt="Quality System Cycle Diagram"
+                  className="max-w-full max-h-full object-contain group-hover:scale-102 transition-transform duration-500"
+                />
               </div>
             </div>
           </div>

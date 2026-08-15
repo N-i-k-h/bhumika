@@ -36,7 +36,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
   // Certificate Form State
   const [certTitle, setCertTitle] = useState('');
   const [certAuthority, setCertAuthority] = useState('');
-  const [certScope, setCertScope] = useState('');
   const [certRefNumber, setCertRefNumber] = useState('');
   const [certValidity, setCertValidity] = useState('');
   const [certImage, setCertImage] = useState<string>('');
@@ -219,7 +218,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
         body: JSON.stringify({
           title: certTitle,
           authority: certAuthority,
-          scope: certScope,
           refNumber: certRefNumber,
           validity: certValidity,
           image: certImage || undefined
@@ -229,7 +227,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
         setSuccessMsg('Certificate added successfully!');
         setCertTitle('');
         setCertAuthority('');
-        setCertScope('');
         setCertRefNumber('');
         setCertValidity('');
         setCertImage('');
@@ -573,17 +570,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     placeholder="e.g. TUV SUD South Asia"
                   />
                 </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Scope of Certification</label>
-                  <textarea
-                    required
-                    rows={2}
-                    value={certScope}
-                    onChange={(e) => setCertScope(e.target.value)}
-                    className="w-full p-2 border border-primary/10 rounded text-xs rfq-input"
-                    placeholder="Describe manufacturing lines covered..."
-                  />
-                </div>
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Reference / Cert Code</label>

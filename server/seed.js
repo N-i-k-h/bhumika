@@ -349,7 +349,6 @@ export async function seedDatabase(force = false) {
         {
           title: "Quality Policy (QP/01)",
           authority: "Bhumika Alloy Castings Pvt. Ltd.",
-          scope: "Management commitment to deliver castings and components that meet customer expectations through continual improvement and providing training to all levels to achieve the quality objectives.",
           refNumber: "QP/01",
           validity: "Implemented June 2008 (Active)",
           image: getBase64Image("quality_policy.png")
@@ -357,7 +356,6 @@ export async function seedDatabase(force = false) {
         {
           title: "Statement of Compliance (NORSOK M-650)",
           authority: "MTIC InterCert India Private Limited",
-          scope: "Qualification of manufacturer of special materials according to NORSOK M-650, Edition 4. Verified and approved for Investment Castings (ASTM A995 Grade 4A and Grade 6A).",
           refNumber: "NORSOK/M650/MTIC/IND/2023/0101",
           validity: "Bangalore, 17.07.2023 to 13.07.2028 (5 Years)",
           image: getBase64Image("norsok_certificate.png")
@@ -365,7 +363,6 @@ export async function seedDatabase(force = false) {
         {
           title: "DIN EN ISO 9001:2015 Certification",
           authority: "InterCert GmbH - Group of MTIC",
-          scope: "Manufacture and Supply of Centrifugal Castings and Investment Castings in As Cast and Machined Condition in compliance with DIN EN ISO 9001:2015.",
           refNumber: "18-Q-1800008-TIC",
           validity: "Valid from 26.04.2024 to 27.04.2027",
           image: getBase64Image("iso_certificate.png")
