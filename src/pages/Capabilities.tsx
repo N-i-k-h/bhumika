@@ -266,7 +266,7 @@ export const Capabilities: React.FC = () => {
                       alt={step.title}
                       className={`w-full h-full object-cover transition-transform duration-500 ${
                         step.title.toLowerCase().includes("knockout")
-                          ? 'object-top scale-[0.9] group-hover:scale-[0.96]'
+                          ? 'scale-[1.02] group-hover:scale-[1.08]'
                           : step.title.toLowerCase().includes("shot blasting")
                           ? 'scale-[0.98] group-hover:scale-[1.05]'
                           : 'scale-[1.15] group-hover:scale-[1.22]'
