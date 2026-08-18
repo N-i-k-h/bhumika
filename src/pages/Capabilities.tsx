@@ -527,6 +527,10 @@ export const Capabilities: React.FC = () => {
                 Providing raw castings often leaves complex features unfinished. Bhumika's in-house machine shop bridges this gap by offering both <strong>CNC Turning</strong> and <strong>VMC (Vertical Machining Center) Milling</strong>, finishing parts to absolute tolerances.
               </p>
               <div className="grid grid-cols-2 gap-4 text-xs font-label-caps">
+                <div className="bg-steel-plate p-4 rounded col-span-2">
+                  <span className="text-secondary block font-bold mb-1">NUMBER OF MACHINES</span>
+                  22 CNC, 3 VMC
+                </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">MACHINING LIMITS</span>
                   Sub-micron dimensional range
