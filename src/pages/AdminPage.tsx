@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Layers, Users, ShieldCheck, Plus, Trash2, Edit2, 
-  Upload, X, RefreshCw, Check, LogOut, ShieldAlert 
+  Upload, X, RefreshCw, Check, LogOut, ShieldAlert, Briefcase 
 } from 'lucide-react';
 
 interface EditingItem {
-  type: 'products' | 'customers' | 'certificates';
+  type: 'products' | 'customers' | 'certificates' | 'jobs';
   id: string | number;
 }
 
 export const AdminPage: React.FC = () => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem('isAdmin') === 'true');
-  const [activeTab, setActiveTab] = useState<'products' | 'customers' | 'certificates'>('products');
+  const [activeTab, setActiveTab] = useState<'products' | 'customers' | 'certificates' | 'jobs'>('products');
   const [isLoading, setIsLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -26,6 +26,7 @@ export const AdminPage: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [customers, setCustomers] = useState<any[]>([]);
   const [certificates, setCertificates] = useState<any[]>([]);
+  const [jobs, setJobs] = useState<any[]>([]);
 
   // Edit Mode state tracking
   const [editingItem, setEditingItem] = useState<EditingItem | null>(null);
@@ -52,6 +53,16 @@ export const AdminPage: React.FC = () => {
   const [certRefNumber, setCertRefNumber] = useState('');
   const [certValidity, setCertValidity] = useState('');
   const [certImage, setCertImage] = useState<string>(''); // Base64 string
+
+  // Form Fields: Jobs
+  const [jobId, setJobId] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
+  const [jobDepartment, setJobDepartment] = useState('');
+  const [jobLocation, setJobLocation] = useState('Shimoga, KA');
+  const [jobShift, setJobShift] = useState('1st');
+  const [jobType, setJobType] = useState('FULL-TIME');
+  const [jobDescription, setJobDescription] = useState('');
+  const [jobRequirements, setJobRequirements] = useState('');
 
   const API_URL = '/api';
 
@@ -100,6 +111,14 @@ export const AdminPage: React.FC = () => {
         } else {
           const errData = await res.json();
           setErrorMsg(errData.error || 'Failed to retrieve certificates.');
+        }
+      } else if (activeTab === 'jobs') {
+        res = await fetch(`${API_URL}/jobs`);
+        if (res.ok) {
+          setJobs(await res.json());
+        } else {
+          const errData = await res.json();
+          setErrorMsg(errData.error || 'Failed to retrieve jobs.');
         }
       }
     } catch (err) {
@@ -182,6 +201,16 @@ export const AdminPage: React.FC = () => {
     setCertRefNumber('');
     setCertValidity('');
     setCertImage('');
+
+    // Job Reset
+    setJobId('');
+    setJobTitle('');
+    setJobDepartment('');
+    setJobLocation('Shimoga, KA');
+    setJobShift('1st');
+    setJobType('FULL-TIME');
+    setJobDescription('');
+    setJobRequirements('');
   };
 
   // PRODUCTS SUBMISSION (CREATE or UPDATE)
@@ -404,6 +433,81 @@ export const AdminPage: React.FC = () => {
     }
   };
 
+  // JOBS SUBMISSION (CREATE or UPDATE)
+  const handleSubmitJob = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg('');
+
+    const isEdit = editingItem && editingItem.type === 'jobs';
+    setIsLoading(true);
+    const url = isEdit ? `${API_URL}/jobs/${editingItem.id}` : `${API_URL}/jobs`;
+    const method = isEdit ? 'PUT' : 'POST';
+
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jobId,
+          title: jobTitle,
+          department: jobDepartment,
+          location: jobLocation,
+          shift: jobShift,
+          type: jobType,
+          description: jobDescription,
+          requirements: jobRequirements
+        })
+      });
+
+      if (res.ok) {
+        setSuccessMsg(isEdit ? 'Job posting updated successfully!' : 'Job posting created successfully!');
+        resetForms();
+        fetchData();
+        setTimeout(() => setSuccessMsg(''), 3000);
+      } else {
+        const errData = await res.json();
+        setErrorMsg(errData.error || 'Failed to submit job data.');
+      }
+    } catch (err) {
+      setErrorMsg('API server connection error.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // JOB EDIT INITIATION
+  const startEditJob = (item: any) => {
+    setEditingItem({ type: 'jobs', id: item._id });
+    setJobId(item.jobId);
+    setJobTitle(item.title);
+    setJobDepartment(item.department);
+    setJobLocation(item.location);
+    setJobShift(item.shift || '1st');
+    setJobType(item.type || 'FULL-TIME');
+    setJobDescription(item.description || '');
+    setJobRequirements(item.requirements || '');
+  };
+
+  const handleDeleteJob = async (id: string) => {
+    if (!window.confirm('Delete this job posting?')) return;
+    setIsLoading(true);
+    try {
+      const res = await fetch(`${API_URL}/jobs/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        if (editingItem?.type === 'jobs' && editingItem.id === id) {
+          resetForms();
+        }
+        fetchData();
+      } else {
+        setErrorMsg('Failed to delete job posting.');
+      }
+    } catch (err) {
+      setErrorMsg('API server connection error.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // ACCESS DENIED PAGE (LOGIN FORM)
   if (!isAdmin) {
     return (
@@ -528,6 +632,17 @@ export const AdminPage: React.FC = () => {
           >
             <ShieldCheck className="w-4 h-4" />
             Certificates ({certificates.length})
+          </button>
+          <button
+            onClick={() => { setActiveTab('jobs'); resetForms(); }}
+            className={`px-6 py-4 font-label-caps text-xs font-black flex items-center gap-2 cursor-pointer transition-all border-b-2 ${
+              activeTab === 'jobs'
+                ? 'border-secondary text-secondary bg-surface'
+                : 'border-transparent text-on-surface-variant hover:text-primary'
+            }`}
+          >
+            <Briefcase className="w-4 h-4" />
+            Jobs ({jobs.length})
           </button>
         </div>
       </div>
@@ -783,6 +898,117 @@ export const AdminPage: React.FC = () => {
                 </button>
               </form>
             )}
+
+            {/* Jobs Form */}
+            {activeTab === 'jobs' && (
+              <form onSubmit={handleSubmitJob} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Job ID / Code</label>
+                    <input
+                      type="text"
+                      required
+                      value={jobId}
+                      onChange={(e) => setJobId(e.target.value)}
+                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                      placeholder="e.g. HT-0151"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Employment Type</label>
+                    <select
+                      value={jobType}
+                      onChange={(e) => setJobType(e.target.value)}
+                      className="w-full p-2.5 border border-primary/10 rounded text-xs bg-white"
+                    >
+                      <option value="FULL-TIME">FULL-TIME</option>
+                      <option value="APPRENTICESHIP">APPRENTICESHIP</option>
+                      <option value="PART-TIME">PART-TIME</option>
+                      <option value="CONTRACT">CONTRACT</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Job Title</label>
+                  <input
+                    type="text"
+                    required
+                    value={jobTitle}
+                    onChange={(e) => setJobTitle(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="e.g. CNC MACHINIST III"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Department / Category</label>
+                  <input
+                    type="text"
+                    required
+                    value={jobDepartment}
+                    onChange={(e) => setJobDepartment(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="e.g. Finish Machining"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Location</label>
+                    <input
+                      type="text"
+                      required
+                      value={jobLocation}
+                      onChange={(e) => setJobLocation(e.target.value)}
+                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                      placeholder="e.g. Shimoga, KA"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Shift</label>
+                    <input
+                      type="text"
+                      required
+                      value={jobShift}
+                      onChange={(e) => setJobShift(e.target.value)}
+                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                      placeholder="e.g. 1st, 2nd, Rotating"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Job Description</label>
+                  <textarea
+                    rows={3}
+                    value={jobDescription}
+                    onChange={(e) => setJobDescription(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="Responsibilities & daily scope..."
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Requirements / Qualifications</label>
+                  <textarea
+                    rows={2}
+                    value={jobRequirements}
+                    onChange={(e) => setJobRequirements(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="Degree, years of experience, skills..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-secondary hover:bg-opacity-95 text-white font-bold py-3 rounded text-xs shadow cursor-pointer transition-all disabled:opacity-50"
+                >
+                  {editingItem ? 'Save Job Posting Changes' : 'Publish Job Posting'}
+                </button>
+              </form>
+            )}
           </div>
 
           {/* RIGHT COLUMN: ACTIVE DATABASE LIST WITH ACTIONS */}
@@ -791,7 +1017,8 @@ export const AdminPage: React.FC = () => {
               Active Database Records ({
                 activeTab === 'products' ? products.length :
                 activeTab === 'customers' ? customers.length :
-                certificates.length
+                activeTab === 'certificates' ? certificates.length :
+                jobs.length
               })
             </h3>
 
@@ -943,6 +1170,57 @@ export const AdminPage: React.FC = () => {
                           onClick={() => handleDeleteCertificate(cert._id)}
                           className="p-2 text-red-600 hover:bg-red-50 hover:text-red-800 border border-transparent hover:border-red-200 transition-all rounded cursor-pointer"
                           title="Delete certificate"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+
+            {/* Jobs List */}
+            {activeTab === 'jobs' && !isLoading && (
+              <div className="space-y-4">
+                {jobs.length === 0 ? (
+                  <p className="text-xs text-on-surface-variant/60 py-6 text-center">No job postings found in MongoDB. Create one using the form.</p>
+                ) : (
+                  jobs.map((job) => (
+                    <div 
+                      key={job._id} 
+                      className={`p-4 border rounded-lg transition-all flex items-center justify-between gap-6 bg-steel-plate/10 ${
+                        editingItem?.type === 'jobs' && editingItem.id === job._id
+                          ? 'border-secondary ring-1 ring-secondary'
+                          : 'border-primary/5'
+                      }`}
+                    >
+                      <div className="overflow-hidden space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-[10px] text-secondary font-black bg-secondary/10 px-2 py-0.5 rounded">
+                            {job.jobId}
+                          </span>
+                          <span className="font-label-caps text-[9px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded">
+                            {job.type}
+                          </span>
+                        </div>
+                        <h4 className="font-bold text-sm text-primary truncate uppercase">{job.title}</h4>
+                        <span className="text-[10px] text-on-surface-variant/70 block truncate font-label-caps font-bold text-secondary">
+                          {job.department} • {job.location} ({job.shift} Shift)
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <button
+                          onClick={() => startEditJob(job)}
+                          className="p-2 text-primary hover:bg-white border border-primary/5 hover:text-secondary hover:border-secondary transition-all rounded cursor-pointer"
+                          title="Edit job"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteJob(job._id)}
+                          className="p-2 text-red-600 hover:bg-red-50 hover:text-red-800 border border-transparent hover:border-red-200 transition-all rounded cursor-pointer"
+                          title="Delete job"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>

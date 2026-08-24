@@ -48,6 +48,11 @@ export const Footer: React.FC = () => {
                 Metallurgy Grades
               </Link>
             </li>
+            <li>
+              <Link className="font-body-md text-surface-variant hover:text-molten-glow transition-colors duration-200" to="/careers">
+                Careers &amp; Openings
+              </Link>
+            </li>
 
           </ul>
         </div>

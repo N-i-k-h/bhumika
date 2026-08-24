@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { Product, Customer, Certificate } from './models.js';
+import { Product, Customer, Certificate, Job } from './models.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -371,6 +371,60 @@ export async function seedDatabase(force = false) {
 
       await Certificate.insertMany(certificatesData);
       console.log(`Successfully seeded ${certificatesData.length} certificates!`);
+    }
+
+    const jobCount = await Job.countDocuments();
+    if (jobCount === 0 || force) {
+      if (force) {
+        await Job.deleteMany({});
+        console.log("Cleared jobs collection.");
+      }
+      console.log("Seeding jobs...");
+      const jobsData = [
+        {
+          jobId: "HT-0151",
+          title: "CNC MACHINIST III",
+          department: "Finish Machining",
+          location: "Shimoga, India",
+          shift: "2nd",
+          type: "FULL-TIME",
+          description: "Operate 3-axis & 5-axis CNC turning and milling machines for precision casting components. Perform tool offsets, dimensional checks, and setup adjustments.",
+          requirements: "Diploma/BE in Mechanical Engineering, 3+ years operating Fanuc/Siemens CNC controls."
+        },
+        {
+          jobId: "HT-0129",
+          title: "NDT / QUALITY INSPECTOR",
+          department: "Quality & Metallurgy",
+          location: "Shimoga, India",
+          shift: "1st",
+          type: "FULL-TIME",
+          description: "Conduct Liquid Penetrant Inspection (LPI), magnetic particle testing, and dimensional inspection using CMM / granite master plates for investment and centrifugal castings.",
+          requirements: "ASNT Level II Certification in NDT (PT/MT/UT), 2+ years foundry quality control experience."
+        },
+        {
+          jobId: "HT-0163",
+          title: "MAINTENANCE MILLWRIGHT",
+          department: "Plant Maintenance",
+          location: "Shimoga, India",
+          shift: "Rotating",
+          type: "FULL-TIME",
+          description: "Maintain induction furnaces, centrifugal spinning dies, hydraulic power packs, and steam autoclaves to ensure 100% uptime.",
+          requirements: "ITI / Diploma in Mechanical Maintenance, experience with industrial hydraulics and induction heating systems."
+        },
+        {
+          jobId: "HT-0147",
+          title: "PROCESS METALLURGIST",
+          department: "Engineering & R&D",
+          location: "Shimoga, India",
+          shift: "1st",
+          type: "FULL-TIME",
+          description: "Oversee melt chemistry adjustments on Optical Emission Spectrometer (OES), optimize heat treatment cycles (solution annealing & tempering), and refine grain structure.",
+          requirements: "B.E. / B.Tech in Metallurgical Engineering, expertise in stainless steel & super duplex metallurgy."
+        }
+      ];
+
+      await Job.insertMany(jobsData);
+      console.log(`Successfully seeded ${jobsData.length} job postings!`);
     }
   } catch (error) {
     console.error("Error seeding database:", error);

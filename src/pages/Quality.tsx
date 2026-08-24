@@ -106,35 +106,33 @@ export const Quality: React.FC = () => {
 
       {/* Quality Commitment Section */}
       <section className="py-20 bg-white border-b border-primary/5">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
-          <div className="grid md:grid-cols-12 gap-12 items-center">
-            {/* Left side: Text Content */}
-            <div className="md:col-span-7 space-y-6">
-              <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block">
-                QUALITY COMMITMENT
-              </span>
-              <h2 className="font-headline-lg text-3xl md:text-4xl font-black">
-                <span className="text-primary">Quality </span>
-                <span className="text-secondary">Control</span>
-              </h2>
-              <p className="font-body-md text-base text-on-surface-variant leading-relaxed">
-                At BHUMIKA ALLOY CASTINGS, we are committed to delivering the highest quality castings. Our shell moulding process includes rigorous quality control measures at every stage, from raw material selection to final inspection. We employ advanced testing methods, including dimensional inspection, metallurgical analysis, and non-destructive testing, to ensure that each casting meets the stringent standards of quality and performance.
-              </p>
-            </div>
-            
-            {/* Right side: Quality Cycle Diagram */}
-            <div className="md:col-span-5 flex justify-center mt-8 md:mt-0">
-              <div className="relative aspect-square w-full max-w-[420px] bg-white overflow-hidden rounded-xl shadow-sm border border-primary/10 group p-4 flex items-center justify-center">
-                <img
-                  src={qualityCycleImg}
-                  alt="Quality System Cycle Diagram"
-                  className="max-w-full max-h-full object-contain group-hover:scale-102 transition-transform duration-500"
-                />
-              </div>
-            </div>
+        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop flex flex-col items-center">
+          {/* Text Content */}
+          <div className="max-w-3xl text-center space-y-6 mb-12">
+            <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block">
+              QUALITY COMMITMENT
+            </span>
+            <h2 className="font-headline-lg text-3xl md:text-4xl font-black">
+              <span className="text-primary">Quality </span>
+              <span className="text-secondary">Control</span>
+            </h2>
+            <p className="font-body-md text-base text-on-surface-variant leading-relaxed">
+              At BHUMIKA ALLOY CASTINGS, we are committed to delivering the highest quality castings. Our shell moulding process includes rigorous quality control measures at every stage, from raw material selection to final inspection. We employ advanced testing methods, including dimensional inspection, metallurgical analysis, and non-destructive testing, to ensure that each casting meets the stringent standards of quality and performance.
+            </p>
+          </div>
+          
+          {/* Quality Cycle Diagram (Centered below) */}
+          <div className="relative aspect-square w-full max-w-[500px] bg-white overflow-hidden rounded-xl shadow-sm border border-primary/10 group p-6 flex items-center justify-center">
+            <img
+              src={qualityCycleImg}
+              alt="Quality System Cycle Diagram"
+              className="max-w-full max-h-full object-contain group-hover:scale-[1.01] transition-transform duration-500"
+            />
           </div>
         </div>
       </section>
+
+
 
       {/* Core Quality Pillars */}
       <section className="py-16 bg-white border-b border-primary/5">

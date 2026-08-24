@@ -9,6 +9,7 @@ import { Gallery } from './pages/Gallery';
 import { Contact } from './pages/Contact';
 import { Customers } from './pages/Customers';
 import { Certificates } from './pages/Certificates';
+import { Careers } from './pages/Careers';
 import { AdminPage } from './pages/AdminPage';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="gallery" element={<Gallery />} />
           <Route path="customers" element={<Customers />} />
           <Route path="certificates" element={<Certificates />} />
+          <Route path="careers" element={<Careers />} />
           <Route path="admin" element={<AdminPage />} />
           <Route path="contact" element={<Contact />} />
         </Route>

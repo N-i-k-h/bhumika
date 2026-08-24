@@ -211,7 +211,7 @@ export const Capabilities: React.FC = () => {
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">SURFACE FINISH</span>
-                  Ra 3.2 µm
+                  Ra 1.6 µm &amp; above
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">TYPICAL TOLERANCE</span>
@@ -529,7 +529,7 @@ export const Capabilities: React.FC = () => {
               <div className="grid grid-cols-2 gap-4 text-xs font-label-caps">
                 <div className="bg-steel-plate p-4 rounded col-span-2">
                   <span className="text-secondary block font-bold mb-1">NUMBER OF MACHINES</span>
-                  22 CNC, 3 VMC
+                  22 CNC's, 3 VMC's
                 </div>
                 <div className="bg-steel-plate p-4 rounded">
                   <span className="text-secondary block font-bold mb-1">MACHINING LIMITS</span>
@@ -597,7 +597,7 @@ export const Capabilities: React.FC = () => {
                   <td className="p-4 font-bold text-primary">Investment Casting</td>
                   <td className="p-4">10 g – 20 kg</td>
                   <td className="p-4">+/-0.37 mm</td>
-                  <td className="p-4">3.2 – 6.3 µm</td>
+                  <td className="p-4">1.6 µm &amp; above</td>
                 </tr>
                 <tr>
                   <td className="p-4 font-bold text-primary">Centrifugal Casting</td>
@@ -658,8 +658,9 @@ export const Capabilities: React.FC = () => {
                 High-strength duplex and super duplex alloys offering superior resistance to pitting, crevice corrosion, and stress corrosion cracking in aggressive environments.
               </p>
               <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
-                <span className="bg-steel-plate px-2 py-1 rounded">CD4MCuN</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">CD3MWCuN</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CD4MCuN(4A)</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CD3MWCuN(5A)</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CD3MN(6A)</span>
               </div>
             </div>
 
@@ -692,6 +693,20 @@ export const Capabilities: React.FC = () => {
                 <span className="bg-steel-plate px-2 py-1 rounded">S45C</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">WCB</span>
                 <span className="bg-steel-plate px-2 py-1 rounded">WCC</span>
+              </div>
+            </div>
+
+            {/* Special Steels */}
+            <div className="p-6 border border-primary/10 rounded-lg hover:border-secondary transition-all md:col-span-2">
+              <h4 className="font-headline-md text-base font-bold text-primary mb-3 flex items-center justify-between">
+                Special Steels <Zap className="w-5 h-5 text-secondary" />
+              </h4>
+              <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
+                High-performance specialty alloys engineered for unique industrial demands, such as low thermal expansion and extreme corrosion resistance.
+              </p>
+              <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
+                <span className="bg-steel-plate px-2 py-1 rounded">Invar 36 (Inver 36)</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">Inconel 825 (Inconil 825)</span>
               </div>
             </div>
           </div>

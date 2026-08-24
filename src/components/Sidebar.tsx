@@ -39,6 +39,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     { label: 'Products', path: '/products' },
     { label: 'Customers', path: '/customers' },
     { label: 'Certificates', path: '/certificates' },
+    { label: 'Careers', path: '/careers' },
     { label: 'Contact Us', path: '/contact' },
   ];
 

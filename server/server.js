@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { v2 as cloudinary } from 'cloudinary';
-import { Product, Customer, Certificate } from './models.js';
+import { Product, Customer, Certificate, Job } from './models.js';
 import { seedDatabase } from './seed.js';
 
 dotenv.config();
@@ -226,12 +226,60 @@ app.put('/api/certificates/:id', async (req, res) => {
   }
 });
 
+// 4. Jobs CRUD
+app.get('/api/jobs', async (req, res) => {
+  try {
+    const jobs = await Job.find().sort({ createdAt: -1 });
+    res.json(jobs);
+  } catch (error) {
+    console.error("GET /api/jobs error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/jobs', async (req, res) => {
+  try {
+    const { jobId, title, department, location, shift, type, description, requirements } = req.body;
+    const newJob = new Job({ jobId, title, department, location, shift, type, description, requirements });
+    await newJob.save();
+    res.status(201).json(newJob);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.delete('/api/jobs/:id', async (req, res) => {
+  try {
+    const result = await Job.findByIdAndDelete(req.params.id);
+    if (!result) return res.status(404).json({ error: "Job posting not found" });
+    res.json({ message: "Job deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/api/jobs/:id', async (req, res) => {
+  try {
+    const { jobId, title, department, location, shift, type, description, requirements } = req.body;
+    const updated = await Job.findByIdAndUpdate(
+      req.params.id,
+      { jobId, title, department, location, shift, type, description, requirements },
+      { new: true }
+    );
+    if (!updated) return res.status(404).json({ error: "Job posting not found" });
+    res.json(updated);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 // Re-seed route
 app.post('/api/seed', async (req, res) => {
   try {
     await Product.deleteMany({});
     await Customer.deleteMany({});
     await Certificate.deleteMany({});
+    await Job.deleteMany({});
     await autoSeed(true);
     res.json({ message: "Database re-seeded successfully" });
   } catch (error) {

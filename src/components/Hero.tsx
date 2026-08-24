@@ -22,8 +22,8 @@ const heroSlides: HeroSlide[] = [
     id: 1,
     image: facilityImg,
     tagline: 'ESTABLISHED 1997 • SHIMOGA, INDIA',
-    title: 'Welcome to Bhumika Alloy Castings Private Limited',
-    subtitle: 'Manufacturer of high quality investment & centrifugal castings in as-cast and machined condition.',
+    title: 'Welcome to **Bhumika Alloy Castings Private Limited**',
+    subtitle: 'Manufacturer of high quality **investment & centrifugal castings** in as-cast and machined condition.',
     ctaText: 'Download Company Brochure',
     isDownload: true,
   },
@@ -31,7 +31,7 @@ const heroSlides: HeroSlide[] = [
     id: 2,
     image: investmentCastingHeroImg,
     tagline: 'HIGH-INTEGRITY METALLURGY',
-    title: 'Get the Best Investment Casting Solutions from Us',
+    title: 'Get the Best **Investment Casting** Solutions from Us',
     subtitle: 'Precision lost-wax molding engineered for aerospace, defense, valve & heavy engineering domains.',
     ctaText: 'Explore Capabilities',
     ctaLink: '/process',
@@ -40,7 +40,7 @@ const heroSlides: HeroSlide[] = [
     id: 3,
     image: centrifugalCastingHeroImg,
     tagline: 'HEAVY-DUTY CENTRIFUGAL ALLOYS',
-    title: 'High-Density Centrifugal Alloy Castings',
+    title: 'High-Density **Centrifugal Alloy Casting**',
     subtitle: 'Horizontal rotational casting for dense, void-free rings, tubes & decanter shells.',
     ctaText: 'View Product Catalog',
     ctaLink: '/products',
@@ -49,7 +49,7 @@ const heroSlides: HeroSlide[] = [
     id: 4,
     image: whyBhumikaImg,
     tagline: 'ISO 9001:2015 CERTIFIED FACILITY',
-    title: 'Where We Believe that Complete Service Means Excellence',
+    title: 'Where We Believe that **Complete Service Means Excellence**',
     subtitle: 'Over 29 years of metallurgical rigor, custom alloy development & state-of-the-art metrology.',
     ctaText: 'Download Company Brochure',
     isDownload: true,
@@ -57,24 +57,33 @@ const heroSlides: HeroSlide[] = [
 ];
 
 const renderHeadline = (title: string) => {
-  const words = title.split(' ');
-  if (words.length <= 3) {
-    return (
-      <>
-        <span className="text-white">{words[0]}</span>{' '}
-        <span className="text-secondary">{words.slice(1).join(' ')}</span>
-      </>
-    );
-  }
-  const midIndex = Math.ceil(words.length / 2);
-  const firstHalf = words.slice(0, midIndex).join(' ');
-  const secondHalf = words.slice(midIndex).join(' ');
-  return (
-    <>
-      <span className="text-white">{firstHalf}</span>{' '}
-      <span className="text-secondary block sm:inline">{secondHalf}</span>
-    </>
-  );
+  const parts = title.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      const cleanText = part.slice(2, -2);
+      return (
+        <span key={index} className="text-secondary block sm:inline">
+          {cleanText}
+        </span>
+      );
+    }
+    return <span key={index} className="text-white">{part}</span>;
+  });
+};
+
+const renderSubtitle = (subtitle: string) => {
+  const parts = subtitle.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      const cleanText = part.slice(2, -2);
+      return (
+        <span key={index} className="text-secondary font-bold">
+          {cleanText}
+        </span>
+      );
+    }
+    return part;
+  });
 };
 
 export const Hero: React.FC = () => {
@@ -165,7 +174,7 @@ export const Hero: React.FC = () => {
                 }}
                 className="font-body-lg text-sm sm:text-base md:text-lg text-white/80 max-w-2xl leading-relaxed text-left"
               >
-                {heroSlides[currentSlide].subtitle}
+                {renderSubtitle(heroSlides[currentSlide].subtitle)}
               </motion.p>
 
               {/* CTA Buttons */}

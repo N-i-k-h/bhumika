@@ -186,7 +186,7 @@ export const About: React.FC = () => {
                 Most castings require final machining tolerances. Our machine shop handles complex components directly, avoiding third-party overhead.
               </p>
               <ul className="space-y-3 text-xs text-on-surface-variant pl-4 list-disc">
-                <li>Precision machining with 22 CNC and 3 VMC machines</li>
+                <li>Precision machining with 22 CNC's and 3 VMC's</li>
                 <li>High-performance CNC lathes for rotational turning</li>
                 <li>Conventional lathes, milling, and shaping rigs</li>
                 <li>Profile Projector for dimensional validation</li>

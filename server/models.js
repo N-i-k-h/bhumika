@@ -31,6 +31,20 @@ const certificateSchema = new mongoose.Schema({
   image: { type: String } // Optional base64 or URL
 }, { timestamps: true });
 
+// Job Posting Schema
+const jobSchema = new mongoose.Schema({
+  jobId: { type: String, required: true, unique: true },
+  title: { type: String, required: true },
+  department: { type: String, required: true },
+  location: { type: String, required: true },
+  shift: { type: String, default: '1st' },
+  type: { type: String, default: 'FULL-TIME' },
+  description: { type: String },
+  requirements: { type: String }
+}, { timestamps: true });
+
 export const Product = mongoose.model('Product', productSchema);
 export const Customer = mongoose.model('Customer', customerSchema);
 export const Certificate = mongoose.model('Certificate', certificateSchema);
+export const Job = mongoose.model('Job', jobSchema);
+
