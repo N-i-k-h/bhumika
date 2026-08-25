@@ -28,7 +28,7 @@ export const Careers: React.FC = () => {
     email: '',
     message: ''
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
 
   useEffect(() => {
     fetchJobs();
@@ -55,7 +55,7 @@ export const Careers: React.FC = () => {
 
   const handleApplyClick = (job: JobItem) => {
     setSelectedJob(job);
-    setIsSubmitted(false);
+    setResumeFile(null);
     setFormData({
       name: '',
       phone: '',
@@ -63,6 +63,13 @@ export const Careers: React.FC = () => {
       email: '',
       message: ''
     });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setResumeFile(file);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -86,15 +93,18 @@ export const Careers: React.FC = () => {
       `Phone Number: ${formData.phone}\n` +
       `Total Experience: ${formData.experience || 'Not specified'}\n` +
       `Email Address: ${formData.email || 'Not specified'}\n\n` +
+      `[IMPORTANT: Please attach your resume file manually to this email before sending.]\n` +
+      `Resume File Name: ${resumeFile ? resumeFile.name : 'No file chosen'}\n\n` +
       `Additional Notes / Summary:\n` +
       `${formData.message || 'None provided'}\n`;
 
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=bhumikacastings@gmail.com&su=${encodeURIComponent(rawSubject)}&body=${encodeURIComponent(rawBody)}`;
 
-    // Open Gmail Web compose in a new tab
+    // Open Gmail Web compose in a new tab (fully synchronous, bypasses popup blocker)
     window.open(gmailUrl, '_blank');
 
-    setIsSubmitted(true);
+    // Immediately close modal
+    setSelectedJob(null);
   };
 
   return (
@@ -278,145 +288,116 @@ export const Careers: React.FC = () => {
 
               {/* Modal Content */}
               <div className="p-6">
-                {!isSubmitted ? (
-                  <form onSubmit={handleSubmitApplication} className="space-y-4">
-                    <p className="text-xs text-on-surface-variant font-body-md leading-relaxed mb-4">
-                      Please enter your candidate details below. Submitting will prepare your application and open a pre-filled Gmail draft directly to our recruitment team.
-                    </p>
+                <form onSubmit={handleSubmitApplication} className="space-y-4">
+                  <p className="text-xs text-on-surface-variant font-body-md leading-relaxed mb-4">
+                    Please enter your candidate details below. Submitting will prepare your application and open a pre-filled draft directly in your default email client.
+                  </p>
 
-                    {/* Candidate Name */}
+                  {/* Candidate Name */}
+                  <div>
+                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-name">
+                      Full Name *
+                    </label>
+                    <input
+                      id="app-name"
+                      type="text"
+                      required
+                      placeholder="e.g. Rajesh Kumar"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
+                    />
+                  </div>
+
+                  {/* Contact Number */}
+                  <div>
+                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-phone">
+                      Phone Number *
+                    </label>
+                    <input
+                      id="app-phone"
+                      type="tel"
+                      required
+                      placeholder="e.g. +91 98765 43210"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    {/* Total Experience */}
                     <div>
-                      <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-name">
-                        Full Name *
+                      <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-experience">
+                        Experience (Optional)
                       </label>
                       <input
-                        id="app-name"
+                        id="app-experience"
                         type="text"
-                        required
-                        placeholder="e.g. Rajesh Kumar"
-                        value={formData.name}
+                        placeholder="e.g. 3 Years"
+                        value={formData.experience}
                         onChange={handleInputChange}
                         className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
                       />
                     </div>
 
-                    {/* Contact Number */}
+                    {/* Email Address */}
                     <div>
-                      <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-phone">
-                        Phone Number *
+                      <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-email">
+                        Email (Optional)
                       </label>
                       <input
-                        id="app-phone"
-                        type="tel"
-                        required
-                        placeholder="e.g. +91 98765 43210"
-                        value={formData.phone}
+                        id="app-email"
+                        type="email"
+                        placeholder="candidate@email.com"
+                        value={formData.email}
                         onChange={handleInputChange}
                         className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
                       />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      {/* Total Experience */}
-                      <div>
-                        <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-experience">
-                          Experience (Optional)
-                        </label>
-                        <input
-                          id="app-experience"
-                          type="text"
-                          placeholder="e.g. 3 Years"
-                          value={formData.experience}
-                          onChange={handleInputChange}
-                          className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
-                        />
-                      </div>
-
-                      {/* Email Address */}
-                      <div>
-                        <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-email">
-                          Email (Optional)
-                        </label>
-                        <input
-                          id="app-email"
-                          type="email"
-                          placeholder="candidate@email.com"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Short Cover Note / Message */}
-                    <div>
-                      <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-message">
-                        Qualifications / Cover Note (Optional)
-                      </label>
-                      <textarea
-                        id="app-message"
-                        rows={3}
-                        placeholder="Briefly mention your skills, machines operated, or certifications..."
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="w-full bg-secondary hover:bg-opacity-95 text-white py-3.5 rounded-lg font-bold text-xs uppercase font-label-caps tracking-widest flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-secondary/20 mt-6"
-                    >
-                      Submit Application <Send className="w-4 h-4" />
-                    </button>
-                  </form>
-                ) : (
-                  /* Success Feedback Screen */
-                  <div className="py-6 text-center space-y-6">
-                    <div className="w-14 h-14 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto">
-                      <CheckCircle2 className="w-8 h-8 text-secondary" />
-                    </div>
-                    <div className="space-y-1">
-                      <h4 className="font-headline-md text-xl font-black text-primary uppercase">
-                        Application Transmitted
-                      </h4>
-                      <p className="text-xs text-on-surface-variant font-label-caps font-bold">
-                        ROLE: {selectedJob.title} ({selectedJob.jobId})
-                      </p>
-                    </div>
-
-                    <p className="text-xs text-on-surface-variant max-w-sm mx-auto leading-relaxed">
-                      A Gmail compose draft pre-filled with your details has been opened in a new browser tab to send directly to <strong>bhumikacastings@gmail.com</strong>.
-                    </p>
-
-                    <div className="pt-2 flex flex-col gap-3">
-                      <a
-                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=bhumikacastings@gmail.com&su=${encodeURIComponent(`Job Application: ${selectedJob.title} (${selectedJob.jobId}) - ${formData.name}`)}&body=${encodeURIComponent(
-                          `Bhumika Alloy Castings - Candidate Application\n` +
-                          `----------------------------------------------\n` +
-                          `Target Role: ${selectedJob.title} (${selectedJob.jobId})\n` +
-                          `Candidate Name: ${formData.name}\n` +
-                          `Phone Number: ${formData.phone}\n` +
-                          `Experience: ${formData.experience || 'N/A'}\n` +
-                          `Email: ${formData.email || 'N/A'}\n\n` +
-                          `Notes:\n${formData.message || 'None'}\n`
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-bold text-xs inline-flex items-center justify-center gap-2 cursor-pointer shadow-md uppercase font-label-caps"
-                      >
-                        <Mail className="w-4 h-4" /> Re-Open in Gmail Web
-                      </a>
-
-                      <button
-                        onClick={() => setSelectedJob(null)}
-                        className="bg-steel-plate hover:bg-slate-200 text-primary py-2.5 rounded-lg font-bold text-xs uppercase font-label-caps cursor-pointer border border-primary/10"
-                      >
-                        Done &amp; Close Window
-                      </button>
                     </div>
                   </div>
-                )}
+
+                  {/* Resume Upload */}
+                  <div>
+                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5 font-sans" htmlFor="app-resume">
+                      Upload Resume (Optional, PDF or Image)
+                    </label>
+                    <input
+                      id="app-resume"
+                      type="file"
+                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                      onChange={handleFileChange}
+                      className="w-full text-xs p-2.5 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input cursor-pointer"
+                    />
+                    {resumeFile && (
+                      <p className="text-[10px] text-secondary mt-1 font-semibold">
+                        Selected: {resumeFile.name} ({(resumeFile.size / 1024).toFixed(1)} KB)
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Short Cover Note / Message */}
+                  <div>
+                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-message">
+                      Qualifications / Cover Note (Optional)
+                    </label>
+                    <textarea
+                      id="app-message"
+                      rows={3}
+                      placeholder="Briefly mention your skills, machines operated, or certifications..."
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full bg-secondary hover:bg-opacity-95 text-white py-3.5 rounded-lg font-bold text-xs uppercase font-label-caps tracking-widest flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-secondary/20 mt-6 transition-all duration-200"
+                  >
+                    Submit Application <Send className="w-4 h-4" />
+                  </button>
+                </form>
               </div>
             </motion.div>
           </div>

@@ -150,12 +150,24 @@ export const Products: React.FC = () => {
                 <h4 className="font-headline-md text-base text-primary font-bold mb-2 group-hover:text-secondary transition-colors line-clamp-1">
                   {p.title}
                 </h4>
-                {p.metalGrade && (
-                  <div className="mt-auto pt-2.5 border-t border-primary/5 flex items-center justify-between">
-                    <span className="text-[9px] font-bold text-on-surface-variant/70 uppercase font-label-caps">Metal Grade:</span>
-                    <span className="text-[10px] font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded font-label-caps uppercase tracking-wider">
-                      {p.metalGrade}
-                    </span>
+                {(p.metalGrade || p.weight) && (
+                  <div className="mt-auto pt-2.5 border-t border-primary/5 space-y-1.5 flex flex-col">
+                    {p.metalGrade && (
+                      <div className="flex items-center justify-between w-full">
+                        <span className="text-[9px] font-bold text-on-surface-variant/70 uppercase font-label-caps">Metal Grade:</span>
+                        <span className="text-[10px] font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded font-label-caps uppercase tracking-wider">
+                          {p.metalGrade}
+                        </span>
+                      </div>
+                    )}
+                    {p.weight && (
+                      <div className="flex items-center justify-between w-full">
+                        <span className="text-[9px] font-bold text-on-surface-variant/70 uppercase font-label-caps">Weight:</span>
+                        <span className="text-[10px] font-bold text-primary font-sans">
+                          {p.weight}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 )}
               </motion.div>

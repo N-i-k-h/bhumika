@@ -725,6 +725,62 @@ export const AdminPage: React.FC = () => {
                   />
                 </div>
                 <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Material Standard *</label>
+                  <input
+                    type="text"
+                    required
+                    value={prodMaterial}
+                    onChange={(e) => setProdMaterial(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="e.g. Stainless Steel / Alloy Steel"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Part Weight Range (Optional)</label>
+                    <input
+                      type="text"
+                      value={prodWeight}
+                      onChange={(e) => setProdWeight(e.target.value)}
+                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                      placeholder="e.g. 1.5 kg – 12.0 kg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Dimensions / Envelope *</label>
+                    <input
+                      type="text"
+                      required
+                      value={prodDimensions}
+                      onChange={(e) => setProdDimensions(e.target.value)}
+                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                      placeholder="e.g. Custom up to 250 mm"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Technical Description *</label>
+                  <textarea
+                    required
+                    rows={2}
+                    value={prodDescription}
+                    onChange={(e) => setProdDescription(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="Describe casting tolerances, gas porosity levels, metallurgy..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Target Applications *</label>
+                  <input
+                    type="text"
+                    required
+                    value={prodApplications}
+                    onChange={(e) => setProdApplications(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="e.g. High pressure piping, marine systems"
+                  />
+                </div>
+                <div>
                   <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">
                     Upload Product Image {editingItem ? '(Optional - leave blank to keep current)' : ''}
                   </label>

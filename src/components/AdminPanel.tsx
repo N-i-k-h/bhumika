@@ -412,10 +412,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Part Weight Range</label>
+                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Part Weight Range (Optional)</label>
                     <input
                       type="text"
-                      required
                       value={prodWeight}
                       onChange={(e) => setProdWeight(e.target.value)}
                       className="w-full p-2 border border-primary/10 rounded text-xs rfq-input"
