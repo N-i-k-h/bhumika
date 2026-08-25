@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, MapPin, Clock, ArrowRight, CheckCircle2, X, Mail, Send } from 'lucide-react';
+import { Briefcase, MapPin, Clock, ArrowRight, X, Send } from 'lucide-react';
 
 interface JobItem {
   _id?: string;
