@@ -652,15 +652,15 @@ export const Capabilities: React.FC = () => {
             {/* Super Duplex Steel */}
             <div className="p-6 border border-primary/10 rounded-lg hover:border-secondary transition-all">
               <h4 className="font-headline-md text-base font-bold text-primary mb-3 flex items-center justify-between">
-                Super Duplex Steel <Zap className="w-5 h-5 text-secondary" />
+                Super Duplex Steel (4A, 5A, 6A) <Zap className="w-5 h-5 text-secondary" />
               </h4>
               <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
                 High-strength duplex and super duplex alloys offering superior resistance to pitting, crevice corrosion, and stress corrosion cracking in aggressive environments.
               </p>
               <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
-                <span className="bg-steel-plate px-2 py-1 rounded">CD4MCuN(4A)</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">CD3MWCuN(5A)</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">CD3MN(6A)</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CD4MCuN</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CD3MWCuN</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">CD3MN</span>
               </div>
             </div>
 
