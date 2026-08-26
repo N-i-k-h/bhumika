@@ -63,6 +63,7 @@ export const AdminPage: React.FC = () => {
   const [jobType, setJobType] = useState('FULL-TIME');
   const [jobDescription, setJobDescription] = useState('');
   const [jobRequirements, setJobRequirements] = useState('');
+  const [jobVacancy, setJobVacancy] = useState('1 Position');
 
   const API_URL = '/api';
 
@@ -211,6 +212,7 @@ export const AdminPage: React.FC = () => {
     setJobType('FULL-TIME');
     setJobDescription('');
     setJobRequirements('');
+    setJobVacancy('1 Position');
   };
 
   // PRODUCTS SUBMISSION (CREATE or UPDATE)
@@ -450,12 +452,13 @@ export const AdminPage: React.FC = () => {
         body: JSON.stringify({
           jobId,
           title: jobTitle,
-          department: jobDepartment,
-          location: jobLocation,
-          shift: jobShift,
-          type: jobType,
+          department: jobDepartment || 'Production',
+          location: jobLocation || 'Shimoga',
+          shift: jobShift || '1st',
+          type: jobType || 'FULL-TIME',
           description: jobDescription,
-          requirements: jobRequirements
+          requirements: jobRequirements || 'Not specified',
+          vacancy: jobVacancy
         })
       });
 
@@ -486,6 +489,7 @@ export const AdminPage: React.FC = () => {
     setJobType(item.type || 'FULL-TIME');
     setJobDescription(item.description || '');
     setJobRequirements(item.requirements || '');
+    setJobVacancy(item.vacancy || '1 Position');
   };
 
   const handleDeleteJob = async (id: string) => {
@@ -958,31 +962,16 @@ export const AdminPage: React.FC = () => {
             {/* Jobs Form */}
             {activeTab === 'jobs' && (
               <form onSubmit={handleSubmitJob} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Job ID / Code</label>
-                    <input
-                      type="text"
-                      required
-                      value={jobId}
-                      onChange={(e) => setJobId(e.target.value)}
-                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                      placeholder="e.g. HT-0151"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Employment Type</label>
-                    <select
-                      value={jobType}
-                      onChange={(e) => setJobType(e.target.value)}
-                      className="w-full p-2.5 border border-primary/10 rounded text-xs bg-white"
-                    >
-                      <option value="FULL-TIME">FULL-TIME</option>
-                      <option value="APPRENTICESHIP">APPRENTICESHIP</option>
-                      <option value="PART-TIME">PART-TIME</option>
-                      <option value="CONTRACT">CONTRACT</option>
-                    </select>
-                  </div>
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Job ID / Code</label>
+                  <input
+                    type="text"
+                    required
+                    value={jobId}
+                    onChange={(e) => setJobId(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="e.g. HT-0151"
+                  />
                 </div>
 
                 <div>
@@ -998,61 +987,25 @@ export const AdminPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Department / Category</label>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Vacancy</label>
                   <input
                     type="text"
                     required
-                    value={jobDepartment}
-                    onChange={(e) => setJobDepartment(e.target.value)}
+                    value={jobVacancy}
+                    onChange={(e) => setJobVacancy(e.target.value)}
                     className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                    placeholder="e.g. Finish Machining"
+                    placeholder="e.g. 1 Position, 2 Openings"
                   />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Location</label>
-                    <input
-                      type="text"
-                      required
-                      value={jobLocation}
-                      onChange={(e) => setJobLocation(e.target.value)}
-                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                      placeholder="e.g. Shimoga, KA"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Shift</label>
-                    <input
-                      type="text"
-                      required
-                      value={jobShift}
-                      onChange={(e) => setJobShift(e.target.value)}
-                      className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                      placeholder="e.g. 1st, 2nd, Rotating"
-                    />
-                  </div>
                 </div>
 
                 <div>
                   <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Job Description</label>
                   <textarea
-                    rows={3}
+                    rows={6}
                     value={jobDescription}
                     onChange={(e) => setJobDescription(e.target.value)}
                     className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
                     placeholder="Responsibilities & daily scope..."
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Requirements / Qualifications</label>
-                  <textarea
-                    rows={2}
-                    value={jobRequirements}
-                    onChange={(e) => setJobRequirements(e.target.value)}
-                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
-                    placeholder="Degree, years of experience, skills..."
                   />
                 </div>
 
@@ -1256,14 +1209,11 @@ export const AdminPage: React.FC = () => {
                           <span className="font-mono text-[10px] text-secondary font-black bg-secondary/10 px-2 py-0.5 rounded">
                             {job.jobId}
                           </span>
-                          <span className="font-label-caps text-[9px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded">
-                            {job.type}
+                          <span className="text-[10px] text-on-surface-variant font-medium">
+                            Vacancy: {job.vacancy || '1 Position'}
                           </span>
                         </div>
                         <h4 className="font-bold text-sm text-primary truncate uppercase">{job.title}</h4>
-                        <span className="text-[10px] text-on-surface-variant/70 block truncate font-label-caps font-bold text-secondary">
-                          {job.department} • {job.location} ({job.shift} Shift)
-                        </span>
                       </div>
                       <div className="flex items-center gap-2 flex-shrink-0">
                         <button

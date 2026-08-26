@@ -40,7 +40,8 @@ const jobSchema = new mongoose.Schema({
   shift: { type: String, default: '1st' },
   type: { type: String, default: 'FULL-TIME' },
   description: { type: String },
-  requirements: { type: String }
+  requirements: { type: String },
+  vacancy: { type: String, default: '1 Position' }
 }, { timestamps: true });
 
 export const Product = mongoose.model('Product', productSchema);

@@ -11,6 +11,7 @@ interface JobItem {
   type: string;
   description?: string;
   requirements?: string;
+  vacancy?: string;
 }
 
 export const Careers: React.FC = () => {
@@ -190,7 +191,7 @@ export const Careers: React.FC = () => {
 
                       <div className="pt-2 border-t border-primary/5 flex items-center justify-end text-[11px] text-on-surface-variant/80 font-label-caps font-semibold">
                         <span className="text-secondary bg-secondary/5 px-2 py-0.5 rounded border border-secondary/10 font-bold">
-                          Vacancy: 1 Position
+                          Vacancy: {job.vacancy || '1 Position'}
                         </span>
                       </div>
                     </div>
@@ -318,12 +319,12 @@ export const Careers: React.FC = () => {
 
                 <div>
                   <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-2" htmlFor="app-message">
-                    Cover Letter / Qualifications Summary
+                    Say About You
                   </label>
                   <textarea
                     className="w-full text-xs p-3 border border-outline-variant rounded bg-white rfq-input h-32"
                     id="app-message"
-                    placeholder="Describe your qualifications, certifications, machine operations experience, or why you want to join Bhumika Alloy Castings."
+                    placeholder="Tell us about yourself, your skills, or work experience..."
                     value={formData.message}
                     onChange={handleInputChange}
                   />

@@ -240,8 +240,8 @@ app.get('/api/jobs', async (req, res) => {
 
 app.post('/api/jobs', async (req, res) => {
   try {
-    const { jobId, title, department, location, shift, type, description, requirements } = req.body;
-    const newJob = new Job({ jobId, title, department, location, shift, type, description, requirements });
+    const { jobId, title, department, location, shift, type, description, requirements, vacancy } = req.body;
+    const newJob = new Job({ jobId, title, department, location, shift, type, description, requirements, vacancy });
     await newJob.save();
     res.status(201).json(newJob);
   } catch (error) {
@@ -261,10 +261,10 @@ app.delete('/api/jobs/:id', async (req, res) => {
 
 app.put('/api/jobs/:id', async (req, res) => {
   try {
-    const { jobId, title, department, location, shift, type, description, requirements } = req.body;
+    const { jobId, title, department, location, shift, type, description, requirements, vacancy } = req.body;
     const updated = await Job.findByIdAndUpdate(
       req.params.id,
-      { jobId, title, department, location, shift, type, description, requirements },
+      { jobId, title, department, location, shift, type, description, requirements, vacancy },
       { new: true }
     );
     if (!updated) return res.status(404).json({ error: "Job posting not found" });
