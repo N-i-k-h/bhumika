@@ -8,7 +8,6 @@ import dimensionalImg from '../assets/dimensional_inspection.png';
 import microscopeImg from '../assets/metallurgical_microscope.png';
 import spectrometerImg from '../assets/spectrometer.png';
 import visualInspectionImg from '../assets/visual_inspection.png';
-import qualityPolicyImg from '../assets/quality_policy.png';
 import qualityCycleImg from '../assets/quality_cycle_diagram.png';
 
 interface TestingMachine {
@@ -107,59 +106,59 @@ export const Quality: React.FC = () => {
         </div>
       </section>
 
-      {/* Quality Commitment Section */}
+      {/* Quality Commitment & Policy Section */}
       <section className="py-20 bg-white border-b border-primary/5">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Content */}
-            <div className="space-y-6">
-              <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block">
-                QUALITY COMMITMENT
-              </span>
-              <h2 className="font-headline-lg text-3xl md:text-4xl font-black">
-                <span className="text-primary">Quality </span>
-                <span className="text-secondary">Control & Policy</span>
-              </h2>
-              <p className="font-body-md text-base text-on-surface-variant leading-relaxed">
-                At BHUMIKA ALLOY CASTINGS, we are committed to delivering the highest quality castings. Our shell moulding process includes rigorous quality control measures at every stage, from raw material selection to final inspection. We employ advanced testing methods, including dimensional inspection, metallurgical analysis, and non-destructive testing, to ensure that each casting meets the stringent standards of quality and performance.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
-            {/* Right Content - Quality Objectives & Policy Image (Click to Zoom) */}
-            <div 
-              onClick={() => setIsZoomed(true)}
-              className="relative w-full max-w-[350px] mx-auto bg-white overflow-hidden rounded-xl shadow-lg border border-primary/10 group p-2 flex items-center justify-center cursor-zoom-in transition-all duration-300 hover:shadow-xl hover:border-secondary/30"
-            >
-              <img
-                src={qualityPolicyImg}
-                alt="Quality Objectives and Quality Policy"
-                className="w-full h-auto object-contain rounded-lg transition-transform duration-500 group-hover:scale-[1.02]"
-              />
-              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
-                <span className="bg-white/95 text-primary text-xs font-bold font-label-caps px-3 py-1.5 rounded shadow border border-primary/5 tracking-wider uppercase">
-                  Click to View
+            {/* Left Column: Flowing text of introductory commitment and quality policy */}
+            <div className="lg:col-span-8 space-y-8">
+              <div className="space-y-4">
+                <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block">
+                  QUALITY COMMITMENT
                 </span>
+                <h2 className="font-headline-lg text-3xl md:text-4xl font-black">
+                  <span className="text-primary">Quality </span>
+                  <span className="text-secondary">Control & Policy</span>
+                </h2>
+                <p className="font-body-md text-base text-on-surface-variant leading-relaxed">
+                  At BHUMIKA ALLOY CASTINGS, we are committed to delivering the highest quality castings. Our shell moulding process includes rigorous quality control measures at every stage, from raw material selection to final inspection. We employ advanced testing methods, including dimensional inspection, metallurgical analysis, and non-destructive testing, to ensure that each casting meets the stringent standards of quality and performance.
+                </p>
+              </div>
+
+              {/* Quality Policy text placed directly after the intro text */}
+              <div className="space-y-4 border-l-4 border-secondary pl-6 py-2">
+                <p className="font-body-md text-primary font-black text-sm md:text-base leading-relaxed uppercase">
+                  THE BAC MANAGEMENT IS COMMITTED TO ACHIEVE FULLEST CUSTOMER SATISFACTION BY PROVIDING QUALITY CASTINGS AND COMPONENTS ON-TIME BY COMPLYING WITH CUSTOMER REQUIREMENTS & STANDARDS.
+                </p>
+                <p className="font-body-md text-on-surface-variant font-medium text-xs md:text-sm leading-relaxed uppercase">
+                  THIS SHALL BE ACHIEVED THROUGH COMPLYING WITH STATUTORY & LEGAL REQUIREMENTS, CONTINUAL IMPROVEMENT OF QMS AND PROVIDING TRAININGS FROM TIME-TO-TIME TO ALL LEVELS.
+                </p>
               </div>
             </div>
-          </div>
 
-          {/* Quality System Cycle Diagram (Centered below) */}
-          <div className="mt-20 flex flex-col items-center border-t border-primary/5 pt-16">
-            <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block mb-4 text-center">
-              QUALITY SYSTEM CYCLE
-            </span>
-            <div className="relative w-full max-w-[500px] group flex items-center justify-center">
-              <img
-                src={qualityCycleImg}
-                alt="Quality System Cycle Diagram"
-                className="w-full h-auto object-contain transition-transform duration-500"
-              />
+            {/* Right Column: Centrifugal/Investment Quality Cycle circular diagram (Zoomable) */}
+            <div className="lg:col-span-4 flex flex-col items-center justify-center">
+              <div 
+                onClick={() => setIsZoomed(true)}
+                className="relative w-full max-w-[320px] bg-white overflow-hidden rounded-xl shadow-lg border border-primary/10 group p-2 flex items-center justify-center cursor-zoom-in transition-all duration-300 hover:shadow-xl hover:border-secondary/30 animate-fadeIn"
+              >
+                <img
+                  src={qualityCycleImg}
+                  alt="Quality System Cycle Diagram"
+                  className="w-full h-auto object-contain rounded-lg transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                  <span className="bg-white/95 text-primary text-xs font-bold font-label-caps px-3 py-1.5 rounded shadow border border-primary/5 tracking-wider uppercase">
+                    Click to Zoom
+                  </span>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </section>
-
-
 
       {/* Core Quality Pillars */}
       <section className="py-16 bg-white border-b border-primary/5">
@@ -253,6 +252,18 @@ export const Quality: React.FC = () => {
                       {machine.description}
                     </p>
                   </div>
+                  {/* Specifications */}
+                  <div className="pt-4 border-t border-primary/5 space-y-2">
+                    <span className="text-[10px] text-secondary font-black tracking-wider uppercase block font-label-caps">Specifications</span>
+                    <ul className="space-y-1">
+                      {machine.specs.map((spec, sIdx) => (
+                        <li key={sIdx} className="text-[10px] text-on-surface-variant flex items-center gap-1.5 font-medium">
+                          <span className="w-1 h-1 bg-secondary rounded-full flex-shrink-0"></span>
+                          {spec}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -275,9 +286,9 @@ export const Quality: React.FC = () => {
               &times;
             </button>
             <img
-              src={qualityPolicyImg}
-              alt="Quality Objectives and Quality Policy Zoomed"
-              className="max-w-[90vw] max-h-[85vh] object-contain rounded shadow-2xl border border-white/10 select-none"
+              src={qualityCycleImg}
+              alt="Quality System Cycle Diagram Zoomed"
+              className="max-w-[90vw] max-h-[85vh] object-contain rounded shadow-2xl border border-white/10 select-none bg-white p-4"
               onClick={(e) => e.stopPropagation()}
             />
           </div>

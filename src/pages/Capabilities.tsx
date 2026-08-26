@@ -705,8 +705,8 @@ export const Capabilities: React.FC = () => {
                 High-performance specialty alloys engineered for unique industrial demands, such as low thermal expansion and extreme corrosion resistance.
               </p>
               <div className="flex flex-wrap gap-2 text-[10px] font-label-caps text-primary">
-                <span className="bg-steel-plate px-2 py-1 rounded">Invar 36 (Inver 36)</span>
-                <span className="bg-steel-plate px-2 py-1 rounded">Inconel 825 (Inconil 825)</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">Invar 36</span>
+                <span className="bg-steel-plate px-2 py-1 rounded">Inconel 825</span>
               </div>
             </div>
           </div>
