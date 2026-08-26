@@ -9,7 +9,8 @@
     "render-build": "npm install && npm run build && npm install --prefix server",
     "install-server": "npm install --prefix server",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "local": "concurrently \"npm run dev\" \"npm run dev --prefix server\""
   },
   "dependencies": {
     "framer-motion": "^13.1.0",
@@ -24,6 +25,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
+    "concurrently": "^10.0.5",
     "oxlint": "^1.71.0",
     "tailwindcss": "^4.3.2",
     "typescript": "~6.0.2",

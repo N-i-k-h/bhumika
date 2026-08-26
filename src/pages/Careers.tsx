@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, MapPin, Clock, ArrowRight, X, Send } from 'lucide-react';
+import { Briefcase, Clock, UploadCloud, CheckCircle2, Send, Mail } from 'lucide-react';
 
 interface JobItem {
   _id?: string;
@@ -18,17 +17,21 @@ export const Careers: React.FC = () => {
   const [jobs, setJobs] = useState<JobItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  
-  // Modal State
-  const [selectedJob, setSelectedJob] = useState<JobItem | null>(null);
+
+  // Form State (Single unified form for all jobs)
   const [formData, setFormData] = useState({
     name: '',
-    phone: '',
-    experience: '',
     email: '',
-    message: ''
+    phone: '',
+    targetRole: 'General Application',
+    experience: '',
+    message: '',
+    terms: false,
   });
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
+
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [referenceId, setReferenceId] = useState('');
 
   useEffect(() => {
     fetchJobs();
@@ -53,63 +56,69 @@ export const Careers: React.FC = () => {
     }
   };
 
-  const handleApplyClick = (job: JobItem) => {
-    setSelectedJob(job);
-    setResumeFile(null);
-    setFormData({
-      name: '',
-      phone: '',
-      experience: '',
-      email: '',
-      message: ''
-    });
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setResumeFile(file);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { id, value, type } = e.target;
+    if (type === 'checkbox') {
+      const checked = (e.target as HTMLInputElement).checked;
+      setFormData(prev => ({ ...prev, [id.replace('app-', '')]: checked }));
+    } else {
+      setFormData(prev => ({ ...prev, [id.replace('app-', '')]: value }));
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id.replace('app-', '')]: value }));
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0]);
+    } else {
+      setSelectedFile(null);
+    }
   };
 
-  const handleSubmitApplication = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedJob) return;
+    const ref = "BAC-APP-" + Math.floor(1000 + Math.random() * 9000);
+    setReferenceId(ref);
 
-    const rawSubject = `Job Application: ${selectedJob.title} (${selectedJob.jobId}) - ${formData.name}`;
+    const rawSubject = `Job Application Package - ${ref} (${formData.targetRole}) - ${formData.name}`;
     const rawBody =
       `Bhumika Alloy Castings - Candidate Application\n` +
       `----------------------------------------------\n` +
-      `Target Role: ${selectedJob.title} (${selectedJob.jobId})\n` +
-      `Department: ${selectedJob.department}\n` +
-      `Location: ${selectedJob.location}\n\n` +
-      `Candidate Details:\n` +
-      `Name: ${formData.name}\n` +
+      `Reference ID: ${ref}\n` +
+      `Candidate Name: ${formData.name}\n` +
+      `Email Address: ${formData.email}\n` +
       `Phone Number: ${formData.phone}\n` +
+      `Applied Position: ${formData.targetRole}\n` +
       `Total Experience: ${formData.experience || 'Not specified'}\n` +
-      `Email Address: ${formData.email || 'Not specified'}\n\n` +
-      `[IMPORTANT: Please attach your resume file manually to this email before sending.]\n` +
-      `Resume File Name: ${resumeFile ? resumeFile.name : 'No file chosen'}\n\n` +
-      `Additional Notes / Summary:\n` +
+      `${selectedFile ? `Attached Resume: ${selectedFile.name}\n` : ''}\n` +
+      `[IMPORTANT: Please attach your resume file manually to this email before sending.]\n\n` +
+      `Cover Message / Summary:\n` +
       `${formData.message || 'None provided'}\n`;
 
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=bhumikacastings@gmail.com&su=${encodeURIComponent(rawSubject)}&body=${encodeURIComponent(rawBody)}`;
 
-    // Open Gmail Web compose in a new tab (fully synchronous, bypasses popup blocker)
+    // Open Gmail Web compose in a new tab
     window.open(gmailUrl, '_blank');
 
-    // Immediately close modal
-    setSelectedJob(null);
+    setIsSubmitted(true);
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      targetRole: 'General Application',
+      experience: '',
+      message: '',
+      terms: false,
+    });
+    setSelectedFile(null);
+    setIsSubmitted(false);
   };
 
   return (
-    <div className="page-transition min-h-screen bg-surface">
-      {/* Hero Section */}
+    <div className="page-transition">
+      {/* Inner Page Hero */}
       <section className="bg-primary py-20 text-on-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-15">
           <div className="absolute inset-0 bg-[radial-gradient(#C15C26_1px,transparent_1px)] [background-size:16px_16px]"></div>
@@ -122,287 +131,298 @@ export const Careers: React.FC = () => {
             <span className="text-white">Career </span>
             <span className="text-secondary">Opportunities</span>
           </h1>
-          <p className="font-body-lg text-sm md:text-base text-surface-variant max-w-2xl mt-4 leading-relaxed font-light">
+          <p className="font-body-lg text-sm md:text-base text-surface-variant max-w-xl mt-4 leading-relaxed font-light">
             Build your career with over 29 years of foundry excellence, precision CNC engineering, and high-integrity metallurgical manufacturing in Shimoga.
           </p>
         </div>
       </section>
 
-      {/* Main Jobs Section */}
-      <section className="py-20 bg-steel-plate/30 text-primary min-h-[600px] border-b border-primary/5">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
-          <div className="mb-12 border-b border-primary/10 pb-6">
+      {/* Main Content Layout (Jobs on Left, Form on Right) */}
+      <section className="py-20 bg-white">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop grid lg:grid-cols-3 gap-16">
+          
+          {/* Left: Job Openings List */}
+          <div className="space-y-8 lg:col-span-1">
             <div>
-              <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block mb-1">
+              <span className="font-label-caps text-label-caps text-secondary mb-4 block uppercase tracking-wider text-xs font-bold">
                 OPEN POSITIONS
               </span>
-              <h2 className="font-headline-lg text-2xl md:text-3xl font-black tracking-wide uppercase text-primary">
-                Explore Current <span className="text-secondary">Openings</span>
+              <h2 className="font-headline-lg text-2xl font-bold mb-6">
+                <span className="text-primary">Current </span>
+                <span className="text-secondary">Openings</span>
               </h2>
+
+              {isLoading ? (
+                <div className="py-12 text-on-surface-variant font-label-caps text-xs flex flex-col items-center gap-2">
+                  <div className="w-6 h-6 border-2 border-secondary border-t-transparent rounded-full animate-spin"></div>
+                  Loading Positions...
+                </div>
+              ) : error ? (
+                <p className="text-xs text-red-600 bg-red-50 p-4 rounded border border-red-200">{error}</p>
+              ) : jobs.length === 0 ? (
+                <div className="border border-primary/10 p-6 rounded-lg text-center space-y-2 bg-steel-plate/30">
+                  <h4 className="font-bold text-primary text-sm">No Active Openings</h4>
+                  <p className="text-xs text-on-surface-variant leading-relaxed">
+                    We don't have any specific openings right now, but we are always looking for skilled CNC engineers and metallurgists. You can still submit a General Application.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {jobs.map((job) => (
+                    <div 
+                      key={job._id || job.jobId}
+                      className="p-5 rounded-lg border border-primary/10 bg-white shadow-sm hover:shadow transition-shadow space-y-3"
+                    >
+                      <div>
+                        <div className="flex justify-between items-center text-[10px] text-secondary font-mono tracking-widest font-bold uppercase mb-1">
+                          <span>{job.jobId}</span>
+                        </div>
+                        <h4 className="font-bold text-primary text-base leading-tight uppercase">
+                          {job.title}
+                        </h4>
+                      </div>
+                      
+                      {job.description && (
+                        <p className="text-on-surface-variant leading-relaxed text-xs">
+                          {job.description}
+                        </p>
+                      )}
+
+                      <div className="pt-2 border-t border-primary/5 flex items-center justify-end text-[11px] text-on-surface-variant/80 font-label-caps font-semibold">
+                        <span className="text-secondary bg-secondary/5 px-2 py-0.5 rounded border border-secondary/10 font-bold">
+                          Vacancy: 1 Position
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
-          {isLoading ? (
-            <div className="py-24 text-center text-on-surface-variant font-label-caps text-sm flex flex-col items-center gap-3">
-              <div className="w-8 h-8 border-2 border-secondary border-t-transparent rounded-full animate-spin"></div>
-              Loading Job Postings...
-            </div>
-          ) : error ? (
-            <div className="bg-red-50 border border-red-200 p-6 rounded-xl text-center text-red-800 max-w-md mx-auto">
-              <p className="text-sm">{error}</p>
-              <button 
-                onClick={fetchJobs}
-                className="mt-4 px-4 py-2 bg-secondary text-white text-xs font-bold rounded uppercase tracking-wider font-label-caps"
-              >
-                Retry Loading
-              </button>
-            </div>
-          ) : jobs.length === 0 ? (
-            <div className="bg-white border border-primary/10 p-12 rounded-2xl text-center max-w-xl mx-auto space-y-4 shadow-sm">
-              <Briefcase className="w-12 h-12 text-secondary mx-auto opacity-70" />
-              <h3 className="font-headline-md text-xl font-bold text-primary">No Open Positions Currently</h3>
-              <p className="text-xs text-on-surface-variant leading-relaxed font-body-md">
-                We don't have any specific openings right now, but we are always looking for skilled CNC engineers and metallurgists. Feel free to submit an inquiry through our Contact page.
-              </p>
-            </div>
-          ) : (
-            /* Industrial Job Cards Grid in White & Orange */
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {jobs.map((job) => (
-                <motion.div
-                  key={job._id || job.jobId}
-                  whileHover={{ y: -4 }}
-                  className="bg-white p-8 rounded-2xl border border-primary/10 hover:border-secondary/50 shadow-sm hover:shadow-xl flex flex-col justify-between group relative overflow-hidden transition-all duration-300 premium-card"
-                >
-                  {/* Top Accent Orange Line */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-molten-glow to-amber-600 opacity-80 group-hover:opacity-100 transition-opacity"></div>
-
-                  <div className="space-y-6">
-                    {/* Top Row: Job ID & Type Badge */}
-                    <div className="flex justify-between items-center text-xs">
-                      <span className="font-mono text-xs text-secondary font-black tracking-widest bg-secondary/10 border border-secondary/20 px-3 py-1 rounded">
-                        {job.jobId}
-                      </span>
-                      <span className="font-label-caps text-[10px] font-black uppercase tracking-wider bg-steel-plate text-primary px-3 py-1 rounded-full border border-primary/10">
-                        {job.type || 'FULL-TIME'}
-                      </span>
-                    </div>
-
-                    {/* Job Title & Department */}
-                    <div>
-                      <h3 className="font-headline-lg text-xl md:text-2xl font-black uppercase text-primary tracking-wide group-hover:text-secondary transition-colors">
-                        {job.title}
-                      </h3>
-                      <p className="font-label-caps text-xs text-secondary font-bold tracking-wider mt-1 uppercase">
-                        {job.department}
-                      </p>
-                    </div>
-
-                    {/* Description if present */}
-                    {job.description && (
-                      <p className="text-xs text-on-surface-variant leading-relaxed font-body-md line-clamp-2">
-                        {job.description}
-                      </p>
-                    )}
-
-                    {/* Location & Shift Grid */}
-                    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-primary/10 text-xs font-label-caps">
-                      <div>
-                        <span className="text-[10px] text-on-surface-variant/60 block font-bold uppercase tracking-wider mb-1">
-                          LOCATION
-                        </span>
-                        <span className="font-bold text-primary flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
-                          {job.location}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-[10px] text-on-surface-variant/60 block font-bold uppercase tracking-wider mb-1">
-                          SHIFT
-                        </span>
-                        <span className="font-bold text-primary flex items-center gap-1.5">
-                          <Clock className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
-                          {job.shift}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <div className="pt-8">
-                    <button
-                      onClick={() => handleApplyClick(job)}
-                      className="w-full bg-secondary hover:bg-opacity-95 text-white py-3.5 px-6 rounded-lg font-bold text-xs uppercase font-label-caps tracking-widest flex items-center justify-between cursor-pointer shadow-md shadow-secondary/20 transition-all"
-                    >
-                      <span>APPLY FOR THIS ROLE</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Candidate Application Modal */}
-      <AnimatePresence>
-        {selectedJob && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedJob(null)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm"
-            />
-
-            {/* Modal Container */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-primary/10 overflow-hidden z-10 my-8"
-            >
-              {/* Modal Header */}
-              <div className="bg-primary p-6 text-white flex justify-between items-start">
-                <div>
-                  <span className="font-mono text-[10px] text-secondary font-black bg-secondary/10 border border-secondary/20 px-2.5 py-0.5 rounded uppercase">
-                    {selectedJob.jobId}
-                  </span>
-                  <h3 className="font-headline-lg text-lg sm:text-xl font-black uppercase text-white tracking-wide mt-2">
-                    {selectedJob.title}
-                  </h3>
-                  <p className="font-label-caps text-xs text-secondary font-bold uppercase tracking-wider">
-                    {selectedJob.department} • {selectedJob.location}
-                  </p>
-                </div>
-                <button
-                  onClick={() => setSelectedJob(null)}
-                  className="p-1 rounded bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="p-6">
-                <form onSubmit={handleSubmitApplication} className="space-y-4">
-                  <p className="text-xs text-on-surface-variant font-body-md leading-relaxed mb-4">
-                    Please enter your candidate details below. Submitting will prepare your application and open a pre-filled draft directly in your default email client.
-                  </p>
-
-                  {/* Candidate Name */}
+          {/* Right: Application Form Container */}
+          <div className="lg:col-span-2 bg-steel-plate/60 p-8 rounded-lg border border-primary/5 shadow-sm h-fit">
+            <span className="font-label-caps text-xs text-secondary font-bold mb-2 block uppercase tracking-wider">
+              ONLINE APPLICATION
+            </span>
+            <h2 className="font-headline-lg text-2xl font-black text-primary mb-6">
+              Apply for Career Openings
+            </h2>
+            
+            {!isSubmitted ? (
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-name">
+                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-2" htmlFor="app-name">
                       Full Name *
                     </label>
                     <input
+                      className="w-full text-xs p-3 border border-outline-variant rounded bg-white rfq-input"
                       id="app-name"
-                      type="text"
                       required
-                      placeholder="e.g. Rajesh Kumar"
+                      type="text"
+                      placeholder="Rajesh Kumar"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
                     />
                   </div>
-
-                  {/* Contact Number */}
                   <div>
-                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-phone">
-                      Phone Number *
+                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-2" htmlFor="app-email">
+                      Email Address *
                     </label>
                     <input
-                      id="app-phone"
-                      type="tel"
+                      className="w-full text-xs p-3 border border-outline-variant rounded bg-white rfq-input"
+                      id="app-email"
                       required
-                      placeholder="e.g. +91 98765 43210"
+                      type="email"
+                      placeholder="candidate@email.com"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-2" htmlFor="app-phone">
+                      Contact Number *
+                    </label>
+                    <input
+                      className="w-full text-xs p-3 border border-outline-variant rounded bg-white rfq-input"
+                      id="app-phone"
+                      required
+                      type="tel"
+                      placeholder="+91 98765 43210"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
                     />
                   </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    {/* Total Experience */}
-                    <div>
-                      <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-experience">
-                        Experience (Optional)
-                      </label>
-                      <input
-                        id="app-experience"
-                        type="text"
-                        placeholder="e.g. 3 Years"
-                        value={formData.experience}
-                        onChange={handleInputChange}
-                        className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
-                      />
-                    </div>
-
-                    {/* Email Address */}
-                    <div>
-                      <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-email">
-                        Email (Optional)
-                      </label>
-                      <input
-                        id="app-email"
-                        type="email"
-                        placeholder="candidate@email.com"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Resume Upload */}
                   <div>
-                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5 font-sans" htmlFor="app-resume">
-                      Upload Resume (Optional, PDF or Image)
+                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-2" htmlFor="app-targetRole">
+                      Target Role / Job Position
                     </label>
+                    <select
+                      className="w-full text-xs p-3 border border-outline-variant rounded bg-white rfq-input"
+                      id="app-targetRole"
+                      value={formData.targetRole}
+                      onChange={handleInputChange}
+                    >
+                      <option value="General Application">General Application</option>
+                      {jobs.map(job => (
+                        <option key={job.jobId} value={`${job.title} (${job.jobId})`}>
+                          {job.title}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-2" htmlFor="app-experience">
+                    Total Experience
+                  </label>
+                  <input
+                    className="w-full text-xs p-3 border border-outline-variant rounded bg-white rfq-input"
+                    id="app-experience"
+                    type="text"
+                    placeholder="e.g. 3.5 Years"
+                    value={formData.experience}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-2">
+                    Upload Resume (Simulation)
+                  </label>
+                  <div className="border-2 border-dashed border-outline-variant rounded-lg p-6 bg-white hover:bg-steel-plate/30 transition-all flex flex-col items-center justify-center cursor-pointer relative">
                     <input
-                      id="app-resume"
+                      className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                      id="app-file"
                       type="file"
                       accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                       onChange={handleFileChange}
-                      className="w-full text-xs p-2.5 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input cursor-pointer"
                     />
-                    {resumeFile && (
-                      <p className="text-[10px] text-secondary mt-1 font-semibold">
-                        Selected: {resumeFile.name} ({(resumeFile.size / 1024).toFixed(1)} KB)
-                      </p>
-                    )}
+                    <UploadCloud className="w-8 h-8 text-outline mb-2" />
+                    <p className="text-xs text-primary font-bold">
+                      {selectedFile 
+                        ? `Selected File: ${selectedFile.name} (${(selectedFile.size / 1024).toFixed(1)} KB)`
+                        : "Drag and drop or click to upload"
+                      }
+                    </p>
+                    <p className="text-[10px] text-outline mt-1 font-label-caps">
+                      Supports PDF, DOC, DOCX, JPG, PNG up to 10MB
+                    </p>
                   </div>
+                </div>
 
-                  {/* Short Cover Note / Message */}
-                  <div>
-                    <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-1.5" htmlFor="app-message">
-                      Qualifications / Cover Note (Optional)
-                    </label>
-                    <textarea
-                      id="app-message"
-                      rows={3}
-                      placeholder="Briefly mention your skills, machines operated, or certifications..."
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      className="w-full text-xs p-3 border border-outline-variant rounded-lg bg-steel-plate/30 focus:bg-white rfq-input"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-xs font-bold text-primary uppercase font-label-caps mb-2" htmlFor="app-message">
+                    Cover Letter / Qualifications Summary
+                  </label>
+                  <textarea
+                    className="w-full text-xs p-3 border border-outline-variant rounded bg-white rfq-input h-32"
+                    id="app-message"
+                    placeholder="Describe your qualifications, certifications, machine operations experience, or why you want to join Bhumika Alloy Castings."
+                    value={formData.message}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-                  <button
-                    type="submit"
-                    className="w-full bg-secondary hover:bg-opacity-95 text-white py-3.5 rounded-lg font-bold text-xs uppercase font-label-caps tracking-widest flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-secondary/20 mt-6 transition-all duration-200"
+                <div className="flex items-center gap-2">
+                  <input
+                    className="rounded border-outline-variant text-secondary focus:ring-secondary text-xs"
+                    id="app-terms"
+                    required
+                    type="checkbox"
+                    checked={formData.terms}
+                    onChange={handleInputChange}
+                  />
+                  <label className="text-[11px] text-on-surface-variant cursor-pointer select-none" htmlFor="app-terms">
+                    I consent to share this candidate data under Bhumika's recruitment & privacy policies.
+                  </label>
+                </div>
+
+                <button
+                  className="w-full bg-secondary hover:bg-opacity-90 text-white py-4 rounded font-bold transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase font-label-caps cursor-pointer"
+                  type="submit"
+                >
+                  Submit Application Package <Send className="w-4 h-4" />
+                </button>
+              </form>
+            ) : (
+              /* Success Feedback Screen */
+              <div className="flex flex-col items-center text-center py-12 space-y-6 page-transition">
+                <div className="w-16 h-16 bg-secondary/10 text-secondary rounded-full flex items-center justify-center shadow-lg">
+                  <CheckCircle2 className="w-10 h-10 text-secondary" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-headline-md text-2xl font-black text-primary">Application Prepared</h3>
+                  <p className="text-xs text-on-surface-variant font-label-caps font-bold">
+                    REFERENCE ID: {referenceId}
+                  </p>
+                </div>
+                <p className="text-xs text-on-surface-variant max-w-md leading-relaxed mx-auto">
+                  A Gmail draft with your application details has been opened in a new tab to send directly to <strong>bhumikacastings@gmail.com</strong>.
+                </p>
+                <div className="pt-2 flex flex-col sm:flex-row flex-wrap gap-3 justify-center items-center">
+                  <a
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=bhumikacastings@gmail.com&su=${encodeURIComponent(`Job Application Package - ${referenceId} (${formData.targetRole}) - ${formData.name}`)}&body=${encodeURIComponent(
+                      `Bhumika Alloy Castings - Candidate Application\n` +
+                      `----------------------------------------------\n` +
+                      `Reference ID: ${referenceId}\n` +
+                      `Candidate Name: ${formData.name}\n` +
+                      `Email Address: ${formData.email}\n` +
+                      `Phone Number: ${formData.phone}\n` +
+                      `Applied Position: ${formData.targetRole}\n` +
+                      `Total Experience: ${formData.experience || 'Not specified'}\n` +
+                      `${selectedFile ? `Attached Resume: ${selectedFile.name}\n` : ''}\n` +
+                      `[IMPORTANT: Please attach your resume file manually to this email before sending.]\n\n` +
+                      `Cover Message / Summary:\n` +
+                      `${formData.message || 'None'}\n`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded font-bold text-xs inline-flex items-center gap-2 cursor-pointer shadow-md uppercase font-label-caps"
                   >
-                    Submit Application <Send className="w-4 h-4" />
+                    <Mail className="w-4 h-4" /> Re-Open in Gmail Web
+                  </a>
+
+                  <a
+                    href={`mailto:bhumikacastings@gmail.com?subject=${encodeURIComponent(`Job Application Package - ${referenceId} (${formData.targetRole}) - ${formData.name}`)}&body=${encodeURIComponent(
+                      `Bhumika Alloy Castings - Candidate Application\n` +
+                      `----------------------------------------------\n` +
+                      `Reference ID: ${referenceId}\n` +
+                      `Candidate Name: ${formData.name}\n` +
+                      `Email Address: ${formData.email}\n` +
+                      `Phone Number: ${formData.phone}\n` +
+                      `Applied Position: ${formData.targetRole}\n` +
+                      `Total Experience: ${formData.experience || 'Not specified'}\n` +
+                      `${selectedFile ? `Attached Resume: ${selectedFile.name}\n` : ''}\n` +
+                      `[IMPORTANT: Please attach your resume file manually to this email before sending.]\n\n` +
+                      `Cover Message / Summary:\n` +
+                      `${formData.message || 'None'}\n`
+                    )}`}
+                    className="bg-steel-plate hover:bg-slate-200 text-primary px-5 py-2.5 rounded font-bold text-xs inline-flex items-center gap-2 cursor-pointer border border-primary/10"
+                  >
+                    <Mail className="w-4 h-4" /> Default Email App
+                  </a>
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    className="bg-primary hover:bg-secondary text-white px-6 py-2.5 rounded font-bold text-xs cursor-pointer"
+                    onClick={resetForm}
+                  >
+                    Submit Another Application
                   </button>
-                </form>
+                </div>
               </div>
-            </motion.div>
+            )}
           </div>
-        )}
-      </AnimatePresence>
+
+        </div>
+      </section>
     </div>
   );
 };
