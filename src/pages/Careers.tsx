@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Briefcase, Clock, UploadCloud, CheckCircle2, Send, Mail } from 'lucide-react';
+import { Briefcase, UploadCloud, CheckCircle2, Send, Mail } from 'lucide-react';
 
 interface JobItem {
   _id?: string;
