@@ -174,26 +174,25 @@ export const Careers: React.FC = () => {
                       key={job._id || job.jobId}
                       className="p-5 rounded-lg border border-primary/10 bg-white shadow-sm hover:shadow transition-shadow space-y-3"
                     >
-                      <div>
-                        <div className="flex justify-between items-center text-[10px] text-secondary font-mono tracking-widest font-bold uppercase mb-1">
-                          <span>{job.jobId}</span>
+                      <div className="flex justify-between items-start gap-4">
+                        <div className="min-w-0">
+                          <span className="block text-[10px] text-secondary font-mono tracking-widest font-bold uppercase mb-1">
+                            {job.jobId}
+                          </span>
+                          <h4 className="font-bold text-primary text-base leading-tight uppercase">
+                            {job.title}
+                          </h4>
                         </div>
-                        <h4 className="font-bold text-primary text-base leading-tight uppercase">
-                          {job.title}
-                        </h4>
-                      </div>
-                      
-                      {job.description && (
-                        <p className="text-on-surface-variant leading-relaxed text-xs">
-                          {job.description}
-                        </p>
-                      )}
-
-                      <div className="pt-2 border-t border-primary/5 flex items-center justify-end text-[11px] text-on-surface-variant/80 font-label-caps font-semibold">
-                        <span className="text-secondary bg-secondary/5 px-2 py-0.5 rounded border border-secondary/10 font-bold">
+                        <span className="text-secondary bg-secondary/5 px-2 py-0.5 rounded border border-secondary/10 font-bold text-[10px] font-label-caps whitespace-nowrap flex-shrink-0">
                           Vacancy: {job.vacancy || '1 Position'}
                         </span>
                       </div>
+                      
+                      {job.description && (
+                        <p className="text-on-surface-variant leading-relaxed text-xs pt-1">
+                          {job.description}
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
