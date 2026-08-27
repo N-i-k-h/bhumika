@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Flame, Scale, Activity, Eye, Settings, Layers } from 'lucide-react';
 import impactTestingImg from '../assets/impact_testing_machine.png';
@@ -86,7 +86,7 @@ export const Quality: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const [isZoomed, setIsZoomed] = useState(false);
+
 
   return (
     <div className="page-transition">
@@ -112,7 +112,7 @@ export const Quality: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             {/* Left Column: Flowing text of introductory commitment and quality policy */}
-            <div className="lg:col-span-8 space-y-8">
+            <div className="lg:col-span-7 space-y-8">
               <div className="space-y-4">
                 <span className="font-label-caps text-xs text-secondary font-bold uppercase tracking-widest block">
                   QUALITY COMMITMENT
@@ -137,22 +137,14 @@ export const Quality: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Centrifugal/Investment Quality Cycle circular diagram (Zoomable) */}
-            <div className="lg:col-span-4 flex flex-col items-center justify-center">
-              <div 
-                onClick={() => setIsZoomed(true)}
-                className="relative w-full max-w-[320px] bg-white overflow-hidden rounded-xl shadow-lg border border-primary/10 group p-2 flex items-center justify-center cursor-zoom-in transition-all duration-300 hover:shadow-xl hover:border-secondary/30 animate-fadeIn"
-              >
+            {/* Right Column: Centrifugal/Investment Quality Cycle circular diagram */}
+            <div className="lg:col-span-5 flex flex-col items-center justify-center">
+              <div className="relative w-full max-w-[480px] bg-white overflow-hidden rounded-xl shadow-lg border border-primary/10 p-2 flex items-center justify-center transition-all duration-300 hover:shadow-xl animate-fadeIn">
                 <img
                   src={qualityCycleImg}
                   alt="Quality System Cycle Diagram"
-                  className="w-full h-auto object-contain rounded-lg transition-transform duration-500 group-hover:scale-[1.02]"
+                  className="w-full h-auto object-contain rounded-lg"
                 />
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
-                  <span className="bg-white/95 text-primary text-xs font-bold font-label-caps px-3 py-1.5 rounded shadow border border-primary/5 tracking-wider uppercase">
-                    Click to Zoom
-                  </span>
-                </div>
               </div>
             </div>
 
@@ -271,29 +263,7 @@ export const Quality: React.FC = () => {
         </div>
       </section>
 
-      {/* Lightbox / Zoomed Image Modal */}
-      {isZoomed && (
-        <div 
-          onClick={() => setIsZoomed(false)}
-          className="fixed inset-0 bg-black/80 z-[1000] flex items-center justify-center p-4 md:p-10 cursor-zoom-out animate-fadeIn"
-        >
-          <div className="relative max-w-full max-h-full flex items-center justify-center">
-            <button 
-              onClick={() => setIsZoomed(false)}
-              className="absolute -top-12 right-0 md:-right-12 text-white hover:text-secondary transition-colors text-2xl font-bold bg-black/40 w-10 h-10 rounded-full flex items-center justify-center border border-white/20"
-              aria-label="Close modal"
-            >
-              &times;
-            </button>
-            <img
-              src={qualityCycleImg}
-              alt="Quality System Cycle Diagram Zoomed"
-              className="max-w-[90vw] max-h-[85vh] object-contain rounded shadow-2xl border border-white/10 select-none bg-white p-4"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-        </div>
-      )}
+
     </div>
   );
 };

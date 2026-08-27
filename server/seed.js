@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { Product, Customer, Certificate, Job } from './models.js';
+import { Product, Customer, Certificate, Job, Category } from './models.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -85,6 +85,24 @@ export async function seedDatabase(force = false) {
         console.error("Failed to copy ISO certificate:", err.message);
       }
     }
+    const categoryCount = await Category.countDocuments();
+    if (categoryCount === 0 || force) {
+      if (force) {
+        await Category.deleteMany({});
+        console.log("Cleared categories collection.");
+      }
+      console.log("Seeding categories...");
+      const categoriesData = [
+        { name: "Automobile", slug: "automobile" },
+        { name: "Food Industry", slug: "food" },
+        { name: "Textile", slug: "textile" },
+        { name: "Reverse Osmosis", slug: "reverse_osmosis" },
+        { name: "Others", slug: "others" }
+      ];
+      await Category.insertMany(categoriesData);
+      console.log(`Successfully seeded ${categoriesData.length} categories!`);
+    }
+
     const productCount = await Product.countDocuments();
     if (productCount === 0 || force) {
       if (force) {

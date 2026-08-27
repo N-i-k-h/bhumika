@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   dimensions: { type: String },
   description: { type: String },
   applications: { type: String },
-  industry: { type: String, enum: ['automobile', 'food', 'textile', 'reverse_osmosis', 'others'], default: 'others', required: true }
+  industry: { type: String, default: 'others', required: true }
 }, { timestamps: true });
 
 // Customer Schema
@@ -44,8 +44,15 @@ const jobSchema = new mongoose.Schema({
   vacancy: { type: String, default: '1 Position' }
 }, { timestamps: true });
 
+// Category Schema
+const categorySchema = new mongoose.Schema({
+  name: { type: String, required: true, unique: true },
+  slug: { type: String, required: true, unique: true }
+}, { timestamps: true });
+
 export const Product = mongoose.model('Product', productSchema);
 export const Customer = mongoose.model('Customer', customerSchema);
 export const Certificate = mongoose.model('Certificate', certificateSchema);
 export const Job = mongoose.model('Job', jobSchema);
+export const Category = mongoose.model('Category', categorySchema);
 

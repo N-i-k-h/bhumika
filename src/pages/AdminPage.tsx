@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 
 interface EditingItem {
-  type: 'products' | 'customers' | 'certificates' | 'jobs';
+  type: 'products' | 'customers' | 'certificates' | 'jobs' | 'categories';
   id: string | number;
 }
 
@@ -14,6 +14,7 @@ export const AdminPage: React.FC = () => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem('isAdmin') === 'true');
   const [activeTab, setActiveTab] = useState<'products' | 'customers' | 'certificates' | 'jobs'>('products');
+  const [showCategoryManager, setShowCategoryManager] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -27,13 +28,15 @@ export const AdminPage: React.FC = () => {
   const [customers, setCustomers] = useState<any[]>([]);
   const [certificates, setCertificates] = useState<any[]>([]);
   const [jobs, setJobs] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [catName, setCatName] = useState('');
 
   // Edit Mode state tracking
   const [editingItem, setEditingItem] = useState<EditingItem | null>(null);
 
   // Form Fields: Products
   const [prodTitle, setProdTitle] = useState('');
-  const [prodIndustry, setProdIndustry] = useState<'automobile' | 'food' | 'textile' | 'reverse_osmosis' | 'others'>('others');
+  const [prodIndustry, setProdIndustry] = useState<string>('others');
   const [prodImage, setProdImage] = useState<string>(''); // Base64 string
   const [prodMaterial, setProdMaterial] = useState('');
   const [prodMetalGrade, setProdMetalGrade] = useState('');
@@ -67,15 +70,13 @@ export const AdminPage: React.FC = () => {
 
   const API_URL = '/api';
 
-  const getIndustryLabel = (industry: string) => {
-    switch (industry) {
-      case 'automobile': return 'Automobile';
-      case 'food': return 'Food Industry';
-      case 'textile': return 'Textile';
-      case 'reverse_osmosis': return 'Reverse Osmosis';
-      case 'others': return 'Others';
-      default: return industry;
-    }
+  const getIndustryLabel = (industrySlug: string) => {
+    const cat = categories.find(c => c.slug === industrySlug);
+    if (cat) return cat.name;
+    return industrySlug
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
 
   useEffect(() => {
@@ -84,10 +85,21 @@ export const AdminPage: React.FC = () => {
     }
   }, [isAdmin, activeTab]);
 
+  useEffect(() => {
+    if (activeTab !== 'products') {
+      setShowCategoryManager(false);
+    }
+  }, [activeTab]);
+
   const fetchData = async () => {
     setIsLoading(true);
     setErrorMsg('');
     try {
+      const catRes = await fetch(`${API_URL}/categories`);
+      if (catRes.ok) {
+        setCategories(await catRes.json());
+      }
+
       let res;
       if (activeTab === 'products') {
         res = await fetch(`${API_URL}/products`);
@@ -180,9 +192,12 @@ export const AdminPage: React.FC = () => {
     setSuccessMsg('');
     setErrorMsg('');
 
+    // Category Reset
+    setCatName('');
+
     // Product Reset
     setProdTitle('');
-    setProdIndustry('others');
+    setProdIndustry(categories[0]?.slug || 'others');
     setProdImage('');
     setProdMaterial('');
     setProdMetalGrade('');
@@ -290,6 +305,68 @@ export const AdminPage: React.FC = () => {
         fetchData();
       } else {
         setErrorMsg('Failed to delete product.');
+      }
+    } catch (err) {
+      setErrorMsg('API server connection error.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // CATEGORIES SUBMISSION (CREATE or UPDATE)
+  const handleSubmitCategory = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg('');
+    if (!catName.trim()) {
+      setErrorMsg('Category name is required.');
+      return;
+    }
+
+    setIsLoading(true);
+    const isEdit = editingItem && editingItem.type === 'categories';
+    const url = isEdit ? `${API_URL}/categories/${editingItem.id}` : `${API_URL}/categories`;
+    const method = isEdit ? 'PUT' : 'POST';
+
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: catName })
+      });
+
+      if (res.ok) {
+        setSuccessMsg(isEdit ? 'Category updated successfully!' : 'Category created successfully!');
+        resetForms();
+        fetchData();
+        setTimeout(() => setSuccessMsg(''), 3000);
+      } else {
+        const data = await res.json();
+        setErrorMsg(data.error || 'Failed to submit category.');
+      }
+    } catch (err) {
+      setErrorMsg('API server connection error.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const startEditCategory = (item: any) => {
+    setEditingItem({ type: 'categories', id: item._id });
+    setCatName(item.name);
+  };
+
+  const handleDeleteCategory = async (id: string) => {
+    if (!window.confirm('Delete this category? Products in this category will fallback to "others".')) return;
+    setIsLoading(true);
+    try {
+      const res = await fetch(`${API_URL}/categories/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        if (editingItem?.type === 'categories' && editingItem.id === id) {
+          resetForms();
+        }
+        fetchData();
+      } else {
+        setErrorMsg('Failed to delete category.');
       }
     } catch (err) {
       setErrorMsg('API server connection error.');
@@ -678,20 +755,35 @@ export const AdminPage: React.FC = () => {
             <div className="flex justify-between items-center mb-6">
               <h3 className="font-label-caps text-xs text-secondary font-black tracking-wider uppercase flex items-center gap-2">
                 <Plus className="w-4 h-4" />
-                {editingItem ? 'Edit Entry' : `Create New ${activeTab.slice(0, -1)}`}
+                {showCategoryManager 
+                  ? (editingItem ? 'Edit Category' : 'Create New Category') 
+                  : (editingItem ? 'Edit Entry' : `Create New ${activeTab.slice(0, -1)}`)}
               </h3>
-              {editingItem && (
-                <button
-                  onClick={resetForms}
-                  className="text-xs text-on-surface-variant hover:text-red-600 transition-colors flex items-center gap-1 cursor-pointer font-medium"
-                >
-                  <X className="w-3.5 h-3.5" /> Cancel Edit
-                </button>
-              )}
+              <div className="flex items-center gap-3">
+                {activeTab === 'products' && (
+                  <button
+                    onClick={() => {
+                      setShowCategoryManager(!showCategoryManager);
+                      resetForms();
+                    }}
+                    className="px-3 py-1.5 bg-secondary/10 hover:bg-secondary/20 text-secondary rounded font-bold text-[10px] tracking-wider uppercase transition-all cursor-pointer"
+                  >
+                    {showCategoryManager ? "Manage Products" : "Manage Categories"}
+                  </button>
+                )}
+                {editingItem && (
+                  <button
+                    onClick={resetForms}
+                    className="text-xs text-on-surface-variant hover:text-red-600 transition-colors flex items-center gap-1 cursor-pointer font-medium"
+                  >
+                    <X className="w-3.5 h-3.5" /> Cancel
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Products Form */}
-            {activeTab === 'products' && (
+            {activeTab === 'products' && !showCategoryManager && (
               <form onSubmit={handleSubmitProduct} className="space-y-4">
                 <div>
                   <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Product Title</label>
@@ -708,14 +800,12 @@ export const AdminPage: React.FC = () => {
                   <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Product Category</label>
                   <select
                     value={prodIndustry}
-                    onChange={(e) => setProdIndustry(e.target.value as any)}
+                    onChange={(e) => setProdIndustry(e.target.value)}
                     className="w-full p-2.5 border border-primary/10 rounded text-xs bg-white"
                   >
-                    <option value="automobile">Automobile</option>
-                    <option value="food">Food Industry</option>
-                    <option value="textile">Textile</option>
-                    <option value="reverse_osmosis">Reverse Osmosis</option>
-                    <option value="others">Others</option>
+                    {categories.map((cat) => (
+                      <option key={cat._id} value={cat.slug}>{cat.name}</option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -972,13 +1062,37 @@ export const AdminPage: React.FC = () => {
                 </button>
               </form>
             )}
+
+            {/* Categories Form */}
+            {activeTab === 'products' && showCategoryManager && (
+              <form onSubmit={handleSubmitCategory} className="space-y-4">
+                <div>
+                  <label className="block text-[10px] font-bold text-primary uppercase font-label-caps mb-1">Category Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={catName}
+                    onChange={(e) => setCatName(e.target.value)}
+                    className="w-full p-2.5 border border-primary/10 rounded text-xs rfq-input"
+                    placeholder="e.g. Defense Aerospace"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-secondary hover:bg-opacity-95 text-white font-bold py-3 rounded text-xs shadow cursor-pointer transition-all disabled:opacity-50"
+                >
+                  {editingItem ? 'Save Category Changes' : 'Create Category Listing'}
+                </button>
+              </form>
+            )}
           </div>
 
           {/* RIGHT COLUMN: ACTIVE DATABASE LIST WITH ACTIONS */}
           <div className="lg:col-span-7 bg-white p-6 rounded-xl border border-primary/5 shadow-sm">
             <h3 className="font-label-caps text-xs text-primary font-black tracking-wider uppercase mb-6 pb-2 border-b border-primary/5">
               Active Database Records ({
-                activeTab === 'products' ? products.length :
+                activeTab === 'products' ? (showCategoryManager ? categories.length : products.length) :
                 activeTab === 'customers' ? customers.length :
                 activeTab === 'certificates' ? certificates.length :
                 jobs.length
@@ -992,7 +1106,7 @@ export const AdminPage: React.FC = () => {
             )}
 
             {/* Products List */}
-            {activeTab === 'products' && !isLoading && (
+            {activeTab === 'products' && !showCategoryManager && !isLoading && (
               <div className="space-y-4">
                 {products.length === 0 ? (
                   <p className="text-xs text-on-surface-variant/60 py-6 text-center">No products found in MongoDB. Create one using the form.</p>
@@ -1181,6 +1295,49 @@ export const AdminPage: React.FC = () => {
                           onClick={() => handleDeleteJob(job._id)}
                           className="p-2 text-red-600 hover:bg-red-50 hover:text-red-800 border border-transparent hover:border-red-200 transition-all rounded cursor-pointer"
                           title="Delete job"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+
+            {/* Categories List */}
+            {activeTab === 'products' && showCategoryManager && !isLoading && (
+              <div className="space-y-4">
+                {categories.length === 0 ? (
+                  <p className="text-xs text-on-surface-variant/60 py-6 text-center">No categories found in MongoDB. Create one using the form.</p>
+                ) : (
+                  categories.map((cat) => (
+                    <div 
+                      key={cat._id} 
+                      className={`p-4 border rounded-lg transition-all flex items-center justify-between gap-6 bg-steel-plate/10 ${
+                        editingItem?.type === 'categories' && editingItem.id === cat._id
+                          ? 'border-secondary ring-1 ring-secondary'
+                          : 'border-primary/5'
+                      }`}
+                    >
+                      <div className="min-w-0">
+                        <h4 className="font-bold text-sm text-primary truncate">{cat.name}</h4>
+                        <span className="text-[10px] text-secondary font-bold font-label-caps block uppercase mt-0.5">
+                          Slug: {cat.slug}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <button
+                          onClick={() => startEditCategory(cat)}
+                          className="p-2 text-primary hover:bg-white border border-primary/5 hover:text-secondary hover:border-secondary transition-all rounded cursor-pointer"
+                          title="Edit category"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteCategory(cat._id)}
+                          className="p-2 text-red-600 hover:bg-red-50 hover:text-red-800 border border-transparent hover:border-red-200 transition-all rounded cursor-pointer"
+                          title="Delete category"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>

@@ -13,7 +13,7 @@ interface Product {
   dimensions: string;
   description: string;
   applications: string;
-  industry: 'automobile' | 'food' | 'textile' | 'reverse_osmosis' | 'others';
+  industry: string;
 }
 
 export const Products: React.FC = () => {
@@ -21,9 +21,11 @@ export const Products: React.FC = () => {
   const filterParam = searchParams.get('filter') || 'all';
 
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<{ _id: string; name: string; slug: string }[]>([]);
   const [activeFilter, setActiveFilter] = useState(filterParam);
 
   useEffect(() => {
+    // Fetch products
     fetch('/api/products')
       .then(res => {
         if (!res.ok) throw new Error('API server down');
@@ -35,17 +37,33 @@ export const Products: React.FC = () => {
         }
       })
       .catch(err => {
-        console.warn('Could not fetch from server:', err);
+        console.warn('Could not fetch products from server:', err);
+      });
+
+    // Fetch categories
+    fetch('/api/categories')
+      .then(res => {
+        if (!res.ok) throw new Error('API server down');
+        return res.json();
+      })
+      .then(data => {
+        if (Array.isArray(data)) {
+          setCategories(data);
+        }
+      })
+      .catch(err => {
+        console.warn('Could not fetch categories from server:', err);
       });
   }, []);
 
   useEffect(() => {
-    if (['all', 'automobile', 'food', 'textile', 'reverse_osmosis', 'others'].includes(filterParam)) {
+    const validSlugs = ['all', ...categories.map(c => c.slug)];
+    if (validSlugs.includes(filterParam)) {
       setActiveFilter(filterParam);
     } else {
       setActiveFilter('all');
     }
-  }, [filterParam]);
+  }, [filterParam, categories]);
 
   const handleFilterChange = (filter: string) => {
     setActiveFilter(filter);
@@ -61,15 +79,13 @@ export const Products: React.FC = () => {
     ? products 
     : products.filter(p => p.industry === activeFilter);
 
-  const getIndustryLabel = (industry: string) => {
-    switch (industry) {
-      case 'automobile': return 'Automobile';
-      case 'food': return 'Food Industry';
-      case 'textile': return 'Textile';
-      case 'reverse_osmosis': return 'Reverse Osmosis';
-      case 'others': return 'Others';
-      default: return industry;
-    }
+  const getIndustryLabel = (industrySlug: string) => {
+    const cat = categories.find(c => c.slug === industrySlug);
+    if (cat) return cat.name;
+    return industrySlug
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
 
   return (
@@ -100,24 +116,27 @@ export const Products: React.FC = () => {
           {/* Filters Banner */}
           <div className="flex flex-wrap gap-3 items-center justify-between border-b border-primary/10 pb-6 mb-12">
             <div className="flex flex-wrap gap-2" id="filter-buttons">
-              {[
-                { value: 'all', label: 'All Components' },
-                { value: 'automobile', label: 'Automobile' },
-                { value: 'food', label: 'Food Industry' },
-                { value: 'textile', label: 'Textile' },
-                { value: 'reverse_osmosis', label: 'Reverse Osmosis' },
-                { value: 'others', label: 'Others' }
-              ].map((item) => (
+              <button
+                onClick={() => handleFilterChange('all')}
+                className={`filter-btn text-xs font-label-caps border px-5 py-2.5 rounded font-bold uppercase cursor-pointer ${
+                  activeFilter === 'all'
+                    ? 'active bg-secondary text-white border-secondary shadow-md'
+                    : 'border-primary/20 hover:bg-steel-plate text-primary'
+                }`}
+              >
+                All Components
+              </button>
+              {categories.map((item) => (
                 <button
-                  key={item.value}
-                  onClick={() => handleFilterChange(item.value)}
+                  key={item._id}
+                  onClick={() => handleFilterChange(item.slug)}
                   className={`filter-btn text-xs font-label-caps border px-5 py-2.5 rounded font-bold uppercase cursor-pointer ${
-                    activeFilter === item.value
+                    activeFilter === item.slug
                       ? 'active bg-secondary text-white border-secondary shadow-md'
                       : 'border-primary/20 hover:bg-steel-plate text-primary'
                   }`}
                 >
-                  {item.label}
+                  {item.name}
                 </button>
               ))}
             </div>

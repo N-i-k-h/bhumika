@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { v2 as cloudinary } from 'cloudinary';
-import { Product, Customer, Certificate, Job } from './models.js';
+import { Product, Customer, Certificate, Job, Category } from './models.js';
 import { seedDatabase } from './seed.js';
 
 dotenv.config();
@@ -274,9 +274,93 @@ app.put('/api/jobs/:id', async (req, res) => {
   }
 });
 
+// 5. Category CRUD
+app.get('/api/categories', async (req, res) => {
+  try {
+    const categories = await Category.find().sort({ name: 1 });
+    res.json(categories);
+  } catch (error) {
+    console.error("GET /api/categories error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/categories', async (req, res) => {
+  try {
+    const { name } = req.body;
+    if (!name || !name.trim()) {
+      return res.status(400).json({ error: "Category name is required" });
+    }
+    const slug = name.toLowerCase().trim().replace(/[^a-z0-9\s_-]/g, '').replace(/[\s-]+/g, '_');
+    const existing = await Category.findOne({ $or: [{ name }, { slug }] });
+    if (existing) {
+      return res.status(400).json({ error: "Category already exists" });
+    }
+    const newCategory = new Category({ name, slug });
+    await newCategory.save();
+    res.status(201).json(newCategory);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.put('/api/categories/:id', async (req, res) => {
+  try {
+    const { name } = req.body;
+    if (!name || !name.trim()) {
+      return res.status(400).json({ error: "Category name is required" });
+    }
+    const category = await Category.findById(req.params.id);
+    if (!category) {
+      return res.status(404).json({ error: "Category not found" });
+    }
+    const newSlug = name.toLowerCase().trim().replace(/[^a-z0-9\s_-]/g, '').replace(/[\s-]+/g, '_');
+    
+    const conflict = await Category.findOne({
+      _id: { $ne: req.params.id },
+      $or: [{ name }, { slug: newSlug }]
+    });
+    if (conflict) {
+      return res.status(400).json({ error: "Another category with this name or slug already exists" });
+    }
+    
+    const oldSlug = category.slug;
+    category.name = name;
+    category.slug = newSlug;
+    await category.save();
+    
+    if (oldSlug !== newSlug) {
+      await Product.updateMany({ industry: oldSlug }, { industry: newSlug });
+    }
+    
+    res.json(category);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.delete('/api/categories/:id', async (req, res) => {
+  try {
+    const category = await Category.findById(req.params.id);
+    if (!category) {
+      return res.status(404).json({ error: "Category not found" });
+    }
+    const oldSlug = category.slug;
+    await Category.findByIdAndDelete(req.params.id);
+    
+    if (oldSlug !== 'others') {
+      await Product.updateMany({ industry: oldSlug }, { industry: 'others' });
+    }
+    res.json({ message: "Category deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Re-seed route
 app.post('/api/seed', async (req, res) => {
   try {
+    await Category.deleteMany({});
     await Product.deleteMany({});
     await Customer.deleteMany({});
     await Certificate.deleteMany({});
