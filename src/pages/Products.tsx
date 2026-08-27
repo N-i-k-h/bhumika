@@ -154,7 +154,7 @@ export const Products: React.FC = () => {
                   <div className="mt-auto pt-2.5 border-t border-primary/5 space-y-1.5 flex flex-col">
                     {p.metalGrade && (
                       <div className="flex items-center justify-between w-full">
-                        <span className="text-[9px] font-bold text-on-surface-variant/70 uppercase font-label-caps">Metal Grade:</span>
+                        <span className="text-[9px] font-bold text-on-surface-variant/70 uppercase font-label-caps">Material Grade:</span>
                         <span className="text-[10px] font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded font-label-caps uppercase tracking-wider">
                           {p.metalGrade}
                         </span>
