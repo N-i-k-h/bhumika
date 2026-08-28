@@ -479,7 +479,7 @@ export const Home: React.FC = () => {
 
       {/* Trust Indicators Banner */}
       <div className="bg-primary py-16 text-on-primary">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex items-center gap-4 border-r border-white/10 last:border-0 pr-4">
             <ShieldCheck className="w-8 h-8 text-secondary flex-shrink-0" />
             <div>
@@ -496,20 +496,12 @@ export const Home: React.FC = () => {
               <p className="text-[10px] text-white/60">Up to 500kg batch melt</p>
             </div>
           </div>
-          <div className="flex items-center gap-4 border-r border-white/10 last:border-0 pr-4">
+          <div className="flex items-center gap-4 last:border-0 pr-4">
             <Activity className="w-8 h-8 text-secondary flex-shrink-0" />
             <div>
               <p className="font-label-caps text-[9px] tracking-wider text-secondary uppercase font-bold">METALLURGY</p>
               <p className="font-headline-md text-base font-bold text-white">Spectrometer Lab</p>
               <p className="text-[10px] text-white/60">100% chemical verification</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-4 last:border-0">
-            <Globe className="w-8 h-8 text-secondary flex-shrink-0" />
-            <div>
-              <p className="font-label-caps text-[9px] tracking-wider text-secondary uppercase font-bold">GLOBAL DELIVERY</p>
-              <p className="font-headline-md text-base font-bold text-white">15+ Countries</p>
-              <p className="text-[10px] text-white/60">Supplying parts worldwide</p>
             </div>
           </div>
         </div>

@@ -224,7 +224,7 @@ export const DraftEmail: React.FC = () => {
                     href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-red-650 hover:bg-red-700 text-white px-5 py-2.5 rounded font-bold text-xs inline-flex items-center gap-2 cursor-pointer shadow-md uppercase font-label-caps"
+                    className="bg-steel-plate hover:bg-slate-200 text-primary px-5 py-2.5 rounded font-bold text-xs inline-flex items-center gap-2 cursor-pointer border border-primary/10 shadow-sm uppercase font-label-caps"
                   >
                     <Mail className="w-4 h-4" /> Open in Gmail Web
                   </a>
