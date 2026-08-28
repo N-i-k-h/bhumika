@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Mail, FileText, Send, CheckCircle2, ArrowLeft, AlertCircle, Eye } from 'lucide-react';
+import { Mail, FileText, Send, CheckCircle2, ArrowLeft, AlertCircle } from 'lucide-react';
 
 interface Attachment {
   filename: string;
@@ -30,7 +30,6 @@ export const DraftEmail: React.FC = () => {
   const [isSending, setIsSending] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
-  const [previewUrl, setPreviewUrl] = useState('');
 
   useEffect(() => {
     if (id) {
