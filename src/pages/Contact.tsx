@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MapPin, Phone, Mail, UploadCloud, CheckCircle2, Send, Download, FileText } from 'lucide-react';
 
 export const Contact: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -17,6 +19,8 @@ export const Contact: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [referenceId, setReferenceId] = useState('');
+  const [error, setError] = useState('');
+  const [isSending, setIsSending] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { id, value, type } = e.target;
@@ -36,9 +40,11 @@ export const Contact: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Generate a random Reference ID
+    setError('');
+    setIsSending(true);
+
     const ref = "BAC-RFQ-" + Math.floor(1000 + Math.random() * 9000);
     setReferenceId(ref);
 
@@ -60,17 +66,38 @@ export const Contact: React.FC = () => {
       `Phone: ${formData.phone}\n` +
       `Preferred Process: ${processLabel}\n` +
       `Material / Alloy Grade: ${formData.material || 'N/A'}\n` +
-      `Est. Annual Qty: ${formData.quantity || 'N/A'}\n` +
-      `${selectedFile ? `Attached File: ${selectedFile.name}\n` : ''}\n` +
+      `Est. Annual Qty: ${formData.quantity || 'N/A'}\n\n` +
       `Technical Requirements / Scope:\n` +
       `${formData.message || 'None provided'}\n`;
 
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=bhumikacastings@gmail.com&su=${encodeURIComponent(rawSubject)}&body=${encodeURIComponent(rawBody)}`;
+    try {
+      const data = new FormData();
+      data.append('to', 'bhumikacastings@gmail.com');
+      data.append('senderEmail', formData.email);
+      data.append('subject', rawSubject);
+      data.append('body', rawBody);
+      if (selectedFile) {
+        data.append('file', selectedFile);
+      }
 
-    // Open Gmail Web compose in a new tab by default
-    window.open(gmailUrl, '_blank');
+      const response = await fetch('/api/email/draft', {
+        method: 'POST',
+        body: data,
+      });
 
-    setIsSubmitted(true);
+      const resData = await response.json();
+      if (response.ok && resData.success) {
+        setIsSubmitted(true);
+        navigate(`/draft/${resData.draftId}`);
+      } else {
+        setError(resData.message || 'Failed to prepare RFQ email draft on server.');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Connection error. Failed to connect to server.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const resetForm = () => {
@@ -378,11 +405,20 @@ export const Contact: React.FC = () => {
                   </label>
                 </div>
 
+                {error && (
+                  <p className="text-xs text-red-600 bg-red-50 p-3 rounded border border-red-200">{error}</p>
+                )}
+
                 <button
-                  className="w-full bg-secondary hover:bg-opacity-90 text-white py-4 rounded font-bold transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase font-label-caps cursor-pointer"
+                  disabled={isSending}
+                  className="w-full bg-secondary hover:bg-opacity-90 text-white py-4 rounded font-bold transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase font-label-caps cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   type="submit"
                 >
-                  Submit RFQ Package <Send className="w-4 h-4" />
+                  {isSending ? (
+                    <>Preparing Draft... <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div></>
+                  ) : (
+                    <>Submit RFQ Package <Send className="w-4 h-4" /></>
+                  )}
                 </button>
               </form>
             ) : (

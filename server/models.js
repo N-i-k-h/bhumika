@@ -50,9 +50,28 @@ const categorySchema = new mongoose.Schema({
   slug: { type: String, required: true, unique: true }
 }, { timestamps: true });
 
+// Email Draft Schema for resume / RFQ attachments sending
+const emailDraftSchema = new mongoose.Schema({
+  _id: { type: String, required: true }, // Store UUIDv4
+  senderEmail: { type: String, required: true }, // Candidate/Client email
+  recipient: { type: String, required: true },
+  subject: { type: String, required: true },
+  body: { type: String, required: true },
+  attachments: [{
+    filename: { type: String, required: true },
+    path: { type: String, required: true },
+    mimetype: { type: String, required: true },
+    size: { type: Number, required: true },
+    downloadUrl: { type: String }
+  }],
+  status: { type: String, enum: ['draft', 'sent'], default: 'draft' }
+}, { timestamps: true });
+
 export const Product = mongoose.model('Product', productSchema);
 export const Customer = mongoose.model('Customer', customerSchema);
 export const Certificate = mongoose.model('Certificate', certificateSchema);
 export const Job = mongoose.model('Job', jobSchema);
 export const Category = mongoose.model('Category', categorySchema);
+export const EmailDraft = mongoose.model('EmailDraft', emailDraftSchema);
+
 

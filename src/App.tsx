@@ -12,6 +12,7 @@ import { Customers } from './pages/Customers';
 import { Certificates } from './pages/Certificates';
 import { Careers } from './pages/Careers';
 import { AdminPage } from './pages/AdminPage';
+import { DraftEmail } from './pages/DraftEmail';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="careers" element={<Careers />} />
           <Route path="admin" element={<AdminPage />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="draft/:id" element={<DraftEmail />} />
         </Route>
       </Routes>
     </BrowserRouter>

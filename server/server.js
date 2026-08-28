@@ -3,10 +3,15 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
+import crypto from 'crypto';
+import multer from 'multer';
 import { fileURLToPath } from 'url';
 import { v2 as cloudinary } from 'cloudinary';
-import { Product, Customer, Certificate, Job, Category } from './models.js';
+import { Product, Customer, Certificate, Job, Category, EmailDraft } from './models.js';
 import { seedDatabase } from './seed.js';
+import { getTransporter, createGmailDraft } from './transporter.js';
+import nodemailer from 'nodemailer';
 
 dotenv.config();
 
@@ -32,6 +37,19 @@ async function uploadToCloudinary(imageStr) {
   }
 }
 
+async function uploadFileToCloudinary(filePath) {
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      folder: 'bhumika_alloy_castings_attachments',
+      resource_type: 'raw'
+    });
+    return result.secure_url;
+  } catch (error) {
+    console.error("Cloudinary file upload error:", error);
+    throw new Error("Failed to upload file to Cloudinary");
+  }
+}
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,6 +58,105 @@ const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://nikhilkashyapkn_db_use
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const distPath = path.join(__dirname, '../dist');
+
+// --- Multer & File Upload Configuration ---
+const uploadDir = path.join(__dirname, 'uploads/email-drafts');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const uniqueName = `${crypto.randomUUID()}${ext}`;
+    cb(null, uniqueName);
+  }
+});
+
+const CAREERS_ALLOWED = {
+  '.pdf': ['application/pdf'],
+  '.doc': ['application/msword'],
+  '.docx': ['application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+  '.jpg': ['image/jpeg', 'image/jpg'],
+  '.jpeg': ['image/jpeg', 'image/jpg'],
+  '.png': ['image/png']
+};
+
+const RFQ_ALLOWED = {
+  '.pdf': ['application/pdf'],
+  '.dwg': ['image/vnd.dwg', 'image/x-dwg', 'application/acad', 'application/x-acad', 'application/autocad_dwg', 'application/dwg', 'application/x-dwg', 'application/octet-stream'],
+  '.dxf': ['image/vnd.dxf', 'image/x-dxf', 'application/dxf', 'application/x-dxf', 'application/autocad_dxf', 'application/octet-stream'],
+  '.step': ['application/step', 'application/stp', 'text/plain', 'application/x-step', 'application/x-stp', 'application/octet-stream'],
+  '.stp': ['application/step', 'application/stp', 'text/plain', 'application/x-step', 'application/x-stp', 'application/octet-stream'],
+  '.iges': ['application/iges', 'application/igs', 'model/iges', 'application/x-iges', 'application/x-igs', 'application/octet-stream'],
+  '.igs': ['application/iges', 'application/igs', 'model/iges', 'application/x-iges', 'application/x-igs', 'application/octet-stream']
+};
+
+const fileFilter = (req, file, cb) => {
+  const ext = path.extname(file.originalname).toLowerCase();
+  const mime = file.mimetype.toLowerCase();
+
+  const isCareersAllowed = CAREERS_ALLOWED[ext] && (CAREERS_ALLOWED[ext].includes(mime) || mime === 'application/octet-stream');
+  const isRfqAllowed = RFQ_ALLOWED[ext] && (RFQ_ALLOWED[ext].includes(mime) || mime === 'application/octet-stream');
+
+  if (isCareersAllowed || isRfqAllowed) {
+    cb(null, true);
+  } else {
+    cb(new Error(`File type not allowed: ${ext}`), false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB per file limit
+  }
+});
+
+const cleanupUploadedFiles = (files) => {
+  if (!files || !Array.isArray(files)) return;
+  files.forEach(file => {
+    const filePath = file.path;
+    if (filePath && fs.existsSync(filePath)) {
+      try {
+        fs.unlinkSync(filePath);
+        console.log(`Successfully cleaned up file: ${filePath}`);
+      } catch (err) {
+        console.error(`Error deleting file ${filePath}:`, err);
+      }
+    }
+  });
+};
+
+// --- Background Cleanup Cron for Expired Drafts ---
+const CLEANUP_INTERVAL = 60 * 60 * 1000; // hourly
+setInterval(async () => {
+  console.log("[Background Job] Starting cleanup of expired drafts...");
+  try {
+    const cutoffTime = new Date(Date.now() - 24 * 60 * 60 * 1000); // 24 hours ago
+    const expiredDrafts = await EmailDraft.find({
+      status: 'draft',
+      createdAt: { $lt: cutoffTime }
+    });
+
+    if (expiredDrafts.length > 0) {
+      console.log(`[Background Job] Found ${expiredDrafts.length} expired drafts to delete.`);
+      for (const draft of expiredDrafts) {
+        cleanupUploadedFiles(draft.attachments);
+        await EmailDraft.findByIdAndDelete(draft._id);
+      }
+      console.log("[Background Job] Expired drafts cleanup complete.");
+    } else {
+      console.log("[Background Job] No expired drafts found.");
+    }
+  } catch (err) {
+    console.error("[Background Job] Error during draft cleanup:", err);
+  }
+}, CLEANUP_INTERVAL);
 
 // Middlewares
 app.use(cors());
@@ -50,6 +167,7 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static(distPath));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Connect to MongoDB
 mongoose.connect(MONGO_URI)
@@ -354,6 +472,182 @@ app.delete('/api/categories/:id', async (req, res) => {
     res.json({ message: "Category deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+// --- Email Draft Endpoints ---
+
+// 1. Create a draft with attachments
+app.post('/api/email/draft', (req, res) => {
+  upload.any()(req, res, async (err) => {
+    if (err) {
+      console.error("Upload error:", err);
+      return res.status(400).json({ success: false, message: err.message });
+    }
+
+    try {
+      const { to, subject, body, senderEmail } = req.body;
+
+      if (!to || !to.trim()) {
+        cleanupUploadedFiles(req.files);
+        return res.status(400).json({ success: false, message: "Recipient email is required" });
+      }
+      if (!senderEmail || !senderEmail.trim()) {
+        cleanupUploadedFiles(req.files);
+        return res.status(400).json({ success: false, message: "Sender email is required" });
+      }
+      if (!subject || !subject.trim()) {
+        cleanupUploadedFiles(req.files);
+        return res.status(400).json({ success: false, message: "Subject is required" });
+      }
+      if (!body || !body.trim()) {
+        cleanupUploadedFiles(req.files);
+        return res.status(400).json({ success: false, message: "Email body is required" });
+      }
+
+      const files = req.files || [];
+      const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+      if (totalSize > 30 * 1024 * 1024) {
+        cleanupUploadedFiles(files);
+        return res.status(400).json({ success: false, message: "Total attachments size exceeds 30MB limit" });
+      }
+
+      // Upload files to Cloudinary (with fallback to local storage on error)
+      const attachments = [];
+      for (const file of files) {
+        let downloadUrl = "";
+        let uploadSuccess = false;
+
+        try {
+          console.log(`Attempting to upload attachment to Cloudinary: ${file.originalname}`);
+          downloadUrl = await uploadFileToCloudinary(file.path);
+          uploadSuccess = true;
+          // Delete local file immediately since it's hosted in the cloud
+          fs.unlink(file.path, (unlinkErr) => {
+            if (unlinkErr) console.warn("Could not delete local file after Cloudinary upload:", file.path);
+          });
+        } catch (uploadErr) {
+          console.warn(`[Cloudinary Warning] Upload failed for ${file.originalname}. Falling back to local server storage...`, uploadErr.message);
+          const baseUrl = process.env.BACKEND_URL || `${req.protocol}://${req.get('host')}`;
+          downloadUrl = `${baseUrl}/uploads/email-drafts/${file.filename}`;
+          uploadSuccess = false;
+        }
+
+        attachments.push({
+          filename: file.originalname,
+          path: uploadSuccess ? downloadUrl : file.path,
+          mimetype: file.mimetype,
+          size: file.size,
+          downloadUrl
+        });
+      }
+
+      // Append download links to the email message body
+      let finalBody = body.trim();
+      if (attachments.length > 0) {
+        finalBody += "\n\n" +
+          attachments.map(att => `${att.filename}: ${att.downloadUrl}`).join("\n");
+      }
+
+      const draftId = crypto.randomUUID();
+      const draft = new EmailDraft({
+        _id: draftId,
+        senderEmail: senderEmail.trim(),
+        recipient: to.trim(),
+        subject: subject.trim(),
+        body: finalBody,
+        attachments,
+        status: 'draft'
+      });
+
+      await draft.save();
+      res.status(201).json({ success: true, draftId });
+    } catch (dbErr) {
+      console.error("Draft creation error:", dbErr);
+      cleanupUploadedFiles(req.files);
+      res.status(500).json({ success: false, message: "Failed to create draft in database" });
+    }
+  });
+});
+
+// 2. Fetch a draft details
+app.get('/api/email/draft/:id', async (req, res) => {
+  try {
+    const draft = await EmailDraft.findById(req.params.id);
+    if (!draft) {
+      return res.status(404).json({ success: false, message: "Draft not found" });
+    }
+    res.json({
+      success: true,
+      draft: {
+        id: draft._id,
+        senderEmail: draft.senderEmail,
+        recipient: draft.recipient,
+        subject: draft.subject,
+        body: draft.body,
+        attachments: draft.attachments.map(att => ({
+          filename: att.filename,
+          size: att.size,
+          mimetype: att.mimetype,
+          downloadUrl: att.downloadUrl
+        })),
+        status: draft.status
+      }
+    });
+  } catch (err) {
+    console.error("GET draft error:", err);
+    res.status(500).json({ success: false, message: "Server error fetching draft" });
+  }
+});
+
+// 3. Edit a draft (fails if sent)
+app.put('/api/email/draft/:id', async (req, res) => {
+  try {
+    const { to, subject, body } = req.body;
+
+    if (!to || !to.trim() || !subject || !subject.trim() || !body || !body.trim()) {
+      return res.status(400).json({ success: false, message: "Fields to, subject, and body are required" });
+    }
+
+    const draft = await EmailDraft.findById(req.params.id);
+    if (!draft) {
+      return res.status(404).json({ success: false, message: "Draft not found" });
+    }
+
+    if (draft.status === "sent") {
+      return res.status(400).json({ success: false, message: "Sent drafts cannot be edited" });
+    }
+
+    draft.recipient = to.trim();
+    draft.subject = subject.trim();
+    draft.body = body.trim();
+    await draft.save();
+
+    res.json({ success: true, message: "Draft updated successfully" });
+  } catch (err) {
+    console.error("PUT draft error:", err);
+    res.status(500).json({ success: false, message: "Server error updating draft" });
+  }
+});
+
+// 4. Mark draft as sent in database
+app.post('/api/email/draft/:id/send', async (req, res) => {
+  try {
+    const draft = await EmailDraft.findById(req.params.id);
+    if (!draft) {
+      return res.status(404).json({ success: false, message: "Draft not found" });
+    }
+
+    draft.status = 'sent';
+    await draft.save();
+
+    res.json({
+      success: true,
+      message: "Draft marked as sent successfully"
+    });
+  } catch (err) {
+    console.error("Send draft error:", err);
+    res.status(500).json({ success: false, message: "Server error during draft marking" });
   }
 });
 

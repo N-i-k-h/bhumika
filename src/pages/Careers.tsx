@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Briefcase, UploadCloud, CheckCircle2, Send, Mail } from 'lucide-react';
 
 interface JobItem {
@@ -15,9 +16,11 @@ interface JobItem {
 }
 
 export const Careers: React.FC = () => {
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState<JobItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isSending, setIsSending] = useState(false);
 
   // Form State (Single unified form for all jobs)
   const [formData, setFormData] = useState({
@@ -75,8 +78,11 @@ export const Careers: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setIsSending(true);
+
     const ref = "BAC-APP-" + Math.floor(1000 + Math.random() * 9000);
     setReferenceId(ref);
 
@@ -89,18 +95,38 @@ export const Careers: React.FC = () => {
       `Email Address: ${formData.email}\n` +
       `Phone Number: ${formData.phone}\n` +
       `Applied Position: ${formData.targetRole}\n` +
-      `Total Experience: ${formData.experience || 'Not specified'}\n` +
-      `${selectedFile ? `Attached Resume: ${selectedFile.name}\n` : ''}\n` +
-      `[IMPORTANT: Please attach your resume file manually to this email before sending.]\n\n` +
+      `Total Experience: ${formData.experience || 'Not specified'}\n\n` +
       `Cover Message / Summary:\n` +
       `${formData.message || 'None provided'}\n`;
 
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=bhumikacastings@gmail.com&su=${encodeURIComponent(rawSubject)}&body=${encodeURIComponent(rawBody)}`;
+    try {
+      const data = new FormData();
+      data.append('to', 'bhumikacastings@gmail.com');
+      data.append('senderEmail', formData.email);
+      data.append('subject', rawSubject);
+      data.append('body', rawBody);
+      if (selectedFile) {
+        data.append('resume', selectedFile);
+      }
 
-    // Open Gmail Web compose in a new tab
-    window.open(gmailUrl, '_blank');
+      const response = await fetch('/api/email/draft', {
+        method: 'POST',
+        body: data,
+      });
 
-    setIsSubmitted(true);
+      const resData = await response.json();
+      if (response.ok && resData.success) {
+        setIsSubmitted(true);
+        navigate(`/draft/${resData.draftId}`);
+      } else {
+        setError(resData.message || 'Failed to prepare email draft on server.');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Connection error. Failed to connect to server.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const resetForm = () => {
@@ -343,11 +369,20 @@ export const Careers: React.FC = () => {
                   </label>
                 </div>
 
+                {error && (
+                  <p className="text-xs text-red-600 bg-red-50 p-3 rounded border border-red-200">{error}</p>
+                )}
+
                 <button
-                  className="w-full bg-secondary hover:bg-opacity-90 text-white py-4 rounded font-bold transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase font-label-caps cursor-pointer"
+                  disabled={isSending}
+                  className="w-full bg-secondary hover:bg-opacity-90 text-white py-4 rounded font-bold transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase font-label-caps cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   type="submit"
                 >
-                  Submit Application Package <Send className="w-4 h-4" />
+                  {isSending ? (
+                    <>Preparing Draft... <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div></>
+                  ) : (
+                    <>Submit Application Package <Send className="w-4 h-4" /></>
+                  )}
                 </button>
               </form>
             ) : (
