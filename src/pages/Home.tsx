@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Hero } from '../components/Hero';
-import { ShieldCheck, ArrowRight, Settings, Activity, Globe, Flame, Cpu, Users, Award, Layers } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Settings, Activity, Flame, Cpu, Users, Award, Layers } from 'lucide-react';
 import creatorsImg from '../assets/DSC02681.JPG';
 import whyBhumikaImg from '../assets/why_bhumika_products.jpg';
 import investmentCastingImg from '../assets/investment_casting_patterns.jpg';
@@ -85,7 +85,7 @@ export const Home: React.FC = () => {
                   Manufacturing Facilities
                 </h3>
                 <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
-                  Our Manufacturing Facilities include in house CNC machining, induction hardening, Surface Hardening (Sursulf), Electroplating etc.
+                  Our Manufacturing Facilities include in house CNC and VMC machining, Heat treatment, Shot Blasting.
                 </p>
               </div>
               <Link
@@ -359,17 +359,6 @@ export const Home: React.FC = () => {
                   <h4 className="font-headline-md text-xs font-bold text-primary">Zero Defect Target</h4>
                   <p className="text-[10px] text-on-surface-variant mt-1 leading-relaxed">
                     Rigorous testing including chemical analysis and final visual metrics inspection.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary flex-shrink-0 shadow-sm">
-                  <Globe className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-headline-md text-xs font-bold text-primary">Global Deliveries</h4>
-                  <p className="text-[10px] text-on-surface-variant mt-1 leading-relaxed">
-                    Proven logistics pipeline supplying cast components to over 15 countries.
                   </p>
                 </div>
               </div>

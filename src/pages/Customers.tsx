@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Quote, ShieldCheck, Award, Users } from 'lucide-react';
+import { ShieldCheck, Award } from 'lucide-react';
 import technoVisionLogo from '../assets/techno_vision_tools_logo.png';
 import automotiveAxlesLogo from '../assets/automotive_axles_logo.png';
 import weirMineralsLogo from '../assets/weir_minerals_logo.png';
@@ -125,14 +125,7 @@ export const Customers: React.FC = () => {
       {/* Customer Trust Stats */}
       <section className="py-12 bg-white border-b border-primary/5">
         <div className="max-w-[1280px] mx-auto px-6 md:px-margin-desktop">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="flex justify-center text-secondary">
-                <Users className="w-8 h-8" />
-              </div>
-              <h3 className="text-3xl font-black text-primary">25+</h3>
-              <p className="text-xs text-on-surface-variant font-label-caps uppercase tracking-wider">Global OEM Clients</p>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-center max-w-xl mx-auto">
             <div className="space-y-2">
               <div className="flex justify-center text-secondary">
                 <ShieldCheck className="w-8 h-8" />
@@ -146,13 +139,6 @@ export const Customers: React.FC = () => {
               </div>
               <h3 className="text-3xl font-black text-primary">10+ Yrs</h3>
               <p className="text-xs text-on-surface-variant font-label-caps uppercase tracking-wider">Avg Partnership Span</p>
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-center text-secondary">
-                <Quote className="w-8 h-8" />
-              </div>
-              <h3 className="text-3xl font-black text-primary">100%</h3>
-              <p className="text-xs text-on-surface-variant font-label-caps uppercase tracking-wider">Traceable Alloys</p>
             </div>
           </div>
         </div>
